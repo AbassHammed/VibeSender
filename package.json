@@ -6,22 +6,45 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint",
+    "format": "prettier --write .",
+    "prepare": "husky && husky install",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,css,json,md,ts,tsx}": [
+      "prettier --write ."
+    ],
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   },
   "dependencies": {
+    "@nextui-org/react": "^2.2.9",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "firebase": "^10.8.0",
+    "framer-motion": "^11.0.3",
+    "next": "14.1.0",
+    "prettier": "^3.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.1.0"
+    "react-firebase-hooks": "^5.1.1",
+    "react-icons": "^5.0.1",
+    "recoil": "^0.7.7",
+    "sonner": "^1.4.0"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "autoprefixer": "^10.0.1",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0",
-    "eslint": "^8",
-    "eslint-config-next": "14.1.0"
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "14.1.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.2",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
   }
 }
