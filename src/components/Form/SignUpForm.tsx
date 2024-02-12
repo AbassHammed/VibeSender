@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import Button from '../Button/Button';
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
@@ -49,16 +49,21 @@ const SignUpForm: React.FC = () => {
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     setIsLoading(true);
     e.preventDefault();
-    if (!inputs.email || !inputs.password) {
+    if (!inputs) {
       return toast.info('Please fill all fields');
     }
     try {
       const newUser = await createUserWithEmailAndPassword(inputs.email, inputs.password);
       if (newUser) {
-        await addDoc(collection(firestore, 'users'), {
+        // Use the UID from Firebase Auth as the document ID in Firestore
+        await setDoc(doc(firestore, 'users', newUser.user.uid), {
+          uid: newUser.user.uid,
           email: newUser.user.email,
           fullName: inputs.fullName,
           userName: inputs.userName,
+          jobDescription: null,
+          bio: null,
+          following: 0,
           status: null,
           lastSeen: null,
           dateBirth: null,

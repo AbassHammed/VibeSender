@@ -1,3 +1,4 @@
+import SearchInput from '@/components/Button/SearchInput';
 import { useSidebarContext } from '@/contexts/sideBarContext';
 import React from 'react';
 import { MdOutlineGroupAdd } from 'react-icons/md';
@@ -42,6 +43,7 @@ const Index: React.FC = () => {
               </div>
             </div>
           </div>
+          <SearchInput />
         </aside>
       )}
     </>
