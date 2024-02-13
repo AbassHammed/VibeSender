@@ -4,6 +4,8 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+export type color = 'default' | 'success' | 'danger' | 'warning';
+
 export type User = {
   uid: string;
   email: string;
@@ -11,7 +13,7 @@ export type User = {
   userName: string;
   jobDescription: string;
   bio: string;
-  status: boolean;
+  status: color;
   following: number;
   lastSeen: string;
   dateBirth: string;
