@@ -1,8 +1,10 @@
-import { SessionData } from '@/hooks/useSession';
-import { query, collection, where, getDocs, getDoc, doc } from 'firebase/firestore';
-import { firestore } from './firebase';
-import { User } from '@/types';
 import { Dispatch, SetStateAction } from 'react';
+
+import { SessionData } from '@/hooks/useSession';
+import { User } from '@/types';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
+
+import { firestore } from './firebase';
 
 export const currentUserQuery = async (
   userId: string,
@@ -11,7 +13,9 @@ export const currentUserQuery = async (
   const userQuery = query(collection(firestore, 'users'), where('uid', '==', userId));
   const querySnapshot = await getDocs(userQuery);
 
-  if (querySnapshot.empty) {return;}
+  if (querySnapshot.empty) {
+    return;
+  }
 
   const userData = querySnapshot.docs[0].data();
 
@@ -104,7 +108,9 @@ export const populateFriends = async (
     Array.from(friendIds).map(async id => {
       const userDocRef = doc(firestore, 'users', id);
       const userDoc = await getDoc(userDocRef);
-      if (!userDoc.exists()) {return null;}
+      if (!userDoc.exists()) {
+        return null;
+      }
 
       // Extract userData and manually map it to the User type, including the document id
       const userData = userDoc.data();
@@ -196,7 +202,7 @@ export const searchRequest = async (
     const usersQuery = query(
       collection(firestore, 'users'),
       where('fullName', '>=', filterValue),
-      where('fullName', '<=', `${filterValue  }\uf8ff`),
+      where('fullName', '<=', `${filterValue}\uf8ff`),
     );
     const usersSnapshot = await getDocs(usersQuery);
 

@@ -1,6 +1,7 @@
+import React from 'react';
+
 import SearchInput from '@/components/Button/SearchInput';
 import { useSidebarContext } from '@/contexts/sideBarContext';
-import React from 'react';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 
 const Index: React.FC = () => {
@@ -11,13 +12,9 @@ const Index: React.FC = () => {
       {isLinkActive && (
         <aside
           className="
-        fixed 
         inset-y-0 
         pb-20
-        my-2
-        ml-4
         lg:pb-0
-        lg:left-20 
         lg:w-80 
         lg:block
         rounded-lg

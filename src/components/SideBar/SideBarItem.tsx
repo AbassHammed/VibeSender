@@ -1,5 +1,6 @@
-import clsx from 'clsx';
 import Link from 'next/link';
+
+import clsx from 'clsx';
 import { IconType } from 'react-icons';
 
 interface SideBarItemProps {
@@ -38,7 +39,6 @@ const SideBarItem: React.FC<SideBarItemProps> = ({ label, href, icon: Icon, acti
           active && 'bg-blue-500 text-black',
         )}>
         <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
-        <span className="sr-only">{label}</span>
       </Link>
     </li>
   );

@@ -8,12 +8,12 @@ import { useSignOut } from 'react-firebase-hooks/auth';
 import { HiChat } from 'react-icons/hi';
 import { HiArrowLeftOnRectangle, HiUsers } from 'react-icons/hi2';
 
-const useRoutes = () => {
+const usePages = () => {
   const [signOut] = useSignOut(auth);
   const pathname = usePathname();
   const { toggleLinkActive } = useSidebarContext();
 
-  const routes = useMemo(
+  const pages = useMemo(
     () => [
       {
         label: 'Chat',
@@ -40,7 +40,7 @@ const useRoutes = () => {
     [pathname, signOut, toggleLinkActive],
   );
 
-  return routes;
+  return pages;
 };
 
-export default useRoutes;
+export default usePages;

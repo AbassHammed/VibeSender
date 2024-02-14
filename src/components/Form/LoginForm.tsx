@@ -1,12 +1,15 @@
-import { auth } from '@/firebase/firebase';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+
+import { useRouter } from 'next/router';
+
+import { auth } from '@/firebase/firebase';
+import { currentUserQuery, populateFriends } from '@/firebase/query';
+import { useSession } from '@/hooks/useSession';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import { toast } from 'sonner';
+
 import Button from '../Button/Button';
-import { currentUserQuery, populateFriends } from '@/firebase/query';
-import { useSession } from '@/hooks/useSession';
 
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);

@@ -1,6 +1,8 @@
-import { useRouter } from 'next/router';
-import SideBar from './SideBar/SideBar';
 import React from 'react';
+
+import { useRouter } from 'next/router';
+
+import SideBar from './SideBar/SideBar';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -8,7 +10,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const { pathname } = useRouter();
-  const showNavbar = !['/'].includes(pathname);
+  const showNavbar = !['/', '/users', '/conversations'].includes(pathname);
 
   const mainClass = showNavbar ? 'flex flex-row h-full' : '';
 

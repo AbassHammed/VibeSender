@@ -1,8 +1,9 @@
-import useRoutes from '@/hooks/useRoutes';
-import SideBarItem from './SideBarItem';
-import { HiArrowLeftOnRectangle } from 'react-icons/hi2';
-import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
+import useRoutes from '@/hooks/useRoutes';
+import { useSignOut } from 'react-firebase-hooks/auth';
+import { HiArrowLeftOnRectangle } from 'react-icons/hi2';
+
+import SideBarItem from './SideBarItem';
 
 const SideBar: React.FC = () => {
   const routes = useRoutes();

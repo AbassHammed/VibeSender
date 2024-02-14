@@ -1,14 +1,35 @@
 import '@/styles/globals.css';
-import Head from 'next/head';
+
 import type { AppProps } from 'next/app';
-import { RecoilRoot } from 'recoil';
-import { NextUIProvider } from '@nextui-org/react';
-import { Toaster } from 'sonner';
-import Layout from '@/components/Layout';
+import Head from 'next/head';
+
+import Header from '@/components/Header/Header';
+import HeaderMobile from '@/components/Header/HeaderMobile';
+import NavBar from '@/components/NavBar';
+import { MarginWidthWrapper, PageWrapper, useShowNavbar } from '@/components/Wrapper';
 import { SidebarProvider } from '@/contexts/sideBarContext';
 import { SessionProvider } from '@/hooks/useSession';
+import { NextUIProvider } from '@nextui-org/react';
+import { RecoilRoot } from 'recoil';
+import { Toaster } from 'sonner';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const showNavbar = useShowNavbar();
+
+  const renderContent = () => (
+    <>
+      <NavBar />
+      <main className="flex-1">
+        <MarginWidthWrapper>
+          <Header />
+          <HeaderMobile />
+          <PageWrapper>
+            <Component {...pageProps} />
+          </PageWrapper>
+        </MarginWidthWrapper>
+      </main>
+    </>
+  );
   return (
     <RecoilRoot>
       <Head>
@@ -23,11 +44,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Toaster richColors position="top-center" closeButton />
       <SessionProvider>
         <SidebarProvider>
-          <Layout>
-            <NextUIProvider>
-              <Component {...pageProps} />
-            </NextUIProvider>
-          </Layout>
+          <NextUIProvider>
+            {showNavbar ? renderContent() : <Component {...pageProps} />}
+          </NextUIProvider>
         </SidebarProvider>
       </SessionProvider>
     </RecoilRoot>

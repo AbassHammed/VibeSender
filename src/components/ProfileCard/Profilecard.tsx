@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
-import { User } from '@/types';
-import { useAuth } from '@/hooks/useAuth';
-import { deleteDoc, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+
 import { firestore } from '@/firebase/firebase';
+import { useAuth } from '@/hooks/useAuth';
+import { User } from '@/types';
+import { Avatar, Button, Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
+import { deleteDoc, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 
 type ProfileCardProps = {
   User: User;

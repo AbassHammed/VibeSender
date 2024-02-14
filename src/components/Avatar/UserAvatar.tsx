@@ -1,6 +1,8 @@
 import React from 'react';
-import { Popover, PopoverTrigger, PopoverContent, User } from '@nextui-org/react';
+
 import { User as SessionUser } from '@/types';
+import { Popover, PopoverContent, PopoverTrigger, User } from '@nextui-org/react';
+
 import ProfileCard from '../ProfileCard/Profilecard';
 
 type UserAvatarprops = {

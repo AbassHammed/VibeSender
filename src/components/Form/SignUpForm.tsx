@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth, firestore } from '@/firebase/firebase';
+
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
-import Button from '../Button/Button';
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
-import { useSession } from '@/hooks/useSession';
+
+import { auth, firestore } from '@/firebase/firebase';
 import { currentUserQuery, populateFriends } from '@/firebase/query';
+import { useSession } from '@/hooks/useSession';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
+import { toast } from 'sonner';
+
+import Button from '../Button/Button';
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();

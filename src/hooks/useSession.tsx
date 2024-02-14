@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
 import { User } from '@/types';
 
 interface SessionProviderProps {
@@ -31,7 +32,9 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
     if (typeof window !== 'undefined') {
       if (sessionData) {
         sessionStorage.setItem('sessionData', JSON.stringify(sessionData));
-      } else {sessionStorage.removeItem('sessionData');}
+      } else {
+        sessionStorage.removeItem('sessionData');
+      }
     }
   }, [sessionData]);
 
@@ -44,6 +47,8 @@ export const SessionProvider: React.FC<SessionProviderProps> = ({ children }) =>
 
 export const useSession = () => {
   const context = useContext(SessionContext);
-  if (context === undefined) {throw new Error('useSession must be used within a Sessionprovider');}
+  if (context === undefined) {
+    throw new Error('useSession must be used within a Sessionprovider');
+  }
   return context;
 };
