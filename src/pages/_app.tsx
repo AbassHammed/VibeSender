@@ -6,6 +6,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import { Toaster } from 'sonner';
 import Layout from '@/components/Layout';
 import { SidebarProvider } from '@/contexts/sideBarContext';
+import { SessionProvider } from '@/hooks/useSession';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,14 +20,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Icon.png" sizes="180*180" />
       </Head>
-      <SidebarProvider>
-        <Toaster richColors position="top-center" closeButton />
-        <Layout>
-          <NextUIProvider>
-            <Component {...pageProps} />
-          </NextUIProvider>
-        </Layout>
-      </SidebarProvider>
+      <Toaster richColors position="top-center" closeButton />
+      <SessionProvider>
+        <SidebarProvider>
+          <Layout>
+            <NextUIProvider>
+              <Component {...pageProps} />
+            </NextUIProvider>
+          </Layout>
+        </SidebarProvider>
+      </SessionProvider>
     </RecoilRoot>
   );
 }

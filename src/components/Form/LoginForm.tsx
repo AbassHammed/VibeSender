@@ -5,6 +5,8 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import { toast } from 'sonner';
 import Button from '../Button/Button';
+import { currentUserQuery, populateFriends } from '@/firebase/query';
+import { useSession } from '@/hooks/useSession';
 
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,6 +14,7 @@ const LoginForm: React.FC = () => {
   const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { setSessionData } = useSession();
 
   const handleForgot = () => {};
 
@@ -25,16 +28,19 @@ const LoginForm: React.FC = () => {
     setIsLoading(true);
     e.preventDefault();
     if (!inputs.email || !inputs.password) {
+      setIsLoading(false);
       return toast.warning('Please fill all fields');
     }
     try {
       const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password);
-      if (!newUser) {
-        return;
+      toast.info('everything');
+      if (newUser) {
+        await currentUserQuery(newUser.user.uid, setSessionData);
+        await populateFriends(newUser.user.uid, setSessionData);
+        router.push('/conversations');
       }
-      router.push('/');
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error) {
+      toast.error('An error occurred during login.');
     } finally {
       setIsLoading(false);
     }

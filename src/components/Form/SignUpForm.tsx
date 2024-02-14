@@ -6,9 +6,12 @@ import { toast } from 'sonner';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { useSession } from '@/hooks/useSession';
+import { currentUserQuery, populateFriends } from '@/firebase/query';
 
 const SignUpForm: React.FC = () => {
   const router = useRouter();
+  const { setSessionData } = useSession();
   const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
 
   const [inputs, setInputs] = useState({
@@ -75,6 +78,8 @@ const SignUpForm: React.FC = () => {
           createdAt: serverTimestamp(),
           deletedAt: null,
         });
+        await currentUserQuery(newUser.user.uid, setSessionData);
+        await populateFriends(newUser.user.uid, setSessionData);
         router.push('/user');
       }
     } catch (error: any) {

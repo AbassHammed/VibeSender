@@ -15,14 +15,18 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
 
   useEffect(() => {
     const checkFriendship = async () => {
-      if (!currentUser || !profileUser) {return;}
+      if (!currentUser || !profileUser) {
+        return;
+      }
 
       const docId = [currentUser.uid, profileUser.uid].sort().join('_');
       const docRef = doc(firestore, 'friendships', docId);
       const docSnap = await getDoc(docRef);
 
       setIsFollowed(docSnap.exists());
-      if (docSnap.exists()) {setFriendshipDocId(docId);}
+      if (docSnap.exists()) {
+        setFriendshipDocId(docId);
+      }
     };
 
     checkFriendship();
