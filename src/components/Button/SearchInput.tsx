@@ -18,7 +18,7 @@ const SearchInput: React.FC = () => {
   return (
     <Input
       isClearable
-      className="mx-2 max-w-[300px]"
+      className="max-w-[320px] mb-2"
       variant="bordered"
       placeholder="Search by name..."
       value={filterValue}

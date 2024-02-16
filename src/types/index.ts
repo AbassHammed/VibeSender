@@ -29,6 +29,7 @@ export type User = {
 export type SideNavItem = {
   title: string;
   path: string;
+  onClick: () => void;
   icon?: JSX.Element;
   submenu?: boolean;
   subMenuItems?: SideNavItem[];

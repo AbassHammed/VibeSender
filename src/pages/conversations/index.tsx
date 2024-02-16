@@ -1,11 +1,21 @@
 import React from 'react';
 
 import SearchInput from '@/components/Button/SearchInput';
+import Loading from '@/components/Loading';
 import { useSidebarContext } from '@/contexts/sideBarContext';
+import { auth } from '@/firebase/firebase';
+import { useSession } from '@/hooks/useSession';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 
 const Index: React.FC = () => {
   const { isLinkActive } = useSidebarContext();
+  const { sessionData } = useSession();
+  const [user] = useAuthState(auth);
+
+  if (!user || !sessionData) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -14,10 +24,12 @@ const Index: React.FC = () => {
           className="
         inset-y-0 
         pb-20
+        max-w-80
         lg:pb-0
-        lg:w-80 
+        lg:max-w-80 
         lg:block
         rounded-lg
+        bg-white
         overflow-y-auto 
         border 
         border-gray-200
@@ -30,7 +42,7 @@ const Index: React.FC = () => {
                 className="
               rounded-full 
               p-2 
-              bg-gray-100 
+              bg-blue-100 
               text-gray-600 
               cursor-pointer 
               hover:opacity-75 
