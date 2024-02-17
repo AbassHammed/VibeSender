@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useRouter } from 'next/navigation';
 
 import SearchInput from '@/components/Button/SearchInput';
 import Loading from '@/components/Loading';
 import { useSidebarContext } from '@/contexts/sideBarContext';
 import { auth } from '@/firebase/firebase';
+import { currentUserQuery } from '@/firebase/query';
 import { useSession } from '@/hooks/useSession';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 
 const Index: React.FC = () => {
   const { isLinkActive } = useSidebarContext();
-  const { sessionData } = useSession();
+  const { sessionData, setSessionData } = useSession();
   const [user] = useAuthState(auth);
+  const router = useRouter();
 
-  if (!user || !sessionData) {
+  useEffect(() => {
+    if (!user) {
+      return router.push('/');
+    }
+
+    currentUserQuery(user.uid, setSessionData);
+  });
+
+  if (!user || !sessionData?.currentUser) {
     return <Loading />;
   }
 

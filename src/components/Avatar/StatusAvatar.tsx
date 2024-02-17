@@ -5,11 +5,11 @@ import { Avatar, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/rea
 
 import ProfileCard from '../ProfileCard/Profilecard';
 
-type UserAvatarprops = {
+type StatusAvatarProps = {
   profileUser: SessionUser;
 };
 
-const UserAvatar: React.FC<UserAvatarprops> = ({ profileUser }) => (
+const StatusAvatar: React.FC<StatusAvatarProps> = ({ profileUser }) => (
   <Popover showArrow placement="bottom">
     <PopoverTrigger>
       <Avatar isBordered color={profileUser.status} src={profileUser.imageUrl} />
@@ -20,4 +20,4 @@ const UserAvatar: React.FC<UserAvatarprops> = ({ profileUser }) => (
   </Popover>
 );
 
-export default UserAvatar;
+export default StatusAvatar;

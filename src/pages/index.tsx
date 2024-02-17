@@ -1,8 +1,29 @@
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import AuthForm from '@/components/Form/AuthForm';
+import Loading from '@/components/Loading';
+import { auth } from '@/firebase/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 export default function Home() {
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
+  const [pageLoading, setPageLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      router.push('/conversations');
+    }
+
+    if (!loading || !user) {
+      setPageLoading(false);
+    }
+  }, [user, router, loading]);
+
+  if (pageLoading) {return <Loading />;}
   return (
     <div>
       <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">

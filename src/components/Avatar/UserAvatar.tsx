@@ -5,11 +5,11 @@ import { Popover, PopoverContent, PopoverTrigger, User } from '@nextui-org/react
 
 import ProfileCard from '../ProfileCard/Profilecard';
 
-type UserAvatarprops = {
+type UserAvatarProps = {
   profileUser: SessionUser;
 };
 
-const UserAvatar: React.FC<UserAvatarprops> = ({ profileUser }) => (
+const UserAvatar: React.FC<UserAvatarProps> = ({ profileUser }) => (
   <Popover showArrow placement="bottom">
     <PopoverTrigger>
       <User

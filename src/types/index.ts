@@ -34,3 +34,12 @@ export type SideNavItem = {
   submenu?: boolean;
   subMenuItems?: SideNavItem[];
 };
+
+export type NavItemType = {
+  icon?: {
+    icon: React.ReactNode;
+    fillIcon: React.ReactNode;
+  };
+  label: string;
+  href: string;
+};

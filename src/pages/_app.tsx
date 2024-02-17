@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
 import Header from '@/components/Header/Header';
-import HeaderMobile from '@/components/Header/HeaderMobile';
+// import HeaderMobile from '@/components/Header/HeaderMobile';
 import NavBar from '@/components/NavBar';
 import { MarginWidthWrapper, PageWrapper, useShowNavbar } from '@/components/Wrapper';
 import { SidebarProvider } from '@/contexts/sideBarContext';
@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <main className="flex-1">
         <MarginWidthWrapper>
           <Header />
-          <HeaderMobile />
+          {/* <HeaderMobile /> */}
           <PageWrapper>
             <Component {...pageProps} />
           </PageWrapper>
@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
           content="VibeSender is a dynamic messaging app designed for the modern communicator. With a focus on seamless, real-time conversations, VibeSend offers an intuitive and engaging platform for users to connect, share, and collaborate. Whether you're sending instant messages, sharing photos, or engaging in group chats, VibeSend ensures your conversations are both private and secure. Emphasizing user experience, the app features a sleek design and customizable themes, allowing you to personalize your chat environment. With VibeSend, staying in touch with friends, family, and colleagues is more vibrant and effortless than ever. Join the VibeSend community today and elevate your messaging experience."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/Icon.png" sizes="180*180" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Toaster richColors position="top-center" closeButton />
       <SessionProvider>

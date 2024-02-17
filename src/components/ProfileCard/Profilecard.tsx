@@ -56,7 +56,7 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
       <CardHeader className="justify-between">
         <div className="flex gap-3">
           <Avatar isBordered radius="full" size="md" src={profileUser.imageUrl} />
-          <div className="flex flex-col items-start justify-center">
+          <div className="flex flex-col items-start justify-center pl-2">
             <h4 className="text-small font-semibold leading-none text-default-600">
               {profileUser.fullName}
             </h4>
