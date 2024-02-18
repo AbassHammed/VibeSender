@@ -23,7 +23,9 @@ export default function Home() {
     }
   }, [user, router, loading]);
 
-  if (pageLoading) {return <Loading />;}
+  if (pageLoading) {
+    return <Loading />;
+  }
   return (
     <div>
       <div className="flex min-h-screen flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-100">
