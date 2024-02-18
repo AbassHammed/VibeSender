@@ -19,7 +19,7 @@ const UpdateImage: React.FC<UpdateImageProps> = ({ profileUser }) => (
           <h5 className="text-small tracking-tight text-default-500">{profileUser.fullName}</h5>
         </div>
         <Button size="sm" className="absolute right-4 items-center mt-3">
-            Change photo
+          Change photo
         </Button>
       </div>
     </CardBody>
