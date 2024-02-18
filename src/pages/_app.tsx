@@ -6,7 +6,12 @@ import Head from 'next/head';
 import Header from '@/components/Header/Header';
 // import HeaderMobile from '@/components/Header/HeaderMobile';
 import NavBar from '@/components/NavBar';
-import { MarginWidthWrapper, PageWrapper, useShowNavbar } from '@/components/Wrapper';
+import {
+  MarginWidthWrapper,
+  PageWrapper,
+  ThemeProvider,
+  useShowNavbar,
+} from '@/components/Wrapper';
 import { SidebarProvider } from '@/contexts/sideBarContext';
 import { SessionProvider } from '@/hooks/useSession';
 import { NextUIProvider } from '@nextui-org/react';
@@ -41,14 +46,16 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Toaster richColors position="top-center" closeButton />
-      <SessionProvider>
-        <SidebarProvider>
-          <NextUIProvider>
-            {showNavbar ? renderContent() : <Component {...pageProps} />}
-          </NextUIProvider>
-        </SidebarProvider>
-      </SessionProvider>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <Toaster richColors position="top-center" closeButton />
+        <SessionProvider>
+          <SidebarProvider>
+            <NextUIProvider>
+              {showNavbar ? renderContent() : <Component {...pageProps} />}
+            </NextUIProvider>
+          </SidebarProvider>
+        </SessionProvider>
+      </ThemeProvider>
     </RecoilRoot>
   );
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { User as SessionUser } from '@/types';
+import { stringToColor } from '@/utils/utils';
 import { Avatar, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 
 import ProfileCard from '../ProfileCard/Profilecard';
@@ -12,7 +13,7 @@ type StatusAvatarProps = {
 const StatusAvatar: React.FC<StatusAvatarProps> = ({ profileUser }) => (
   <Popover showArrow placement="bottom">
     <PopoverTrigger>
-      <Avatar isBordered color={profileUser.status} src={profileUser.imageUrl} />
+      <Avatar isBordered color={stringToColor(profileUser.status)} src={profileUser.imageUrl} />
     </PopoverTrigger>
     <PopoverContent className="p-1">
       <ProfileCard User={profileUser} />

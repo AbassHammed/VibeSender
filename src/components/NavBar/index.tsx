@@ -22,7 +22,7 @@ function SideNavItem({ href, icon, label }: NavItemType) {
     <Link
       ref={animationParent}
       href={href}
-      className="flex gap-2 items-center p-2 transition-all rounded-lg cursor-pointer hover:bg-blue-100 w-full">
+      className="flex gap-2 items-center p-2 transition-all rounded-lg cursor-pointer hover:bg-muted w-full">
       <div className="w-[35px] h-[35px] text-3xl">{isActivePage ? icon?.fillIcon : icon?.icon}</div>
 
       <p className={cn('text-[16px] hidden md:block transition-all ', isActivePage && 'font-bold')}>

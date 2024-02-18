@@ -13,7 +13,7 @@ export type User = {
   userName: string;
   jobDescription: string;
   bio: string;
-  status: color;
+  status: string;
   following: number;
   lastSeen: string;
   dateBirth: string;

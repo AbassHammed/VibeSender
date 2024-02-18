@@ -26,8 +26,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import UpdateImage from '../UpdateImage';
+
 const profileFormSchema = z.object({
-  jobDescription: z.string().max(50).min(1).optional(),
+  jobDescription: z.string().max(50).optional(),
   username: z
     .string()
     .min(2, {
@@ -54,9 +56,17 @@ interface ProfilePageProps {
 }
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
+  const defaultValues: Partial<ProfileFormValues> = {
+    bio: currentUser.bio,
+    jobDescription: currentUser.jobDescription,
+    username: currentUser.userName,
+    email: currentUser.email,
+    status: currentUser.status,
+  };
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     mode: 'onChange',
+    defaultValues,
   });
 
   function onSubmit(data: ProfileFormValues) {
@@ -75,6 +85,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
         <h3 className="text-lg font-medium">Profile</h3>
       </div>
       <Separator />
+
+      <UpdateImage profileUser={currentUser} />
       {/* <ProfileForm /> */}
 
       <Form {...form}>
@@ -115,7 +127,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
             )}
           />
           <FormField
-            control={form.control}
+            // control={form.control}
             name="jobDescription"
             render={({ field }) => (
               <FormItem>

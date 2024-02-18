@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { auth } from '@/firebase/firebase';
 import { User as SessionUser } from '@/types';
@@ -11,20 +11,41 @@ import {
   DropdownTrigger,
   User,
 } from '@nextui-org/react';
+import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { useTheme } from 'next-themes';
 import { useSignOut } from 'react-firebase-hooks/auth';
 
 import { AddNoteIcon } from '../Icons/AddNoteIcon';
 import { CopyDocumentIcon } from '../Icons/CopyDocumentIcon';
 import { DeleteDocumentIcon } from '../Icons/DeleteDocumentIcon';
 import { EditDocumentIcon } from '../Icons/EditDocumentIcon';
+import { SystemIcon } from '../Icons/SystemIcon';
 
 type SideBarAvatarProps = {
   profileUser: SessionUser;
 };
 
+type theme = 'light' | 'dark';
+
 const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
   const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0';
   const [signOut] = useSignOut(auth);
+  const { setTheme } = useTheme();
+  const [themeVariant, setThemeVariant] = useState<theme>();
+  const [isIcon, setIsIcon] = useState<boolean | undefined>(undefined);
+
+  const toggleTheme = () => {
+    if (themeVariant === 'dark') {
+      setIsIcon(true);
+      setThemeVariant('light');
+      setTheme(themeVariant);
+    }
+    if (themeVariant === 'light' || !themeVariant) {
+      setIsIcon(false);
+      setThemeVariant('dark');
+      setTheme(themeVariant || 'dark');
+    }
+  };
 
   return (
     <Dropdown>
@@ -41,6 +62,12 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
       </DropdownTrigger>
       <DropdownMenu variant="faded" aria-label="Dropdown menu with description">
         <DropdownSection showDivider>
+          <DropdownItem
+            key="theme"
+            startContent={isIcon ? <MoonIcon /> : !isIcon ? <SunIcon /> : <SystemIcon />}
+            onPress={toggleTheme}>
+            Switch appearance
+          </DropdownItem>
           <DropdownItem
             href="/privacy"
             key="privacy"
