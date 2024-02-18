@@ -14,6 +14,7 @@ export type User = {
   jobDescription: string;
   bio: string;
   status: string;
+  lang: string;
   following: number;
   lastSeen: string;
   dateBirth: string;

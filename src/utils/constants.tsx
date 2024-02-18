@@ -90,8 +90,4 @@ export const SettingsNavItem: SettingsNavItemType[] = [
     title: 'Account',
     href: 'account',
   },
-  {
-    title: 'Appearance',
-    href: 'appearance',
-  },
 ];

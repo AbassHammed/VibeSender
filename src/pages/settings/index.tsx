@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Loading from '@/components/Loading';
-import { AppearancePage, ProfilePage } from '@/components/settingsComponents';
+import { AccountPage, ProfilePage } from '@/components/settingsComponents';
 import SettingsNav from '@/components/SettingsNav';
 import { Separator } from '@/components/ui/separator';
 import { auth } from '@/firebase/firebase';
@@ -9,7 +9,7 @@ import { useSession } from '@/hooks/useSession';
 import { SettingsNavItem } from '@/utils/constants';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-export type settingPage = 'profile' | 'account' | 'appearance';
+export type settingPage = 'profile' | 'account';
 
 const Settings: React.FC = () => {
   const [variant, setVariant] = useState<settingPage>('profile');
@@ -30,12 +30,10 @@ const Settings: React.FC = () => {
           <SettingsNav items={SettingsNavItem} variant={variant} setVariant={setVariant} />
         </aside>
         <div className="flex-1 lg:max-w-2xl">
-          {variant === 'appearance' ? (
-            <AppearancePage />
-          ) : variant === 'profile' ? (
+          {variant === 'profile' ? (
             <ProfilePage currentUser={sessionData.currentUser} />
           ) : (
-            ''
+            <AccountPage currentUser={sessionData.currentUser} />
           )}
         </div>
       </div>

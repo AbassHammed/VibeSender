@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,16 +20,19 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/components/ui/use-toast';
+import { firestore } from '@/firebase/firebase';
+import { currentUserQuery } from '@/firebase/query';
+import { useSession } from '@/hooks/useSession';
 import { User } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { doc, updateDoc } from 'firebase/firestore';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import UpdateImage from '../UpdateImage';
 
 const profileFormSchema = z.object({
-  jobDescription: z.string().max(50).optional(),
+  jobDescription: z.string().max(50).optional().nullable(),
   username: z
     .string()
     .min(2, {
@@ -56,6 +59,9 @@ interface ProfilePageProps {
 }
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
+  const { setSessionData } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
+
   const defaultValues: Partial<ProfileFormValues> = {
     bio: currentUser.bio,
     jobDescription: currentUser.jobDescription,
@@ -69,16 +75,22 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
     defaultValues,
   });
 
-  function onSubmit(data: ProfileFormValues) {
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+  const handleFormSubmit = async (data: ProfileFormValues) => {
+    const userDocRef = doc(firestore, 'users', currentUser.uid);
+    await updateDoc(userDocRef, {
+      jobDescription: data.jobDescription,
+      userName: data.username,
+      status: data.status,
+      bio: data.bio,
     });
-  }
+    await currentUserQuery(currentUser.uid, setSessionData);
+  };
+
+  const onSubmit = async (data: ProfileFormValues) => {
+    setIsLoading(true);
+    await handleFormSubmit(data);
+    setIsLoading(false);
+  };
   return (
     <div className="space-y-4 pl-2">
       <div>
@@ -180,7 +192,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
               </FormItem>
             )}
           />
-          <Button type="submit">Update profile</Button>
+          <Button type="submit">{isLoading ? 'Updating ...' : 'Update profile'}</Button>
         </form>
       </Form>
     </div>

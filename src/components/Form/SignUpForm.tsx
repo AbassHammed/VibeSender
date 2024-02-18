@@ -69,6 +69,7 @@ const SignUpForm: React.FC = () => {
           userName: inputs.userName,
           jobDescription: null,
           bio: null,
+          lang: null,
           following: 0,
           status: null,
           lastSeen: null,
