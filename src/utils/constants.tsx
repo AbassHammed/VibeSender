@@ -36,8 +36,8 @@ export const NavItem: NavItemType[] = [
       icon: <CiSearch />,
       fillIcon: <FiSearch />,
     },
-    label: 'Explore',
-    href: '#',
+    label: 'Search',
+    href: '/search',
   },
   {
     icon: {

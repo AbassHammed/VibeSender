@@ -11,7 +11,6 @@ import { currentUserQuery } from '@/firebase/query';
 import { useSession } from '@/hooks/useSession';
 import { Empty } from 'antd';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { MdOutlineGroupAdd } from 'react-icons/md';
 
 const Index: React.FC = () => {
   const { isLinkActive } = useSidebarContext();
@@ -49,26 +48,13 @@ const Index: React.FC = () => {
         border-gray-200
       ">
           <div className="px-5">
-            <div className="flex justify-between mb-4 pt-4">
-              <div className="text-2xl font-bold text-neutral-800">Chats</div>
-              <div
-                // onClick={() => setIsModalOpen(true)}
-                className="
-              rounded-full 
-              p-2 
-              bg-blue-100 
-              text-gray-600 
-              cursor-pointer 
-              hover:opacity-75 
-              transition
-            ">
-                <MdOutlineGroupAdd size={20} />
-              </div>
+            <div className="flex justify-between mb-4 pt-2">
+              <div className="text-2xl font-bold text-neutral-800">Search</div>
             </div>
           </div>
           <SearchInput />
           <Separator className="my-4" />
-          <Empty description="No recent searches" />
+          <Empty description="No users found" />
         </aside>
       )}
     </>
