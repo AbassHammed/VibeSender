@@ -11,25 +11,29 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
 import { firestore } from '@/firebase/firebase';
 import { currentUserQuery } from '@/firebase/query';
 import { useSession } from '@/hooks/useSession';
+import { cn } from '@/lib/utils';
 import { User } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../ui/command';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import UpdateImage from '../UpdateImage';
+
+const status = [
+  { label: 'Online', value: 'success' },
+  { label: 'Offline', value: 'default' },
+  { label: 'Idle', value: 'warning' },
+  { label: 'DND', value: 'danger' },
+] as const;
 
 const profileFormSchema = z.object({
   jobDescription: z.string().max(50).optional().nullable(),
@@ -158,22 +162,53 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
             control={form.control}
             name="status"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Status</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Set your status" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="default">offline</SelectItem>
-                    <SelectItem value="success">online</SelectItem>
-                    <SelectItem value="danger">away</SelectItem>
-                    <SelectItem value="warning">idle</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormDescription>Manage your status</FormDescription>
+              <FormItem className="flex flex-col">
+                <FormLabel>status</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant="outline"
+                        role="combobox"
+                        className={cn(
+                          'w-[200px] justify-between',
+                          !field.value && 'text-muted-foreground',
+                        )}>
+                        {field.value
+                          ? status.find(status => status.value === field.value)?.label
+                          : 'Select status'}
+                        <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-[200px] p-0">
+                    <Command>
+                      <CommandInput placeholder="Search status..." />
+                      <CommandEmpty>No status found.</CommandEmpty>
+                      <CommandGroup>
+                        {status.map(status => (
+                          <CommandItem
+                            value={status.label}
+                            key={status.value}
+                            onSelect={() => {
+                              form.setValue('status', status.value);
+                            }}>
+                            <CheckIcon
+                              className={cn(
+                                'mr-2 h-4 w-4',
+                                status.value === field.value ? 'opacity-100' : 'opacity-0',
+                              )}
+                            />
+                            {status.label}
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </Command>
+                  </PopoverContent>
+                </Popover>
+                <FormDescription>
+                  This is the status that will be used for your messages.
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
