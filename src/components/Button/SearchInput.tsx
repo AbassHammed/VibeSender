@@ -1,19 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import { searchRequest } from '@/firebase/query';
+import useDebounce from '@/hooks/useDebounce';
+import { useSession } from '@/hooks/useSession';
 import { Input } from '@nextui-org/react';
 
 import { SearchIcon } from '../Icons/SearchIcon';
 
-const SearchInput: React.FC = () => {
-  const [filterValue, setFilterValue] = React.useState('');
+interface SearchInputProps {
+  currentUserId: string;
+  searchInfirends: boolean;
+}
 
-  const onSearchChange = React.useCallback((value?: string) => {
-    value ? setFilterValue(value) : setFilterValue('');
-  }, []);
+const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, searchInfirends }) => {
+  const [filterValue, setFilterValue] = useState('');
+  const { setSessionData } = useSession();
 
-  const onClear = React.useCallback(() => {
-    setFilterValue('');
-  }, []);
+  useDebounce(() => {
+    if (filterValue) {searchRequest(filterValue, searchInfirends, setSessionData, currentUserId);}
+  }, [currentUserId, setSessionData, filterValue]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.currentTarget.value ? setFilterValue(e.currentTarget.value) : setFilterValue('');
+  };
 
   return (
     <Input
@@ -23,9 +32,9 @@ const SearchInput: React.FC = () => {
       placeholder="Search by name..."
       value={filterValue}
       startContent={<SearchIcon />}
-      onClear={() => onClear()}
-      onValueChange={onSearchChange}
+      onChange={handleSearchChange}
     />
   );
 };
+
 export default SearchInput;

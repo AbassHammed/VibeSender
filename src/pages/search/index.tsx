@@ -24,7 +24,7 @@ const Index: React.FC = () => {
     }
 
     currentUserQuery(user.uid, setSessionData);
-  });
+  }, [setSessionData, user, router]);
 
   if (!user || !sessionData?.currentUser) {
     return <Loading />;
@@ -52,7 +52,7 @@ const Index: React.FC = () => {
               <div className="text-2xl font-bold text-neutral-800">Search</div>
             </div>
           </div>
-          <SearchInput />
+          <SearchInput currentUserId={user.uid} searchInfirends={false} />
           <Separator className="my-4" />
           <Empty description="No users found" />
         </aside>

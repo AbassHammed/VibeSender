@@ -11,7 +11,7 @@ type StatusAvatarProps = {
 };
 
 const StatusAvatar: React.FC<StatusAvatarProps> = ({ profileUser }) => (
-  <Popover showArrow placement="bottom">
+  <Popover placement="bottom">
     <PopoverTrigger>
       <Avatar isBordered color={stringToColor(profileUser.status)} src={profileUser.imageUrl} />
     </PopoverTrigger>

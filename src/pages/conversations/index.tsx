@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
+import UserAvatar from '@/components/Avatar/UserAvatar';
 import SearchInput from '@/components/Button/SearchInput';
 import Loading from '@/components/Loading';
 import { Separator } from '@/components/ui/separator';
@@ -9,7 +10,6 @@ import { useSidebarContext } from '@/contexts/sideBarContext';
 import { auth } from '@/firebase/firebase';
 import { currentUserQuery } from '@/firebase/query';
 import { useSession } from '@/hooks/useSession';
-import { Empty } from 'antd';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 
@@ -23,9 +23,8 @@ const Index: React.FC = () => {
     if (!user) {
       return router.push('/');
     }
-
     currentUserQuery(user.uid, setSessionData);
-  });
+  }, [setSessionData, user, router]);
 
   if (!user || !sessionData?.currentUser) {
     return <Loading />;
@@ -66,9 +65,15 @@ const Index: React.FC = () => {
               </div>
             </div>
           </div>
-          <SearchInput />
+          <SearchInput currentUserId={user.uid} searchInfirends />
           <Separator className="my-4" />
-          <Empty description="No recent searches" />
+          {!sessionData.searchedUsers
+            ? 'No recent users'
+            : sessionData.searchedUsers.map(user => (
+              <div key={user.uid} className="m-2">
+                <UserAvatar key={user.uid} profileUser={user} />
+              </div>
+            ))}
         </aside>
       )}
     </>
