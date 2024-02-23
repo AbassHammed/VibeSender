@@ -19,7 +19,9 @@ const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, searchInFriend
   useDebounce(() => {
     if (filterValue.trim() !== '') {
       searchRequest(filterValue.trim(), searchInFriends, setSessionData, currentUserId);
-    } else {setSessionData(prev => ({ ...prev, searchedUsers: [] }));}
+    } else {
+      setSessionData(prev => ({ ...prev, searchedUsers: [] }));
+    }
   }, [currentUserId, setSessionData, filterValue]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
