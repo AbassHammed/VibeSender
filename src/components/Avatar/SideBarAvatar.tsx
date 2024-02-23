@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { SetStateAction } from 'react';
 
 import { auth } from '@/firebase';
 import { User as SessionUser } from '@/types';
 import {
+  Button,
   cn,
   Dropdown,
   DropdownItem,
@@ -27,30 +28,19 @@ type SideBarAvatarProps = {
   profileUser: SessionUser;
 };
 
-type theme = 'light' | 'dark';
-
 const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['system']));
   const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0';
   const [signOut] = useSignOut(auth);
   const { setTheme } = useTheme();
-  const [themeVariant, setThemeVariant] = useState<theme>();
-  const [isIcon, setIsIcon] = useState<boolean | undefined>(undefined);
 
-  const toggleTheme = () => {
-    if (themeVariant === 'dark') {
-      setIsIcon(true);
-      setThemeVariant('light');
-      setTheme(themeVariant);
-    }
-    if (themeVariant === 'light' || !themeVariant) {
-      setIsIcon(false);
-      setThemeVariant('dark');
-      setTheme(themeVariant || 'dark');
-    }
-  };
+  const selectedValue = React.useMemo(
+    () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
+    [selectedKeys],
+  );
 
   return (
-    <Dropdown>
+    <Dropdown closeOnSelect={false}>
       <DropdownTrigger>
         <User
           as="button"
@@ -66,8 +56,48 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
         <DropdownSection showDivider>
           <DropdownItem
             key="theme"
-            startContent={isIcon ? <MoonIcon /> : !isIcon ? <SunIcon /> : <SystemIcon />}
-            onPress={toggleTheme}>
+            startContent={
+              selectedValue === 'dark' ? (
+                <MoonIcon />
+              ) : selectedValue === 'light' ? (
+                <SunIcon />
+              ) : (
+                <SystemIcon />
+              )
+            }
+            endContent={
+              <Dropdown closeOnSelect={false}>
+                <DropdownTrigger>
+                  <Button variant="bordered">{selectedValue}</Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  variant="faded"
+                  aria-label="Dropdown menu with icons"
+                  disallowEmptySelection
+                  selectionMode="single"
+                  selectedKeys={selectedKeys}
+                  onSelectionChange={key => setSelectedKeys(key as SetStateAction<Set<string>>)}>
+                  <DropdownItem
+                    key="light"
+                    startContent={<SunIcon className={iconClasses} />}
+                    onPress={() => setTheme('light')}>
+                    Light
+                  </DropdownItem>
+                  <DropdownItem
+                    key="dark"
+                    startContent={<MoonIcon className={iconClasses} />}
+                    onPress={() => setTheme('dark')}>
+                    Dark
+                  </DropdownItem>
+                  <DropdownItem
+                    key="system"
+                    startContent={<SystemIcon className={iconClasses} />}
+                    onPress={() => setTheme('system')}>
+                    System
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            }>
             Switch appearance
           </DropdownItem>
           <DropdownItem
