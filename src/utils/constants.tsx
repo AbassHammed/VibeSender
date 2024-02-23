@@ -1,4 +1,4 @@
-import { settingPage } from '@/pages/settings';
+import { settingPage } from '@/pages/settings/Settings';
 import { NavItemType } from '@/types';
 import { BsBell, BsFillBellFill } from 'react-icons/bs';
 import { CiSearch } from 'react-icons/ci';

@@ -12,7 +12,6 @@ import {
   ThemeProvider,
   useShowNavbar,
 } from '@/components/Wrapper';
-import { SidebarProvider } from '@/contexts/sideBarContext';
 import { SessionProvider } from '@/hooks/useSession';
 import { MantineProvider } from '@mantine/core';
 import { NextUIProvider } from '@nextui-org/react';
@@ -50,13 +49,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
         <Toaster richColors position="top-center" closeButton />
         <SessionProvider>
-          <SidebarProvider>
-            <NextUIProvider>
-              <MantineProvider>
-                {showNavbar ? renderContent() : <Component {...pageProps} />}
-              </MantineProvider>
-            </NextUIProvider>
-          </SidebarProvider>
+          <NextUIProvider>
+            <MantineProvider>
+              {showNavbar ? renderContent() : <Component {...pageProps} />}
+            </MantineProvider>
+          </NextUIProvider>
         </SessionProvider>
       </ThemeProvider>
     </RecoilRoot>

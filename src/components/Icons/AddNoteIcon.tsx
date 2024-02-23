@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconSvgProps } from '@/types';
 
-export const AddNoteIcon = (props: IconSvgProps) => (
+const AddNoteIcon = (props: IconSvgProps) => (
   <svg
     aria-hidden="true"
     fill="none"
@@ -23,3 +23,5 @@ export const AddNoteIcon = (props: IconSvgProps) => (
     />
   </svg>
 );
+
+export default AddNoteIcon;

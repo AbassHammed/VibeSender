@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { auth } from '@/firebase/firebase';
+import { auth } from '@/firebase';
 import { User as SessionUser } from '@/types';
 import {
   cn,
@@ -15,11 +15,13 @@ import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 import { useSignOut } from 'react-firebase-hooks/auth';
 
-import { AddNoteIcon } from '../Icons/AddNoteIcon';
-import { CopyDocumentIcon } from '../Icons/CopyDocumentIcon';
-import { DeleteDocumentIcon } from '../Icons/DeleteDocumentIcon';
-import { EditDocumentIcon } from '../Icons/EditDocumentIcon';
-import { SystemIcon } from '../Icons/SystemIcon';
+import {
+  AddNoteIcon,
+  CopyDocumentIcon,
+  DeleteDocumentIcon,
+  EditDocumentIcon,
+  SystemIcon,
+} from '../Icons';
 
 type SideBarAvatarProps = {
   profileUser: SessionUser;

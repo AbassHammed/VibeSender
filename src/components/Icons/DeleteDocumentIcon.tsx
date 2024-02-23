@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconSvgProps } from '@/types';
 
-export const DeleteDocumentIcon = (props: IconSvgProps) => (
+const DeleteDocumentIcon = (props: IconSvgProps) => (
   <svg
     aria-hidden="true"
     fill="none"
@@ -29,3 +29,5 @@ export const DeleteDocumentIcon = (props: IconSvgProps) => (
     />
   </svg>
 );
+
+export default DeleteDocumentIcon;

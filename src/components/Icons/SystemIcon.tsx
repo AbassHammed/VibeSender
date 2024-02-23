@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconSvgProps } from '@/types';
 
-export const SystemIcon = (props: IconSvgProps) => (
+const SystemIcon = (props: IconSvgProps) => (
   <svg
     width="15"
     height="15"
@@ -17,3 +17,5 @@ export const SystemIcon = (props: IconSvgProps) => (
       clip-rule="evenodd"></path>
   </svg>
 );
+
+export default SystemIcon;

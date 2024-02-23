@@ -13,9 +13,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Textarea } from '@/components/ui/textarea';
-import { firestore } from '@/firebase/firebase';
-import { currentUserQuery } from '@/firebase/query';
-import { useSession } from '@/hooks/useSession';
+import { currentUserQuery, firestore } from '@/firebase';
+import { useSession } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { User } from '@/types';
 import { zodResolver } from '@hookform/resolvers/zod';

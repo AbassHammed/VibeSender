@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import { firestore } from '@/firebase/firebase';
-import { useAuth } from '@/hooks/useAuth';
+import { firestore } from '@/firebase';
+import { useAuth } from '@/hooks';
 import { User } from '@/types';
 import { Avatar, Button, Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
 import { deleteDoc, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';

@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { auth } from '@/firebase/firebase';
-import { currentUserQuery, populateFriends } from '@/firebase/query';
-import { useSession } from '@/hooks/useSession';
+import { auth, currentUserQuery, populateFriends } from '@/firebase';
+import { useSession } from '@/hooks';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import { toast } from 'sonner';
 
-import Button from '../Button/Button';
+import { Button } from '../Button';
 
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,7 +35,6 @@ const LoginForm: React.FC = () => {
     }
     try {
       const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password);
-      toast.info('everything');
       if (newUser) {
         await currentUserQuery(newUser.user.uid, setSessionData);
         await populateFriends(newUser.user.uid, setSessionData);

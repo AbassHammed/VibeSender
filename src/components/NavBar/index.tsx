@@ -4,14 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useSession } from '@/hooks/useSession';
+import { useAuth, useSession } from '@/hooks';
 import { NavItemType } from '@/types';
 import { NavItem } from '@/utils/constants';
 import { cn } from '@/utils/utils';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
-import SideBarAvatar from '../Avatar/SideBarAvatar';
+import { SideBarAvatar } from '../Avatar';
 import Loading from '../Loading';
 
 function SideNavItem({ href, icon, label }: NavItemType) {

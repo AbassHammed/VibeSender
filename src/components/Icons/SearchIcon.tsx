@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconSvgProps } from '@/types';
 
-export const SearchIcon = (props: IconSvgProps) => (
+const SearchIcon = (props: IconSvgProps) => (
   <svg
     aria-hidden="true"
     fill="none"
@@ -28,3 +28,5 @@ export const SearchIcon = (props: IconSvgProps) => (
     />
   </svg>
 );
+
+export default SearchIcon;

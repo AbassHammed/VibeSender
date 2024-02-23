@@ -1,8 +1,7 @@
 import React, { Key, useRef, useState } from 'react';
 
-import { firestore, storage } from '@/firebase/firebase';
-import { currentUserQuery } from '@/firebase/query';
-import { useSession } from '@/hooks/useSession';
+import { currentUserQuery, firestore, storage } from '@/firebase';
+import { useSession } from '@/hooks';
 import { User } from '@/types';
 import {
   Avatar,

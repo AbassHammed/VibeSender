@@ -2,7 +2,7 @@ import React from 'react';
 
 import { IconSvgProps } from '@/types';
 
-export const CopyDocumentIcon = (props: IconSvgProps) => (
+const CopyDocumentIcon = (props: IconSvgProps) => (
   <svg
     aria-hidden="true"
     fill="none"
@@ -27,3 +27,5 @@ export const CopyDocumentIcon = (props: IconSvgProps) => (
     />
   </svg>
 );
+
+export default CopyDocumentIcon;

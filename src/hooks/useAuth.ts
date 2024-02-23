@@ -10,7 +10,7 @@ type UseAuthReturnType = {
   loading: ReturnType<typeof useAuthState>[1];
 };
 
-export const useAuth = (): UseAuthReturnType => {
+const useAuth = (): UseAuthReturnType => {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
 
@@ -22,3 +22,4 @@ export const useAuth = (): UseAuthReturnType => {
 
   return { user, loading };
 };
+export default useAuth;

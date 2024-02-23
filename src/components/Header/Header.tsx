@@ -3,12 +3,10 @@ import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useAuth } from '@/hooks/useAuth';
-import useScroll from '@/hooks/useScroll';
-import { useSession } from '@/hooks/useSession';
+import { useAuth, useScroll, useSession } from '@/hooks';
 import { cn } from '@/utils/utils';
 
-import UserAvatar from '../Avatar/StatusAvatar';
+import { StatusAvatar } from '../Avatar';
 import Loading from '../Loading';
 
 const Header = () => {
@@ -41,7 +39,7 @@ const Header = () => {
         </div>
 
         <div className="hidden md:block ">
-          <UserAvatar profileUser={sessionData?.currentUser} />
+          <StatusAvatar profileUser={sessionData?.currentUser} />
         </div>
       </div>
     </div>

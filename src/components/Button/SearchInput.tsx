@@ -1,24 +1,27 @@
 import React, { useState } from 'react';
 
-import { searchRequest } from '@/firebase/query';
-import useDebounce from '@/hooks/useDebounce';
-import { useSession } from '@/hooks/useSession';
+import { searchMessages, searchRequest } from '@/firebase';
+import { useDebounce, useSession } from '@/hooks';
 import { Input } from '@nextui-org/react';
 
-import { SearchIcon } from '../Icons/SearchIcon';
+import { SearchIcon } from '../Icons';
+
+type Page = 'convo' | 'find';
 
 interface SearchInputProps {
   currentUserId: string;
-  searchInFriends: boolean;
+  page: Page;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, searchInFriends }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, page }) => {
   const [filterValue, setFilterValue] = useState('');
   const { setSessionData } = useSession();
 
   useDebounce(() => {
-    if (filterValue.trim() !== '') {
-      searchRequest(filterValue.trim(), searchInFriends, setSessionData, currentUserId);
+    if (page === 'convo' && filterValue.trim() !== '') {
+      searchMessages(filterValue.trim(), setSessionData, currentUserId);
+    } else if (page === 'find' && filterValue.trim() !== '') {
+      searchRequest(filterValue.trim(), setSessionData);
     } else {
       setSessionData(prev => ({ ...prev, searchedUsers: [] }));
     }

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { SessionData } from '@/hooks/useSession';
+import { SessionData } from '@/hooks';
 import { User } from '@/types';
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 
@@ -100,65 +100,67 @@ export const populateFriends = async (
   }));
 };
 
-// Function to search users based on fullName, with an option to restrict search within current user's friends
-export const searchRequest = async (
+export const searchMessages = async (
   filterValue: string,
-  searchInFriends: boolean,
   setSessionData: Dispatch<SetStateAction<SessionData | null>>,
   currentUserId: string,
 ) => {
-  if (searchInFriends) {
-    // Query friendships to get friends' IDs
-    const friendshipsQuery1 = query(
-      collection(firestore, 'friendships'),
-      where('user1Id', '==', currentUserId),
-    );
-    const friendshipsQuery2 = query(
-      collection(firestore, 'friendships'),
-      where('user2Id', '==', currentUserId),
-    );
-    const [friendsSnapshot1, friendsSnapshot2] = await Promise.all([
-      getDocs(friendshipsQuery1),
-      getDocs(friendshipsQuery2),
-    ]);
+  // Query friendships to get friends' IDs
+  const friendshipsQuery1 = query(
+    collection(firestore, 'friendships'),
+    where('user1Id', '==', currentUserId),
+  );
+  const friendshipsQuery2 = query(
+    collection(firestore, 'friendships'),
+    where('user2Id', '==', currentUserId),
+  );
+  const [friendsSnapshot1, friendsSnapshot2] = await Promise.all([
+    getDocs(friendshipsQuery1),
+    getDocs(friendshipsQuery2),
+  ]);
 
-    const combinedDocs = [...friendsSnapshot1.docs, ...friendsSnapshot2.docs];
+  const combinedDocs = [...friendsSnapshot1.docs, ...friendsSnapshot2.docs];
 
-    if (combinedDocs.length === 0) {
-      return;
-    }
-
-    const friendIds = new Set(
-      combinedDocs.map(doc => {
-        const data = doc.data();
-        return data.user1Id === currentUserId ? data.userId2 : data.userId1;
-      }),
-    );
-
-    // Fetch and filter friends based on filterValue
-    const friendsData = await Promise.all(
-      Array.from(friendIds).map(async friendId => {
-        const userDocRef = doc(firestore, 'users', friendId);
-        const userDoc = await getDoc(userDocRef);
-        return userDoc.exists() &&
-          userDoc.data().fullName.toLowerCase().includes(filterValue.toLowerCase())
-          ? { ...(userDoc.data() as User) }
-          : null;
-      }),
-    );
-
-    const validFriends = friendsData.filter((friend): friend is User => friend !== null);
-    setSessionData(prev => ({ ...prev, searchedUsers: validFriends }));
-  } else {
-    // Direct search in users collection
-    const usersQuery = query(
-      collection(firestore, 'users'),
-      where('fullName', '>=', filterValue),
-      where('fullName', '<=', `${filterValue}\uf8ff`),
-    );
-    const usersSnapshot = await getDocs(usersQuery);
-
-    const users = usersSnapshot.docs.map(doc => ({ ...(doc.data() as User) }));
-    setSessionData(prev => ({ ...prev, searchedUsers: users }));
+  if (combinedDocs.length === 0) {
+    return;
   }
+
+  const friendIds = new Set(
+    combinedDocs.map(doc => {
+      const data = doc.data();
+      return data.user1Id === currentUserId ? data.userId2 : data.userId1;
+    }),
+  );
+
+  // Fetch and filter friends based on filterValue
+  const friendsData = await Promise.all(
+    Array.from(friendIds).map(async friendId => {
+      const userDocRef = doc(firestore, 'users', friendId);
+      const userDoc = await getDoc(userDocRef);
+      return userDoc.exists() &&
+        userDoc.data().fullName.toLowerCase().includes(filterValue.toLowerCase())
+        ? { ...(userDoc.data() as User) }
+        : null;
+    }),
+  );
+
+  const validFriends = friendsData.filter((friend): friend is User => friend !== null);
+  setSessionData(prev => ({ ...prev, searchedUsers: validFriends }));
+};
+
+// Function to search users based on fullName, with an option to restrict search within current user's friends
+export const searchRequest = async (
+  filterValue: string,
+  setSessionData: Dispatch<SetStateAction<SessionData | null>>,
+) => {
+  // Direct search in users collection
+  const usersQuery = query(
+    collection(firestore, 'users'),
+    where('fullName', '>=', filterValue),
+    where('fullName', '<=', `${filterValue}\uf8ff`),
+  );
+  const usersSnapshot = await getDocs(usersQuery);
+
+  const users = usersSnapshot.docs.map(doc => ({ ...(doc.data() as User) }));
+  setSessionData(prev => ({ ...prev, searchedUsers: users }));
 };

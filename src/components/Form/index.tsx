@@ -5,7 +5,7 @@ import SignUpForm from './SignUpForm';
 
 type page = 'LOGIN' | 'REGISTER';
 
-const AuthForm: React.FC = () => {
+const Form: React.FC = () => {
   const [page, setPage] = useState<page>('LOGIN');
 
   const togglePage = useCallback(() => {
@@ -25,4 +25,4 @@ const AuthForm: React.FC = () => {
     </div>
   );
 };
-export default AuthForm;
+export default Form;

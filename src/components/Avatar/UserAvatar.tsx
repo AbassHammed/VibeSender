@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 import { firestore } from '@/firebase/firebase';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/hooks';
 import { User as SessionUser } from '@/types';
 import { Button, Popover, PopoverContent, PopoverTrigger, User } from '@nextui-org/react';
 import { deleteDoc, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { FaCheck, FaX } from 'react-icons/fa6';
 
-import ProfileCard from '../ProfileCard/Profilecard';
+import ProfileCard from '../ProfileCard';
 
 type UserAvatarProps = {
   profileUser: SessionUser;

@@ -4,7 +4,7 @@ import { User as SessionUser } from '@/types';
 import { stringToColor } from '@/utils/utils';
 import { Avatar, Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 
-import ProfileCard from '../ProfileCard/Profilecard';
+import ProfileCard from '../ProfileCard';
 
 type StatusAvatarProps = {
   profileUser: SessionUser;

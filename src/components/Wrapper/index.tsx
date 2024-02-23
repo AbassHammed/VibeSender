@@ -9,7 +9,7 @@ import { type ThemeProviderProps } from 'next-themes/dist/types';
 // Custom hook to determine if the navbar should be shown
 export function useShowNavbar() {
   const { pathname } = useRouter();
-  return !['/', '/404'].includes(pathname);
+  return !['/', '/404', '/auth'].includes(pathname);
 }
 
 export function MarginWidthWrapper({ children }: { children: ReactNode }) {
