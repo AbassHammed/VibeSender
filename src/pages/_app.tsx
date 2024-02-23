@@ -14,6 +14,7 @@ import {
 } from '@/components/Wrapper';
 import { SidebarProvider } from '@/contexts/sideBarContext';
 import { SessionProvider } from '@/hooks/useSession';
+import { MantineProvider } from '@mantine/core';
 import { NextUIProvider } from '@nextui-org/react';
 import { RecoilRoot } from 'recoil';
 import { Toaster } from 'sonner';
@@ -51,7 +52,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <SessionProvider>
           <SidebarProvider>
             <NextUIProvider>
-              {showNavbar ? renderContent() : <Component {...pageProps} />}
+              <MantineProvider>
+                {showNavbar ? renderContent() : <Component {...pageProps} />}
+              </MantineProvider>
             </NextUIProvider>
           </SidebarProvider>
         </SessionProvider>

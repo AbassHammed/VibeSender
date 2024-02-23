@@ -17,31 +17,14 @@ export const currentUserQuery = async (
     return;
   }
 
-  const userData = querySnapshot.docs[0].data();
+  const userData = querySnapshot.docs[0].data() as User;
 
   setSessionData((prevSessionData): SessionData | null => {
     // If there's no previous session data, we opt to return a default structure or null
     if (!prevSessionData) {
       return {
         currentUser: {
-          uid: userData.uid,
-          email: userData.email,
-          fullName: userData.fullName,
-          userName: userData.userName,
-          jobDescription: userData.jobDescription,
-          bio: userData.bio,
-          status: userData.status,
-          lang: userData.lang,
-          following: userData.following,
-          lastSeen: userData.lastSeen,
-          dateBirth: userData.dateBirth,
-          streetName: userData.streetName,
-          postalCode: userData.postalCode,
-          stateprovince: userData.stateprovince,
-          country: userData.country,
-          imageUrl: userData.imageUrl,
-          createdAt: userData.createdAt,
-          deletedAt: userData.deletedAt,
+          ...userData,
         },
       };
     }
@@ -51,24 +34,7 @@ export const currentUserQuery = async (
       ...prevSessionData,
       currentUser: {
         ...prevSessionData.currentUser,
-        uid: userData.uid,
-        email: userData.email,
-        fullName: userData.fullName,
-        userName: userData.userName,
-        jobDescription: userData.jobDescription,
-        bio: userData.bio,
-        status: userData.status,
-        lang: userData.lang,
-        following: userData.following,
-        lastSeen: userData.lastSeen,
-        dateBirth: userData.dateBirth,
-        streetName: userData.streetName,
-        postalCode: userData.postalCode,
-        stateprovince: userData.stateprovince,
-        country: userData.country,
-        imageUrl: userData.imageUrl,
-        createdAt: userData.createdAt,
-        deletedAt: userData.deletedAt,
+        ...userData,
       },
     };
   });
@@ -115,26 +81,9 @@ export const populateFriends = async (
       }
 
       // Extract userData and manually map it to the User type, including the document id
-      const userData = userDoc.data();
+      const userData = userDoc.data() as User;
       const friend: User = {
-        uid: userData.uid,
-        email: userData.email,
-        fullName: userData.fullName,
-        userName: userData.userName,
-        jobDescription: userData.jobDescription,
-        bio: userData.bio,
-        status: userData.status,
-        lang: userData.lang,
-        following: userData.following,
-        lastSeen: userData.lastSeen,
-        dateBirth: userData.dateBirth,
-        streetName: userData.streetName,
-        postalCode: userData.postalCode,
-        stateprovince: userData.stateprovince,
-        country: userData.country,
-        imageUrl: userData.imageUrl,
-        createdAt: userData.createdAt,
-        deletedAt: userData.deletedAt,
+        ...userData,
       };
 
       return friend;

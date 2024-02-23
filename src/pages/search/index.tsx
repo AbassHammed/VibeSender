@@ -31,9 +31,8 @@ const Index: React.FC = () => {
 
   return (
     <>
-      <div className="flex flex-row h-[calc(100%-60px)]">
-        <aside
-          className="
+      <aside
+        className="
           h-fit
         inset-y-0 
         max-w-80
@@ -45,27 +44,23 @@ const Index: React.FC = () => {
         border 
         border-gray-200
       ">
-          <div className="px-5">
-            <div className="flex justify-between mb-4 pt-2">
-              <div className="text-2xl font-bold text-neutral-800">Search</div>
-            </div>
+        <div className="px-5">
+          <div className="flex justify-between mb-4 pt-2">
+            <div className="text-2xl font-bold text-neutral-800">Search</div>
           </div>
-          <SearchInput currentUserId={user.uid} searchInfirends={false} />
-          <Separator className="my-4" />
-          {!sessionData.searchedUsers || sessionData.searchedUsers.length === 0 ? (
-            <Placeholder description="There is nothing to display" imagePath="/empty.svg" />
-          ) : (
-            sessionData.searchedUsers.map(user => (
-              <div key={user.uid} className="m-2">
-                <UserAvatar profileUser={user} />
-              </div>
-            ))
-          )}
-        </aside>
-        <div className="flex-grow rounded-lg hidden md:block h-fit ml-4">
-          <Placeholder imagePath="/empty.svg" />
         </div>
-      </div>
+        <SearchInput currentUserId={user.uid} searchInFriends={false} />
+        <Separator className="my-4" />
+        {!sessionData.searchedUsers || sessionData.searchedUsers.length === 0 ? (
+          <Placeholder description="There is nothing to display" imagePath="/empty.svg" />
+        ) : (
+          sessionData.searchedUsers.map(user => (
+            <div key={user.uid} className="m-2">
+              <UserAvatar profileUser={user} />
+            </div>
+          ))
+        )}
+      </aside>
     </>
   );
 };

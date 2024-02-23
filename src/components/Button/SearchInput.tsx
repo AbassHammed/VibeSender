@@ -9,15 +9,17 @@ import { SearchIcon } from '../Icons/SearchIcon';
 
 interface SearchInputProps {
   currentUserId: string;
-  searchInfirends: boolean;
+  searchInFriends: boolean;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, searchInfirends }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, searchInFriends }) => {
   const [filterValue, setFilterValue] = useState('');
   const { setSessionData } = useSession();
 
   useDebounce(() => {
-    if (filterValue) {searchRequest(filterValue, searchInfirends, setSessionData, currentUserId);}
+    if (filterValue.trim() !== '') {
+      searchRequest(filterValue.trim(), searchInFriends, setSessionData, currentUserId);
+    } else {setSessionData(prev => ({ ...prev, searchedUsers: [] }));}
   }, [currentUserId, setSessionData, filterValue]);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +29,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, searchInfirend
   return (
     <Input
       isClearable
-      className="max-w-full px-3 mb-2"
+      className="max-w-[320px] px-3 mb-2"
       variant="bordered"
       placeholder="Search by name..."
       value={filterValue}
