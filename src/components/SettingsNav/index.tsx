@@ -26,7 +26,7 @@ const SettingsNav: React.FC<SidebarNavProps> = ({ items, setVariant, variant }) 
         <Link
           onClick={() => toggle(item.href)}
           key={item.href}
-          href="#"
+          href={`#${item.href}`}
           className={cn(
             buttonVariants({ variant: 'ghost' }),
             variant === item.href

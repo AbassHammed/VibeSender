@@ -1,6 +1,7 @@
-import React, { SetStateAction } from 'react';
+import React, { SetStateAction, useEffect } from 'react';
 
 import { auth } from '@/firebase';
+import { useLocalStorage } from '@/hooks';
 import { User as SessionUser } from '@/types';
 import {
   Button,
@@ -29,10 +30,15 @@ type SideBarAvatarProps = {
 };
 
 const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(['system']));
-  const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0';
   const [signOut] = useSignOut(auth);
   const { setTheme } = useTheme();
+  const [themeVariant, setThemeVariant] = useLocalStorage('theme', 'system');
+  const [selectedKeys, setSelectedKeys] = React.useState(new Set([themeVariant]));
+  const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0';
+
+  useEffect(() => {
+    setTheme(themeVariant);
+  }, [setTheme, themeVariant]);
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),
@@ -66,7 +72,7 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
               )
             }
             endContent={
-              <Dropdown closeOnSelect={false}>
+              <Dropdown>
                 <DropdownTrigger>
                   <Button variant="bordered">{selectedValue}</Button>
                 </DropdownTrigger>
@@ -80,19 +86,19 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
                   <DropdownItem
                     key="light"
                     startContent={<SunIcon className={iconClasses} />}
-                    onPress={() => setTheme('light')}>
+                    onPress={() => setThemeVariant('light')}>
                     Light
                   </DropdownItem>
                   <DropdownItem
                     key="dark"
                     startContent={<MoonIcon className={iconClasses} />}
-                    onPress={() => setTheme('dark')}>
+                    onPress={() => setThemeVariant('dark')}>
                     Dark
                   </DropdownItem>
                   <DropdownItem
                     key="system"
                     startContent={<SystemIcon className={iconClasses} />}
-                    onPress={() => setTheme('system')}>
+                    onPress={() => setThemeVariant('system')}>
                     System
                   </DropdownItem>
                 </DropdownMenu>

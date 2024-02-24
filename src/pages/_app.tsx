@@ -46,16 +46,20 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-        <Toaster richColors position="top-center" closeButton />
-        <SessionProvider>
+      <SessionProvider>
+        <ThemeProvider
+          attribute="class"
+          enableSystem
+          defaultTheme="system"
+          disableTransitionOnChange>
+          <Toaster richColors position="top-center" closeButton />
           <NextUIProvider>
             <MantineProvider>
               {showNavbar ? renderContent() : <Component {...pageProps} />}
             </MantineProvider>
           </NextUIProvider>
-        </SessionProvider>
-      </ThemeProvider>
+        </ThemeProvider>
+      </SessionProvider>
     </RecoilRoot>
   );
 }

@@ -46,9 +46,8 @@ const ConversationPage: React.FC = () => {
       ">
         <div className="px-5">
           <div className="flex justify-between mb-4 pt-4">
-            <div className="text-2xl font-bold text-neutral-800">Chats</div>
+            <div className="text-2xl font-bold light:text-neutral-800">Chats</div>
             <div
-              // onClick={() => setIsModalOpen(true)}
               className="
               rounded-full 
               p-2 

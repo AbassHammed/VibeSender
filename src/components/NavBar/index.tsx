@@ -42,9 +42,9 @@ export default function Sidebar() {
   return (
     <div
       className={cn(
-        'h-screen overflow-y-auto w-fit fixed md:pr-8  pt-2 flex flex-col gap-3 border-r-[1px] pl-[10px] md:w-60',
+        'h-screen overflow-y-auto w-fit fixed md:pr-8 hidden md:block  pt-2  flex-col gap-3 border-r-[1px] pl-[10px] md:w-60',
       )}>
-      <Link href={'/'} className="p-2">
+      <Link href={'/'} className="p-2 items-center">
         <Image
           src="/navimg.png"
           width={100}

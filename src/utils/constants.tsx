@@ -3,7 +3,6 @@ import { NavItemType } from '@/types';
 import { BsBell, BsFillBellFill } from 'react-icons/bs';
 import { CiSearch } from 'react-icons/ci';
 import { FiSearch } from 'react-icons/fi';
-import { GoHome, GoHomeFill } from 'react-icons/go';
 import { HiUsers } from 'react-icons/hi';
 import { HiOutlineUsers } from 'react-icons/hi2';
 import {
@@ -17,19 +16,19 @@ import { PiNotepad, PiNotepadFill } from 'react-icons/pi';
 export const NavItem: NavItemType[] = [
   {
     icon: {
-      icon: <GoHome />,
-      fillIcon: <GoHomeFill />,
-    },
-    label: 'Home',
-    href: '#',
-  },
-  {
-    icon: {
       icon: <IoChatbubblesOutline />,
       fillIcon: <IoChatbubblesSharp />,
     },
     label: 'Messages',
     href: '/conversations',
+  },
+  {
+    icon: {
+      icon: <HiOutlineUsers />,
+      fillIcon: <HiUsers />,
+    },
+    label: 'Groups',
+    href: '#',
   },
   {
     icon: {
@@ -53,16 +52,7 @@ export const NavItem: NavItemType[] = [
       icon: <PiNotepad />,
       fillIcon: <PiNotepadFill />,
     },
-    label: 'Lists',
-    href: '#',
-  },
-
-  {
-    icon: {
-      icon: <HiOutlineUsers />,
-      fillIcon: <HiUsers />,
-    },
-    label: 'Communities',
+    label: 'News',
     href: '#',
   },
 
