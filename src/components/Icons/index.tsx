@@ -4,3 +4,5 @@ export { default as DeleteDocumentIcon } from './DeleteDocumentIcon';
 export { default as EditDocumentIcon } from './EditDocumentIcon';
 export { default as SearchIcon } from './SearchIcon';
 export { default as SystemIcon } from './SystemIcon';
+export { default as GoogleIcon } from './GoogleIcon';
+export { default as GithubIcon } from './GithubIcon';

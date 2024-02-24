@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -44,7 +43,7 @@ export default function Sidebar() {
       className={cn(
         'h-screen overflow-y-auto w-fit fixed md:pr-8 hidden md:block  pt-2  flex-col gap-3 border-r-[1px] pl-[10px] md:w-60',
       )}>
-      <Link href={'/'} className="p-2 items-center">
+      {/* <Link href={'/'} className="p-2 items-center">
         <Image
           src="/navimg.png"
           width={100}
@@ -53,7 +52,13 @@ export default function Sidebar() {
           className="items-center"
           priority
         />
-      </Link>
+      </Link> */}
+
+      <div className="h-20 flex items-center pb-2">
+        <Link href="/" className="flex-none">
+          <img src="/logo.png" alt="Logo" width={140} />
+        </Link>
+      </div>
 
       {NavItem.map((d, idx) => (
         <SideNavItem key={idx} icon={d.icon} href={d.href} label={d.label} />

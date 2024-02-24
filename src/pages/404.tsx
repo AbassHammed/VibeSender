@@ -1,42 +1,41 @@
-import { useRouter } from 'next/navigation';
-
-import { Button, Container, Image, SimpleGrid, Text, Title } from '@mantine/core';
-
 export default function PageNotFound() {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push('/users');
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    window.history.back();
   };
   return (
-    <Container className="py-20">
-      {' '}
-      {/* Adjusted padding-top and padding-bottom */}
-      <SimpleGrid spacing={{ base: 40, sm: 80 }} cols={{ base: 1, sm: 2 }}>
-        {/* Mobile image - show on small screens, hide on larger screens */}
-        <Image src="/404.svg" className="block sm:hidden" alt="Image 404" />
-        <div>
-          {/* Adjusted font-weight, font-size, and margin-bottom using Tailwind classes */}
-          <Title className="text-4xl font-bold mb-4 font-greycliffCF">
-            Something is not right...
-          </Title>
-          <Text className="text-lg text-gray-500">
-            Page you are trying to open does not exist. You may have mistyped the address, or the
-            page has been moved to another URL. If you think this is an error contact support.
-          </Text>
-          {/* Full-width button on small screens */}
-          <Button
-            variant="outline"
-            size="md"
-            mt="xl"
-            className="w-full sm:w-auto"
-            onClick={handleClick}>
-            Get back to home page
-          </Button>
+    <main>
+      <div className="max-w-screen-xl mx-auto px-4 flex items-center justify-start h-screen md:px-8">
+        <div className="max-w-lg mx-auto flex-1 flex-row-reverse gap-12 items-center justify-between md:max-w-none md:flex">
+          <div className="flex-1 max-w-lg">
+            <img src="/404.svg" />
+          </div>
+          <div className="mt-12 flex-1 max-w-lg space-y-3 md:mt-0">
+            <h3 className="text-indigo-600 font-semibold">404 Error</h3>
+            <p className="text-gray-800 text-4xl font-semibold sm:text-5xl">Page not found</p>
+            <p className="text-gray-600">
+              Sorry, the page you are looking for could not be found or has been removed.
+            </p>
+            <a
+              href="#"
+              onClick={handleClick}
+              className="text-indigo-600 duration-150 hover:text-indigo-400 font-medium inline-flex items-center gap-x-1">
+              Go back
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-5 h-5">
+                <path
+                  fillRule="evenodd"
+                  d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
+          </div>
         </div>
-        {/* Desktop image - hide on small screens, show on larger screens */}
-        <Image src="/404.svg" className="hidden sm:block" alt="Image 404" />
-      </SimpleGrid>
-    </Container>
+      </div>
+    </main>
   );
 }

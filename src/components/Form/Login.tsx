@@ -8,8 +8,6 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import { toast } from 'sonner';
 
-import { Button } from '../Button';
-
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [inputs, setInputs] = useState({ email: '', password: '' });
@@ -48,58 +46,60 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form className="space-y-6" onSubmit={handleLogin}>
-      <h3 className="text-xl font-medium text-white">Log In</h3>
+    <form onSubmit={handleLogin} className="space-y-5">
       <div>
-        <label htmlFor="email" className="text-sm font-medium block leading-6 text-gray-900">
+        <label htmlFor="email" className="font-medium">
           Email
         </label>
         <input
           onChange={handleInputChange}
           type="email"
-          name="email"
           id="email"
-          autoComplete="email"
-          className="
-            border-2 outline-none sm:text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
-				 placeholder:text-gray-400 text-black
-        "
+          name="email"
           placeholder="name@company.com"
+          required
+          className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
         />
       </div>
       <div>
-        <label htmlFor="password" className="text-sm font-medium block leading-6 text-gray-900">
+        <label htmlFor="password" className="font-medium block leading-6 ">
           Password
         </label>
         <div className="relative flex items-center">
           <input
             onChange={handleInputChange}
             type={showPassword ? 'text' : 'password'}
-            name="password"
             id="password"
-            className="
-				border-2 outline-none sm:text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
-				 placeholder:text-gray-400 text-black
-			"
-            placeholder="*******"
+            name="password"
+            required
+            className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
             {showPassword ? (
-              <FaRegEyeSlash className="h-5 w-5 text-black" onClick={togglePasswordVisibility} />
+              <FaRegEyeSlash className="h-5 w-5 " onClick={togglePasswordVisibility} />
             ) : (
-              <FaRegEye className="h-5 w-5 text-black" onClick={togglePasswordVisibility} />
+              <FaRegEye className="h-5 w-5 " onClick={togglePasswordVisibility} />
             )}
           </div>
         </div>
       </div>
-
-      <Button type="submit" fullWidth>
-        {isLoading ? 'Loading...' : 'Log In'}
-      </Button>
-      <button className="flex w-full justify-end" onClick={() => handleForgot()}>
-        <a href="#" className="text-sm block text-gray-900 hover:underline w-full text-right">
-          Forgot Password?
+      <div className="flex items-center justify-between text-sm">
+        <div className="flex items-center gap-x-3">
+          <input type="checkbox" id="remember-me-checkbox" className="checkbox-item peer hidden" />
+          <label
+            htmlFor="remember-me-checkbox"
+            className="relative flex w-5 h-5 bg-white peer-checked:bg-indigo-600 rounded-md border ring-offset-2 ring-indigo-600 duration-150 peer-active:ring cursor-pointer after:absolute after:inset-x-0 after:top-[3px] after:m-auto after:w-1.5 after:h-2.5 after:border-r-2 after:border-b-2 after:border-white after:rotate-45"></label>
+          <span>Remember me</span>
+        </div>
+        <a
+          href="#"
+          className="text-center text-indigo-600 hover:text-indigo-500"
+          onClick={handleForgot}>
+          Forgot password?
         </a>
+      </div>
+      <button className="w-full px-4 py-2 text-white font-medium bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-600 rounded-lg duration-150">
+        {isLoading ? 'Loging in ...' : 'Log in'}
       </button>
     </form>
   );
