@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -11,19 +11,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 export default function Home() {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
-  const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
       router.push('/conversations');
     }
+  }, [user, router]);
 
-    if (!loading || !user) {
-      setPageLoading(false);
-    }
-  }, [user, router, loading]);
-
-  if (pageLoading) {
+  if (loading) {
     return <Loading />;
   }
   return (
