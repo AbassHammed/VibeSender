@@ -56,7 +56,7 @@ export default function Sidebar() {
 
       <div className="h-20 flex items-center pb-2">
         <Link href="/" className="flex-none">
-          <img src="/logo.png" alt="Logo" width={140} />
+          <img src="/logo.svg" alt="Logo" width={180} />
         </Link>
       </div>
 

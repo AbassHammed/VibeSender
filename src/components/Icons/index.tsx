@@ -6,3 +6,5 @@ export { default as SearchIcon } from './SearchIcon';
 export { default as SystemIcon } from './SystemIcon';
 export { default as GoogleIcon } from './GoogleIcon';
 export { default as GithubIcon } from './GithubIcon';
+export { default as EyeIcon } from './EyeIcon';
+export { default as EyeSlashIcon } from './EyeSlashIcon';
