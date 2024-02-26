@@ -18,7 +18,7 @@ const Form: React.FC = () => {
     <div className="w-full min-h-screen flex flex-col items-center justify-center px-4">
       <div className="max-w-sm w-full text-gray-600 space-y-5">
         <div className="text-center pb-6">
-          <Image src="/logo.png" width={150} height={150} className="mx-auto" alt="Logo" />
+          <Image src="/logo.svg" width={150} height={150} className="mx-auto" alt="Logo" />
           <div className="mt-3">
             <h3 className="light:text-gray-800 text-2xl font-bold sm:text-3xl">
               {page === 'LOGIN' ? 'Welcome back' : 'Sign up '}

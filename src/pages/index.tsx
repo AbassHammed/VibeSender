@@ -4,8 +4,28 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import Loading from '@/components/Loading';
+import { TypewriterEffect } from '@/components/TypeWriter';
 import { auth } from '@/firebase/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+
+const words = [
+  {
+    text: 'VibeSender,',
+    className: 'text-blue-500 dark:text-blue-500',
+  },
+  {
+    text: 'your',
+  },
+  {
+    text: 'perfect',
+  },
+  {
+    text: 'messaging',
+  },
+  {
+    text: 'app',
+  },
+];
 
 export default function Home() {
   const [user, loading] = useAuthState(auth);
@@ -48,14 +68,12 @@ export default function Home() {
         <section>
           <div className="w-screen mx-auto px-4 py-28  light:text-gray-600 overflow-hidden md:flex">
             <div className="flex-none space-y-5 max-w-xl md:mx-32">
-              <Link
-                href="javascript:void(0)"
-                className="inline-flex gap-x-6 items-center rounded-full p-1 pr-6 border text-sm font-medium duration-150 hover:bg-white hover:text-black">
+              <div className="md:inline-flex gap-x-6 items-center hidden rounded-full p-1 pr-6 border text-sm font-medium duration-150 hover:bg-white hover:text-black">
                 <span className="inline-block rounded-full px-3 py-1 bg-indigo-600 text-white">
                   News
                 </span>
                 <p className="flex items-center">
-                  Read the launch post from here
+                  Get live news on what&apos;s happening around you
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
@@ -68,10 +86,11 @@ export default function Home() {
                     />
                   </svg>
                 </p>
-              </Link>
-              <h1 className="text-4xl light:text-gray-800 font-extrabold sm:text-5xl">
-                Build your SaaS exactly how you want
-              </h1>
+              </div>
+              <TypewriterEffect
+                words={words}
+                className="text-3xl light:text-gray-800 font-extrabold sm:text-4xl"
+              />
               <p>
                 Sed ut perspiciatis unde omnis iste natus voluptatem accusantium doloremque
                 laudantium, totam rem aperiam, eaque ipsa quae.
