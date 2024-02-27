@@ -5,7 +5,7 @@ import Head from 'next/head';
 
 import Header from '@/components/Header/Header';
 // import HeaderMobile from '@/components/Header/HeaderMobile';
-import NavBar from '@/components/NavBar';
+import { MediumSideBar, SideBar } from '@/components/NavBar';
 import Play from '@/components/News';
 import {
   MarginWidthWrapper,
@@ -24,7 +24,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const renderContent = () => (
     <>
-      <NavBar />
+      <MediumSideBar />
+      <SideBar />
       <main className="flex-1">
         <MarginWidthWrapper>
           <Header />

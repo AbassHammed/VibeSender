@@ -28,9 +28,12 @@ const Header = () => {
 
   return (
     <div
-      className={cn(`sticky inset-x-0 top-0 z-30 w-full transition-all border-b border-gray-200`, {
-        'border-b border-gray-200 light:bg-white/75 backdrop-blur-lg': scrolled,
-      })}>
+      className={cn(
+        `sticky inset-x-0 top-0 z-30 w-full hidden lg:block transition-all border-b border-gray-200`,
+        {
+          'border-b border-gray-200 light:bg-white/75 backdrop-blur-lg': scrolled,
+        },
+      )}>
       <div className="flex h-[56px] items-center justify-between px-4">
         <div className="flex items-center space-x-4">
           <Link href="/" className="flex flex-row space-x-3 items-center justify-center md:hidden">
@@ -38,7 +41,7 @@ const Header = () => {
           </Link>
         </div>
 
-        <div className="hidden md:block ">
+        <div className="hidden lg:block ">
           <StatusAvatar profileUser={sessionData?.currentUser} />
         </div>
       </div>

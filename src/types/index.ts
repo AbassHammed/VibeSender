@@ -1,5 +1,7 @@
 import { SVGProps } from 'react';
 
+import { settingPage } from '@/pages/settings/Settings';
+
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
@@ -43,4 +45,17 @@ export type NavItemType = {
   };
   label: string;
   href: string;
+};
+
+export type MobileNavItemType = {
+  icon?: {
+    icon: React.ReactNode;
+    fillIcon: React.ReactNode;
+  };
+  href: string;
+};
+
+export type SettingsNavItemType = {
+  title: string;
+  href: settingPage;
 };

@@ -1,5 +1,4 @@
-import { settingPage } from '@/pages/settings/Settings';
-import { NavItemType } from '@/types';
+import { MobileNavItemType, NavItemType, SettingsNavItemType } from '@/types';
 import { BsBell, BsFillBellFill } from 'react-icons/bs';
 import { CiSearch } from 'react-icons/ci';
 import { FiSearch } from 'react-icons/fi';
@@ -66,11 +65,6 @@ export const NavItem: NavItemType[] = [
   },
 ];
 
-type SettingsNavItemType = {
-  title: string;
-  href: settingPage;
-};
-
 export const SettingsNavItem: SettingsNavItemType[] = [
   {
     title: 'Profile',
@@ -79,5 +73,52 @@ export const SettingsNavItem: SettingsNavItemType[] = [
   {
     title: 'Account',
     href: 'account',
+  },
+];
+
+export const MobileNavItem: MobileNavItemType[] = [
+  {
+    icon: {
+      icon: <IoChatbubblesOutline />,
+      fillIcon: <IoChatbubblesSharp />,
+    },
+    href: '/conversations',
+  },
+  {
+    icon: {
+      icon: <HiOutlineUsers />,
+      fillIcon: <HiUsers />,
+    },
+    href: '#',
+  },
+  {
+    icon: {
+      icon: <CiSearch />,
+      fillIcon: <FiSearch />,
+    },
+    href: '/search',
+  },
+  {
+    icon: {
+      icon: <BsBell />,
+      fillIcon: <BsFillBellFill />,
+    },
+    href: '#News',
+  },
+
+  {
+    icon: {
+      icon: <PiNotepad />,
+      fillIcon: <PiNotepadFill />,
+    },
+    href: '#',
+  },
+
+  {
+    icon: {
+      icon: <IoSettingsOutline />,
+      fillIcon: <IoSettingsSharp />,
+    },
+    href: '/settings',
   },
 ];

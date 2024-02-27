@@ -51,7 +51,7 @@ export const TypewriterEffect = ({
               {char}
             </motion.span>
           ))}
-              &nbsp;
+          &nbsp;
         </div>
       ))}
     </motion.div>
@@ -111,7 +111,7 @@ export const TypewriterEffectSmooth = ({
               {char}
             </span>
           ))}
-              &nbsp;
+          &nbsp;
         </div>
       ))}
     </div>

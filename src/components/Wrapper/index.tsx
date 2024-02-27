@@ -54,7 +54,7 @@ export function MarginWidthWrapper({ children }: { children: ReactNode }) {
   let marginLeftClass = '';
   switch (navbarType) {
     case 'medium':
-      marginLeftClass = 'md:ml-40';
+      marginLeftClass = 'md:ml-[80px]';
       break;
     case 'large':
       marginLeftClass = 'md:ml-60';
