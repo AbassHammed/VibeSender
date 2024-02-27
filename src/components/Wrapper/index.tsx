@@ -12,24 +12,58 @@ export function useShowNavbar() {
   return !['/', '/404', '/auth'].includes(pathname);
 }
 
-export function MarginWidthWrapper({ children }: { children: ReactNode }) {
-  const showNavbar = useShowNavbar();
-  return showNavbar ? (
-    <div className="flex flex-col md:ml-60 sm:border-r sm:border-zinc-700 min-h-screen">
-      {children}
-    </div>
-  ) : null;
-}
-
 export function PageWrapper({ children }: { children: ReactNode }) {
   const showNavbar = useShowNavbar();
   return showNavbar ? (
-    <div className="flex flex-col pt-2 px-4 space-y-2 light:bg-zinc-100 flex-grow pb-4">
-      {children}
-    </div>
+    <div className="flex flex-col pt-2 px-4 space-y-2 light:bg-zinc-100 flex-grow">{children}</div>
   ) : null;
 }
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+}
+
+export function useNavbarType() {
+  const [navbarType, setNavbarType] = React.useState('mobile');
+
+  React.useEffect(() => {
+    const updateNavbarType = () => {
+      const width = window.innerWidth;
+
+      if (width < 768) {
+        setNavbarType('mobile');
+      } else if (width >= 768 && width < 1024) {
+        setNavbarType('medium');
+      } else {
+        setNavbarType('large');
+      }
+    };
+    updateNavbarType();
+
+    window.addEventListener('resize', updateNavbarType);
+
+    return () => window.removeEventListener('resize', updateNavbarType);
+  }, []);
+
+  return navbarType;
+}
+
+export function MarginWidthWrapper({ children }: { children: ReactNode }) {
+  const navbarType = useNavbarType();
+
+  let marginLeftClass = '';
+  switch (navbarType) {
+    case 'medium':
+      marginLeftClass = 'md:ml-40';
+      break;
+    case 'large':
+      marginLeftClass = 'md:ml-60';
+      break;
+  }
+
+  return (
+    <div className={`flex flex-col ${marginLeftClass} sm:border-r sm:border-zinc-700 min-h-screen`}>
+      {children}
+    </div>
+  );
 }

@@ -44,7 +44,7 @@ export const NavItem: NavItemType[] = [
       fillIcon: <BsFillBellFill />,
     },
     label: 'Notifications',
-    href: '#',
+    href: '#News',
   },
 
   {

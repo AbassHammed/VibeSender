@@ -41,7 +41,7 @@ export default function Sidebar() {
   return (
     <div
       className={cn(
-        'h-screen overflow-y-auto w-fit fixed md:pr-8 hidden md:block  pt-2  flex-col gap-3 border-r-[1px] pl-[10px] md:w-60',
+        'h-screen overflow-y-auto w-fit fixed lg:pr-8 hidden lg:block  pt-2  flex-col gap-3 border-r-[1px] pl-[10px] lg:w-60',
       )}>
       {/* <Link href={'/'} className="p-2 items-center">
         <Image
@@ -54,7 +54,7 @@ export default function Sidebar() {
         />
       </Link> */}
 
-      <div className="h-20 flex items-center pb-2">
+      <div className="h-20 flex items-center mb-16">
         <Link href="/" className="flex-none">
           <img src="/logo.svg" alt="Logo" width={180} />
         </Link>
