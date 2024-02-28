@@ -59,6 +59,9 @@ export function MarginWidthWrapper({ children }: { children: ReactNode }) {
     case 'large':
       marginLeftClass = 'md:ml-60';
       break;
+    case 'mobile':
+      marginLeftClass = 'mb-12';
+      break;
   }
 
   return (

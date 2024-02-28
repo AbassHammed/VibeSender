@@ -7,7 +7,7 @@ const config = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx,svg}',
 
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
@@ -84,7 +84,7 @@ const config = {
       },
     },
   },
-  plugins: [nextui(), require('tailwindcss-animate')],
+  plugins: [nextui(), require('tailwindcss-animate'), require('@tailwindcss/aspect-ratio')],
 } satisfies Config;
 
 export default config;

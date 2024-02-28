@@ -85,7 +85,7 @@ const UpdateImage: React.FC<UpdateImageProps> = ({ profileUser }) => {
   };
   return (
     <>
-      <Card className="border-none bg-transparent">
+      <Card className="border bg-transparent">
         <CardBody className="justify-between">
           <div className="flex gap-3">
             <Avatar radius="full" size="lg" src={profileUser.imageUrl} />

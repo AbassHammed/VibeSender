@@ -6,6 +6,7 @@ import Head from 'next/head';
 import Header from '@/components/Header/Header';
 // import HeaderMobile from '@/components/Header/HeaderMobile';
 import { MediumSideBar, SideBar } from '@/components/NavBar';
+import MobileDownBar from '@/components/NavBar/MobileDownBar';
 import Play from '@/components/News';
 import {
   MarginWidthWrapper,
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <MediumSideBar />
       <SideBar />
+      <MobileDownBar />
       <main className="flex-1">
         <MarginWidthWrapper>
           <Header />

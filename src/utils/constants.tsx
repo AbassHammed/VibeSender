@@ -65,6 +65,39 @@ export const NavItem: NavItemType[] = [
   },
 ];
 
+export const items = [
+  {
+    href: '/converstaions',
+    label: 'Messages',
+    icon: IoChatbubblesOutline,
+    fillIcon: IoChatbubblesSharp,
+  },
+  {
+    href: '/search',
+    label: 'Search',
+    icon: CiSearch,
+    fillIcon: FiSearch,
+  },
+  {
+    href: '#News',
+    label: 'News',
+    icon: PiNotepad,
+    fillIcon: PiNotepadFill,
+  },
+  {
+    href: '#Notif',
+    label: ' Notifications',
+    icon: BsBell,
+    fillIcon: BsFillBellFill,
+  },
+  {
+    href: '/settings',
+    label: 'Settings',
+    icon: IoSettingsOutline,
+    fillIcon: IoSettingsSharp,
+  },
+];
+
 export const SettingsNavItem: SettingsNavItemType[] = [
   {
     title: 'Profile',
@@ -83,13 +116,6 @@ export const MobileNavItem: MobileNavItemType[] = [
       fillIcon: <IoChatbubblesSharp />,
     },
     href: '/conversations',
-  },
-  {
-    icon: {
-      icon: <HiOutlineUsers />,
-      fillIcon: <HiUsers />,
-    },
-    href: '#',
   },
   {
     icon: {
