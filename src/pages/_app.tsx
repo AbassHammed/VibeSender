@@ -3,8 +3,8 @@ import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
+import { HeaderMobile } from '@/components/Header';
 import Header from '@/components/Header/Header';
-// import HeaderMobile from '@/components/Header/HeaderMobile';
 import { MediumSideBar, MobileDownBar, SideBar } from '@/components/NavBar';
 import Play from '@/components/News';
 import {
@@ -27,10 +27,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <MediumSideBar />
       <SideBar />
       <MobileDownBar />
+      <HeaderMobile />
       <main className="flex-1">
         <MarginWidthWrapper>
           <Header />
-          {/* <HeaderMobile /> */}
           <PageWrapper>
             <Play />
             <Component {...pageProps} />

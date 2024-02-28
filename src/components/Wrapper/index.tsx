@@ -60,7 +60,7 @@ export function MarginWidthWrapper({ children }: { children: ReactNode }) {
       marginLeftClass = 'md:ml-60';
       break;
     case 'mobile':
-      marginLeftClass = 'mb-12';
+      marginLeftClass = 'my-12';
       break;
   }
 
