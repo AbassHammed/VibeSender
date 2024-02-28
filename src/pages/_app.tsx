@@ -5,8 +5,7 @@ import Head from 'next/head';
 
 import Header from '@/components/Header/Header';
 // import HeaderMobile from '@/components/Header/HeaderMobile';
-import { MediumSideBar, SideBar } from '@/components/NavBar';
-import MobileDownBar from '@/components/NavBar/MobileDownBar';
+import { MediumSideBar, MobileDownBar, SideBar } from '@/components/NavBar';
 import Play from '@/components/News';
 import {
   MarginWidthWrapper,
