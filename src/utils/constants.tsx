@@ -52,7 +52,7 @@ export const NavItem: NavItemType[] = [
       fillIcon: <PiNotepadFill />,
     },
     label: 'News',
-    href: '#',
+    href: '/news',
   },
 
   {
@@ -79,7 +79,7 @@ export const items = [
     fillIcon: FiSearch,
   },
   {
-    href: '#News',
+    href: '/news',
     label: 'News',
     icon: PiNotepad,
     fillIcon: PiNotepadFill,
@@ -137,7 +137,7 @@ export const MobileNavItem: MobileNavItemType[] = [
       icon: <PiNotepad />,
       fillIcon: <PiNotepadFill />,
     },
-    href: '#',
+    href: '/news',
   },
 
   {

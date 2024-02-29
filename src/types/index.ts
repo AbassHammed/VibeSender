@@ -59,3 +59,38 @@ export type SettingsNavItemType = {
   title: string;
   href: settingPage;
 };
+
+export type Article = {
+  article_id: string;
+  title: string;
+  link: string;
+  keywords: string;
+  creator: string;
+  video_url: string;
+  description: string;
+  content: string;
+  pubDate: string;
+  image_url: string;
+  source_id: string;
+  source_url: string;
+  source_icon: string;
+  source_priority: number;
+  country: [string[]];
+  category: [string[]];
+  language: string;
+  ai_tags: [string[]];
+  ai_region: string;
+  sentiment: string;
+  sentiment_stats: {
+    positive: number;
+    neutral: number;
+    negative: number;
+  };
+};
+
+export type Articles = {
+  status: string;
+  totalResults: number;
+  results: Article[];
+  nextPage: string;
+};

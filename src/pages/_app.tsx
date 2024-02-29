@@ -13,8 +13,7 @@ import {
   ThemeProvider,
   useShowNavbar,
 } from '@/components/Wrapper';
-import { SessionProvider } from '@/hooks/useSession';
-import { MantineProvider } from '@mantine/core';
+import { CacheProvider, SessionProvider } from '@/hooks';
 import { NextUIProvider } from '@nextui-org/react';
 import { RecoilRoot } from 'recoil';
 import { Toaster } from 'sonner';
@@ -51,18 +50,18 @@ export default function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.ico" />
       </Head>
       <SessionProvider>
-        <ThemeProvider
-          attribute="class"
-          enableSystem
-          defaultTheme="system"
-          disableTransitionOnChange>
-          <Toaster richColors position="top-center" closeButton />
-          <NextUIProvider>
-            <MantineProvider>
+        <CacheProvider>
+          <ThemeProvider
+            attribute="class"
+            enableSystem
+            defaultTheme="system"
+            disableTransitionOnChange>
+            <Toaster richColors position="top-center" closeButton />
+            <NextUIProvider>
               {showNavbar ? renderContent() : <Component {...pageProps} />}
-            </MantineProvider>
-          </NextUIProvider>
-        </ThemeProvider>
+            </NextUIProvider>
+          </ThemeProvider>
+        </CacheProvider>
       </SessionProvider>
     </RecoilRoot>
   );
