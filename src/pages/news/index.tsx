@@ -17,6 +17,14 @@ const NewsPage: React.FC = () => {
     return <Loading />;
   }
 
+  function getFirstFiftyWords(text: string): string {
+    const words = text.split(/\s+/) || [];
+    const firstFiftyWords = words.slice(0, 50).join(' ');
+
+    // Append "..." only if the original text had more than 50 words.
+    return words.length > 50 ? `${firstFiftyWords  }...` : firstFiftyWords;
+  }
+
   return (
     <section className="my-12 mx-auto px-4 max-w-screen-xl md:px-8">
       <div className="text-center">
@@ -50,7 +58,9 @@ const NewsPage: React.FC = () => {
               </div>
               <div className="pt-3 ml-4 mr-2 mb-3">
                 <h3 className="text-xl text-gray-900 dark:text-gray-300">{items.title}</h3>
-                <p className="text-gray-400 text-sm mt-1">{items.description}</p>
+                <p className="text-gray-400 text-sm mt-1">
+                  {getFirstFiftyWords(items.description)}
+                </p>
               </div>
             </a>
           </article>
