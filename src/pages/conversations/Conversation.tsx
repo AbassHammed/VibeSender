@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import UserAvatar from '@/components/Avatar/UserAvatar';
-import SearchInput from '@/components/Button/SearchInput';
+import { UserAvatar } from '@/components/Avatar';
+import { SearchInput } from '@/components/Button';
 import Loading from '@/components/Loading';
 import { Separator } from '@/components/ui/separator';
-import { auth } from '@/firebase/firebase';
-import { currentUserQuery } from '@/firebase/query';
-import { useSession } from '@/hooks/useSession';
+import { auth, currentUserQuery } from '@/firebase';
+import { useSession } from '@/hooks';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 
