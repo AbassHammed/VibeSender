@@ -6,6 +6,8 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+export type notif = 'info' | 'success' | 'warn' | 'error';
+
 export type color = 'default' | 'success' | 'danger' | 'warning';
 
 export type User = {

@@ -1,57 +1,74 @@
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { stringToNotif } from '@/utils/utils';
 import { BsBell } from 'react-icons/bs';
 
+import { NotificationMod } from '.';
+
+const notifs = [
+  {
+    message: 'Your friend AbassHammed just added you, check thier profile out',
+    notif: 'info',
+  },
+  {
+    message:
+      'It\'s been 6 months since you changed your password, constantly changing password makes it more secure',
+    notif: 'warn',
+  },
+  {
+    message:
+      'Your account is violating some our terms and conditions, kindly review your email inboxes for the steps to takes',
+    notif: 'error',
+  },
+  {
+    message: 'You just created your account, welcome! complete your profile here.',
+    notif: 'success',
+    url: 'localhost:3000/setting',
+  },
+];
+
 const MediumLargeSheet: React.FC = () => (
-  <div className="lg:mx-5">
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <BsBell className="h-6 w-6" />
-        </Button>
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Notifications</SheetTitle>
-          <SheetDescription>
-              Make changes to your profile here. Click save when you&apos;re done.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-                Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-                Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
-        </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
-          </SheetClose>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
-  </div>
+  <Sheet>
+    <SheetTrigger asChild>
+      <Button variant="ghost" size="icon" className="lg:mx-5">
+        <BsBell className="h-6 w-6" />
+      </Button>
+    </SheetTrigger>
+    <SheetContent>
+      <SheetHeader>
+        <SheetTitle>Notifications</SheetTitle>
+        <SheetDescription>
+          Make changes to your profile here. Click save when you&apos;re done.
+        </SheetDescription>
+        <Button type="submit">Clear your notifications</Button>
+      </SheetHeader>
+      {notifs.map((item, idx) => (
+        <NotificationMod
+          key={idx}
+          notif={stringToNotif(item.notif)}
+          message={item.message}
+          url={item.url}
+        />
+      ))}
+      {notifs.map((item, idx) => (
+        <NotificationMod
+          key={idx}
+          notif={stringToNotif(item.notif)}
+          message={item.message}
+          url={item.url}
+        />
+      ))}
+    </SheetContent>
+  </Sheet>
 );
 
 export default MediumLargeSheet;
