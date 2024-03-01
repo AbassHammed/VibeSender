@@ -1,5 +1,4 @@
 import { MobileNavItemType, NavItemType, SettingsNavItemType } from '@/types';
-import { BsBell, BsFillBellFill } from 'react-icons/bs';
 import { CiSearch } from 'react-icons/ci';
 import { FiSearch } from 'react-icons/fi';
 import { HiUsers } from 'react-icons/hi';
@@ -39,15 +38,6 @@ export const NavItem: NavItemType[] = [
   },
   {
     icon: {
-      icon: <BsBell />,
-      fillIcon: <BsFillBellFill />,
-    },
-    label: 'Notifications',
-    href: '#News',
-  },
-
-  {
-    icon: {
       icon: <PiNotepad />,
       fillIcon: <PiNotepadFill />,
     },
@@ -62,39 +52,6 @@ export const NavItem: NavItemType[] = [
     },
     label: 'Settings ',
     href: '/settings',
-  },
-];
-
-export const items = [
-  {
-    href: '/converstaions',
-    label: 'Messages',
-    icon: IoChatbubblesOutline,
-    fillIcon: IoChatbubblesSharp,
-  },
-  {
-    href: '/search',
-    label: 'Search',
-    icon: CiSearch,
-    fillIcon: FiSearch,
-  },
-  {
-    href: '/news',
-    label: 'News',
-    icon: PiNotepad,
-    fillIcon: PiNotepadFill,
-  },
-  {
-    href: '#Notif',
-    label: ' Notifications',
-    icon: BsBell,
-    fillIcon: BsFillBellFill,
-  },
-  {
-    href: '/settings',
-    label: 'Settings',
-    icon: IoSettingsOutline,
-    fillIcon: IoSettingsSharp,
   },
 ];
 
@@ -119,6 +76,13 @@ export const MobileNavItem: MobileNavItemType[] = [
   },
   {
     icon: {
+      icon: <HiOutlineUsers />,
+      fillIcon: <HiUsers />,
+    },
+    href: '#Groups',
+  },
+  {
+    icon: {
       icon: <CiSearch />,
       fillIcon: <FiSearch />,
     },
@@ -126,20 +90,11 @@ export const MobileNavItem: MobileNavItemType[] = [
   },
   {
     icon: {
-      icon: <BsBell />,
-      fillIcon: <BsFillBellFill />,
-    },
-    href: '#News',
-  },
-
-  {
-    icon: {
       icon: <PiNotepad />,
       fillIcon: <PiNotepadFill />,
     },
     href: '/news',
   },
-
   {
     icon: {
       icon: <IoSettingsOutline />,

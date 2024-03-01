@@ -22,7 +22,7 @@ const NewsPage: React.FC = () => {
     const firstFiftyWords = words.slice(0, 50).join(' ');
 
     // Append "..." only if the original text had more than 50 words.
-    return words.length > 50 ? `${firstFiftyWords  }...` : firstFiftyWords;
+    return words.length > 50 ? `${firstFiftyWords}...` : firstFiftyWords;
   }
 
   return (

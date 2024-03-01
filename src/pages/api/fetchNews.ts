@@ -12,7 +12,7 @@ const useFetchAndUpdateArticles = () => {
     const now = new Date().getTime();
 
     // Check if more than an hour has passed since the last fetch
-    if (lastFetch && now - parseInt(lastFetch) < 18000000 && articles?.results.length !== 0) {
+    if (lastFetch && now - parseInt(lastFetch) < 18000000 && articles) {
       return;
     }
 
