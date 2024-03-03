@@ -12,6 +12,7 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { MediumSideBarAvatar } from '../Avatar';
 import Loading from '../Loading';
+import { MediumLargeSheet } from '../Notifications';
 
 function MobileSideNavItem({ href, icon }: MobileNavItemType) {
   const [animationParent] = useAutoAnimate();
@@ -56,8 +57,13 @@ export default function MobileSideBar() {
         <MobileSideNavItem key={idx} icon={d.icon} href={d.href} />
       ))}
 
-      <div className="pb-2 bottom-0 fixed">
-        <MediumSideBarAvatar profileUser={sessionData?.currentUser} />
+      <div className="flex flex-col items-center justify-end py-4 bottom-0 fixed">
+        <div className=" my-2">
+          <MediumLargeSheet />
+        </div>
+        <div className="my-2">
+          <MediumSideBarAvatar profileUser={sessionData?.currentUser} />
+        </div>
       </div>
     </div>
   );

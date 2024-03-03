@@ -12,7 +12,7 @@ interface NotificationModProps {
 }
 
 const NotificationMod: React.FC<NotificationModProps> = ({ message, notif, url }) => (
-  <div className="w-full px-4 my-4">
+  <div className="w-full px-4 my-3 mb-5">
     <div
       className={cn(
         `flex justify-between p-4 rounded-md `,
@@ -61,7 +61,7 @@ const NotificationMod: React.FC<NotificationModProps> = ({ message, notif, url }
                       ? 'hover:text-yellow-700'
                       : 'hover:text-green-700',
               )}>
-                link
+              link
             </a>
           )}
         </p>

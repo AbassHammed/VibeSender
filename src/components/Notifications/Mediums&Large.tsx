@@ -43,8 +43,8 @@ const MediumLargeSheet: React.FC = () => (
         <BsBell className="h-6 w-6" />
       </Button>
     </SheetTrigger>
-    <SheetContent>
-      <SheetHeader>
+    <SheetContent className="overflow-y-auto h-screen px-1">
+      <SheetHeader className="px-5">
         <SheetTitle>Notifications</SheetTitle>
         <SheetDescription>
           Make changes to your profile here. Click save when you&apos;re done.
