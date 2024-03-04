@@ -6,10 +6,38 @@ import { stringToNotif } from '@/utils/utils';
 import { BsBell } from 'react-icons/bs';
 
 import { NotificationMod } from '.';
-import { notifs } from './Mediums&Large';
 
 const MobileNotif: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const [notifs, setNotifs] = useState([
+    {
+      id: 1,
+      message: 'Your friend AbassHammed just added you, check thier profile out',
+      notif: 'info',
+    },
+    {
+      id: 2,
+      message:
+        'It\'s been 6 months since you changed your password, constantly changing password makes it more secure',
+      notif: 'warn',
+    },
+    {
+      id: 3,
+      message:
+        'Your account is violating some our terms and conditions, kindly review your email inboxes for the steps to takes',
+      notif: 'error',
+    },
+    {
+      id: 4,
+      message: 'You just created your account, welcome! complete your profile here.',
+      notif: 'success',
+      url: 'localhost:3000/setting',
+    },
+  ]);
+
+  const removeNotification = (id: number) => {
+    setNotifs(notifs.filter(notification => notification.id !== id));
+  };
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -19,7 +47,7 @@ const MobileNotif: React.FC = () => {
         </Button>
       </DrawerTrigger>
       <DrawerPortal>
-        <DrawerContent className="flex flex-col fixed max-h-[50%] rounded-t-[10px] dark:bg-[#141414]">
+        <DrawerContent className="flex flex-col md:hidden fixed max-h-[50%] rounded-t-[10px] dark:bg-[#141414]">
           <Button type="submit" className="m-5">
             Clear your notifications
           </Button>
@@ -30,6 +58,7 @@ const MobileNotif: React.FC = () => {
                 notif={stringToNotif(item.notif)}
                 message={item.message}
                 url={item.url}
+                onClose={() => removeNotification(item.id)}
               />
             ))}
             {notifs.map((item, idx) => (
@@ -38,6 +67,7 @@ const MobileNotif: React.FC = () => {
                 notif={stringToNotif(item.notif)}
                 message={item.message}
                 url={item.url}
+                onClose={() => removeNotification(item.id)}
               />
             ))}
           </div>

@@ -1,6 +1,27 @@
 import { SVGProps } from 'react';
 
 import { settingPage } from '@/pages/settings/Settings';
+import * as Dialog from '@radix-ui/react-dialog';
+
+const DialogRoot = Dialog.Root;
+const DialogTrigger = Dialog.Trigger;
+const DialogPortal = Dialog.Portal;
+const DialogOverlay = Dialog.Overlay;
+const DialogContent = Dialog.Content;
+const DialogTittle = Dialog.Title;
+const DialogDescription = Dialog.Description;
+const DialogClose = Dialog.Close;
+
+export {
+  DialogRoot,
+  DialogTrigger,
+  DialogPortal,
+  DialogOverlay,
+  DialogContent,
+  DialogTittle,
+  DialogDescription,
+  DialogClose,
+};
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -55,6 +76,15 @@ export type MobileNavItemType = {
     fillIcon: React.ReactNode;
   };
   href: string;
+};
+
+export type notification = {
+  id: string;
+  notif: string;
+  message: string;
+  url?: string;
+  createdAt: string;
+  dismissed: boolean;
 };
 
 export type SettingsNavItemType = {

@@ -12,3 +12,4 @@ export { default as ErrorIcon } from './ErrorIcon';
 export { default as InfoIcon } from './InfoIcon';
 export { default as WarnIcon } from './WarnIcon';
 export { default as SuccessIcon } from './SuccessIcon';
+export { default as XIcon } from './XIcon';
