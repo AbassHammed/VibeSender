@@ -128,7 +128,7 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
             Report
           </DropdownItem>
         </DropdownSection>
-        <DropdownSection showDivider>
+        <DropdownSection>
           <DropdownItem
             key="logout"
             className="text-warning"
@@ -137,16 +137,6 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
             description="Logout of your account"
             startContent={<DeleteDocumentIcon className={cn(iconClasses, 'text-warning')} />}>
             Log out
-          </DropdownItem>
-        </DropdownSection>
-        <DropdownSection title="Danger zone">
-          <DropdownItem
-            key="delete"
-            className="text-danger"
-            color="danger"
-            description="Permanently delete your account"
-            startContent={<DeleteDocumentIcon className={cn(iconClasses, 'text-danger')} />}>
-            Delete Account
           </DropdownItem>
         </DropdownSection>
       </DropdownMenu>

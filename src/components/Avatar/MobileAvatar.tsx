@@ -47,7 +47,7 @@ const MobileAvatar: React.FC<MobileAvatarProps> = ({ profileUser }) => {
               Report
             </ListboxItem>
           </ListboxSection>
-          <ListboxSection showDivider>
+          <ListboxSection>
             <ListboxItem
               key="logout"
               className="text-warning"
@@ -56,16 +56,6 @@ const MobileAvatar: React.FC<MobileAvatarProps> = ({ profileUser }) => {
               description="Logout of your account"
               startContent={<DeleteDocumentIcon className={cn(iconClasses, 'text-warning')} />}>
               Log out
-            </ListboxItem>
-          </ListboxSection>
-          <ListboxSection title="Danger zone">
-            <ListboxItem
-              key="delete"
-              className="text-danger"
-              color="danger"
-              description="Permanently delete your account"
-              startContent={<DeleteDocumentIcon className={cn(iconClasses, 'text-danger')} />}>
-              Delete Account
             </ListboxItem>
           </ListboxSection>
         </Listbox>
