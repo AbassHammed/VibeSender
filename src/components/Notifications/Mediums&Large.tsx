@@ -14,7 +14,7 @@ import { BsBell } from 'react-icons/bs';
 
 import { NotificationMod } from '.';
 
-const notifs = [
+export const notifs = [
   {
     message: 'Your friend AbassHammed just added you, check thier profile out',
     notif: 'info',
