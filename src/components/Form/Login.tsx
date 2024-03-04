@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
 
-import { auth, currentUserQuery, populateFriends } from '@/firebase';
+import { auth, currentUserQuery } from '@/firebase';
 import { useSession } from '@/hooks';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { toast } from 'sonner';
@@ -36,7 +36,6 @@ const LoginForm: React.FC = () => {
       const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password);
       if (newUser) {
         await currentUserQuery(newUser.user.uid, setSessionData);
-        await populateFriends(newUser.user.uid, setSessionData);
         router.push('/conversations');
       }
     } catch (error) {

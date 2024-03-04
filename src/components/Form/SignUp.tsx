@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
 
-import { auth, currentUserQuery, firestore, populateFriends } from '@/firebase';
+import { auth, currentUserQuery, firestore } from '@/firebase';
 import { useSession } from '@/hooks';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -81,7 +81,6 @@ const SignUpForm: React.FC = () => {
           deletedAt: null,
         });
         await currentUserQuery(newUser.user.uid, setSessionData);
-        await populateFriends(newUser.user.uid, setSessionData);
         router.push('/user');
       }
     } catch (error: any) {

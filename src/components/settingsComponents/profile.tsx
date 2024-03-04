@@ -23,6 +23,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { DeleteAccount } from '../Modal';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import UpdateImage from '../UpdateImage';
@@ -102,6 +103,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
       <Separator />
 
       <UpdateImage profileUser={currentUser} />
+
       {/* <ProfileForm /> */}
 
       <Form {...form}>
@@ -229,6 +231,8 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
           <Button type="submit">{isLoading ? 'Updating ...' : 'Update profile'}</Button>
         </form>
       </Form>
+      <Separator />
+      <DeleteAccount />
     </div>
   );
 };

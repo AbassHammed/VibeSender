@@ -8,7 +8,7 @@ const DialogTrigger = Dialog.Trigger;
 const DialogPortal = Dialog.Portal;
 const DialogOverlay = Dialog.Overlay;
 const DialogContent = Dialog.Content;
-const DialogTittle = Dialog.Title;
+const DialogTitle = Dialog.Title;
 const DialogDescription = Dialog.Description;
 const DialogClose = Dialog.Close;
 
@@ -18,7 +18,7 @@ export {
   DialogPortal,
   DialogOverlay,
   DialogContent,
-  DialogTittle,
+  DialogTitle,
   DialogDescription,
   DialogClose,
 };

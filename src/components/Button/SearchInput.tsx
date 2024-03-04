@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { searchMessages, searchRequest } from '@/firebase';
+import { searchRequest } from '@/firebase';
 import { useDebounce, useSession } from '@/hooks';
 import { Input } from '@nextui-org/react';
 
@@ -19,7 +19,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, page }) => {
 
   useDebounce(() => {
     if (page === 'convo' && filterValue.trim() !== '') {
-      searchMessages(filterValue.trim(), setSessionData, currentUserId);
+      setSessionData(prev => ({ ...prev, searchedUsers: [] }));
     } else if (page === 'find' && filterValue.trim() !== '') {
       searchRequest(filterValue.trim(), setSessionData);
     } else {
