@@ -23,6 +23,14 @@ export {
   DialogClose,
 };
 
+export type friendRequestData = {
+  id: string;
+  senderId: string;
+  recieverId: string;
+  senderUserName: string;
+  createdAt: string;
+};
+
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };

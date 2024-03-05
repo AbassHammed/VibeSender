@@ -1,2 +1,11 @@
 export { auth, firestore, app, storage } from './firebase';
-export { searchRequest, currentUserQuery } from './query';
+export {
+  searchFriendInRequest,
+  searchRequest,
+  currentUserQuery,
+  sendFriendRequest,
+  searchFriendRequest,
+  acceptFriendRequest,
+  declineFriendRequest,
+  checkFriendshipStatus,
+} from './query';

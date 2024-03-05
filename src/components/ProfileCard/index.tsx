@@ -1,53 +1,74 @@
 import React, { useEffect, useState } from 'react';
 
-import { firestore } from '@/firebase';
-import { useAuth } from '@/hooks';
+import {
+  checkFriendshipStatus,
+  firestore,
+  searchFriendInRequest,
+  sendFriendRequest,
+} from '@/firebase';
+import { useAuth, useSession } from '@/hooks';
 import { User } from '@/types';
 import { Avatar, Button, Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
-import { deleteDoc, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc } from 'firebase/firestore';
+
+export type friendshipStatus = 'follow' | 'unfollow' | 'pending' | 'accept';
 
 type ProfileCardProps = {
   User: User;
 };
 const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
   const { user: currentUser } = useAuth();
+  const { sessionData } = useSession();
   const [isFollowed, setIsFollowed] = useState(false);
-  const [friendshipDocId, setFriendshipDocId] = useState('');
+  const [friendshipStatus, setFriendshipStatus] = useState<friendshipStatus>();
 
   useEffect(() => {
-    const checkFriendship = async () => {
-      if (!currentUser || !profileUser) {
+    const checkStatus = async () => {
+      if (!currentUser || !profileUser) {return;}
+
+      const isFriends = await checkFriendshipStatus(currentUser.uid, profileUser.uid);
+      if (isFriends) {
+        setIsFollowed(true);
+        setFriendshipStatus('unfollow');
         return;
       }
 
-      const docId = [currentUser.uid, profileUser.uid].sort().join('_');
-      const docRef = doc(firestore, 'friendships', docId);
-      const docSnap = await getDoc(docRef);
-
-      setIsFollowed(docSnap.exists());
-      if (docSnap.exists()) {
-        setFriendshipDocId(docId);
+      const receivedRequest = await searchFriendInRequest(profileUser.uid, currentUser.uid);
+      if (receivedRequest) {
+        setFriendshipStatus('accept');
+        return;
       }
+
+      const sentRequest = await searchFriendInRequest(currentUser.uid, profileUser.uid);
+      if (sentRequest) {
+        setFriendshipStatus('pending');
+        return;
+      }
+
+      setFriendshipStatus('follow');
     };
 
-    checkFriendship();
+    checkStatus();
   }, [currentUser, profileUser]);
 
-  const toggleFriendship = async () => {
-    const docId = friendshipDocId || [currentUser?.uid, profileUser.uid].sort().join('_');
-    const docRef = doc(firestore, 'friendships', docId);
+  const toggleFriendshipStatus = async () => {
+    if (!currentUser || !profileUser || !sessionData?.currentUser) {return;}
+    const docId = [currentUser.uid, profileUser.uid].sort().join('_');
+    const docRef = doc(firestore, 'friends', docId);
 
-    if (isFollowed) {
-      await deleteDoc(docRef);
-      setIsFollowed(false);
-    } else {
-      await setDoc(docRef, {
-        userId1: currentUser?.uid,
-        userId2: profileUser.uid,
-        createdAt: serverTimestamp(),
-      });
-      setIsFollowed(true);
-      setFriendshipDocId(docId);
+    switch (friendshipStatus) {
+      case 'follow':
+        await sendFriendRequest(profileUser.uid, currentUser.uid, sessionData.currentUser.userName);
+        setFriendshipStatus('pending');
+        break;
+
+      case 'unfollow':
+        await deleteDoc(docRef);
+        setFriendshipStatus('follow');
+        break;
+
+      default:
+        break;
     }
   };
 
@@ -69,8 +90,8 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
           radius="full"
           size="sm"
           variant={isFollowed ? 'bordered' : 'solid'}
-          onPress={toggleFriendship}>
-          {isFollowed ? 'Unfollow' : 'Follow'}
+          onPress={toggleFriendshipStatus}>
+          {friendshipStatus}
         </Button>
       </CardHeader>
       <CardBody className="px-3 py-0">
