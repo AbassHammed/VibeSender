@@ -31,7 +31,7 @@ const Module: React.FC<ModuleProps> = ({ senderUserName, recieverId, requestId, 
             <h3 className="leading-none font-medium">{senderUserName}</h3>
             <p className="mt-1 text-sm ">
               {' '}
-              {`${senderUserName} just sent you a friend request, click to decide.`}
+              {`${senderUserName} just sent you a friend request, click to choose.`}
             </p>
           </div>
           {open && (
