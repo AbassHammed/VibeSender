@@ -1,17 +1,42 @@
 import React, { useEffect, useState } from 'react';
 
 import {
+  acceptFriendRequest,
   checkFriendshipStatus,
   firestore,
   searchFriendInRequest,
   sendFriendRequest,
 } from '@/firebase';
 import { useAuth, useSession } from '@/hooks';
+import { cn } from '@/lib/utils';
 import { User } from '@/types';
 import { Avatar, Button, Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
 import { deleteDoc, doc } from 'firebase/firestore';
 
-export type friendshipStatus = 'follow' | 'unfollow' | 'pending' | 'accept';
+const friendShipStatusStyles = {
+  unfollow: {
+    background: 'bg-red-50 border border-red-300',
+    text: 'text-red-600',
+    hover: 'hover:text-red-700',
+  },
+  follow: {
+    background: 'bg-blue-50 border border-blue-300',
+    text: 'text-blue-600',
+    hover: 'hover:text-blue-700',
+  },
+  pending: {
+    background: 'bg-yellow-50 border border-yellow-300',
+    text: 'text-yellow-600',
+    hover: 'hover:text-yellow-700',
+  },
+  accept: {
+    background: 'bg-green-50 border border-green-300',
+    text: 'text-green-600',
+    hover: 'hover:text-green-700',
+  },
+};
+
+export type FriendshipStatus = 'follow' | 'unfollow' | 'pending' | 'accept';
 
 type ProfileCardProps = {
   User: User;
@@ -19,12 +44,17 @@ type ProfileCardProps = {
 const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
   const { user: currentUser } = useAuth();
   const { sessionData } = useSession();
-  const [isFollowed, setIsFollowed] = useState(false);
-  const [friendshipStatus, setFriendshipStatus] = useState<friendshipStatus>();
-
+  const [isFollowed, setIsFollowed] = useState<boolean>();
+  const [friendshipStatus, setFriendshipStatus] = useState<FriendshipStatus>('accept');
+  const [isMe, setIsMe] = useState(false);
+  const [values, setValues] = useState({ background: '', text: '' });
   useEffect(() => {
+    const { background, text } = friendShipStatusStyles[friendshipStatus];
+    setValues(prev => ({ ...prev, background, text }));
     const checkStatus = async () => {
-      if (!currentUser || !profileUser) {return;}
+      if (!currentUser || !profileUser) {
+        return;
+      }
 
       const isFriends = await checkFriendshipStatus(currentUser.uid, profileUser.uid);
       if (isFriends) {
@@ -47,12 +77,15 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
 
       setFriendshipStatus('follow');
     };
-
+    const isUser = profileUser.uid === currentUser?.uid;
+    setIsMe(isUser);
     checkStatus();
-  }, [currentUser, profileUser]);
+  }, [currentUser, profileUser, friendshipStatus]);
 
   const toggleFriendshipStatus = async () => {
-    if (!currentUser || !profileUser || !sessionData?.currentUser) {return;}
+    if (!currentUser || !profileUser || !sessionData?.currentUser) {
+      return;
+    }
     const docId = [currentUser.uid, profileUser.uid].sort().join('_');
     const docRef = doc(firestore, 'friends', docId);
 
@@ -65,6 +98,10 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
       case 'unfollow':
         await deleteDoc(docRef);
         setFriendshipStatus('follow');
+        break;
+
+      case 'accept':
+        await acceptFriendRequest(docId, profileUser.uid, currentUser.uid);
         break;
 
       default:
@@ -85,7 +122,7 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
           </div>
         </div>
         <Button
-          className={isFollowed ? 'bg-transparent text-foreground border-default-200' : ''}
+          className={cn(values.background, values.text, { 'hidden ': isMe })}
           color="primary"
           radius="full"
           size="sm"

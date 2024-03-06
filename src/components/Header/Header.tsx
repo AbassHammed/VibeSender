@@ -6,6 +6,7 @@ import { useAuth, useScroll, useSession } from '@/hooks';
 import { cn } from '@/utils/utils';
 
 import { StatusAvatar } from '../Avatar';
+import { MediumLarge } from '../FriendRequest';
 import Loading from '../Loading';
 import { MediumLargeSheet } from '../Notifications';
 
@@ -36,6 +37,7 @@ const Header = () => {
       )}>
       <div className="flex h-[56px] items-center justify-end px-4">
         <div className=" flex flex-row">
+          <MediumLarge />
           <MediumLargeSheet />
           <StatusAvatar profileUser={sessionData?.currentUser} />
         </div>

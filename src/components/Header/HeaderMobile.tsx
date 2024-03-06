@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import { useAuth, useSession } from '@/hooks';
 
 import { MobileAvatar } from '../Avatar';
+import { Mobile } from '../FriendRequest';
 import Loading from '../Loading';
 import { MobileNotif } from '../Notifications';
 
@@ -15,7 +16,8 @@ const HeaderMobile: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { user, loading: authLoading } = useAuth();
-  const showNotif = !['/settings'].includes(pathname);
+  const showNotif = !['/settings', '/search'].includes(pathname);
+  const showAdd = ['/search'].includes(pathname);
 
   useEffect(() => {
     if (!sessionData) {
@@ -35,7 +37,13 @@ const HeaderMobile: React.FC = () => {
       </div>
 
       <div className=" md:hidden ">
-        {showNotif ? <MobileNotif /> : <MobileAvatar profileUser={sessionData?.currentUser} />}
+        {showNotif ? (
+          <MobileNotif />
+        ) : showAdd ? (
+          <Mobile />
+        ) : (
+          <MobileAvatar profileUser={sessionData?.currentUser} />
+        )}
       </div>
     </div>
   );

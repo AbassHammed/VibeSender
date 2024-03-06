@@ -11,6 +11,7 @@ import { cn } from '@/utils/utils';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { MediumSideBarAvatar } from '../Avatar';
+import { MediumLarge } from '../FriendRequest';
 import Loading from '../Loading';
 import { MediumLargeSheet } from '../Notifications';
 
@@ -58,6 +59,9 @@ export default function MobileSideBar() {
       ))}
 
       <div className="flex flex-col items-center justify-end py-4 bottom-0 fixed">
+        <div className="my-2">
+          <MediumLarge />
+        </div>
         <div className=" my-2">
           <MediumLargeSheet />
         </div>

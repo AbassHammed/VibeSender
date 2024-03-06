@@ -41,7 +41,7 @@ const MobileNotif: React.FC = () => {
 
   return (
     <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger>
+      <DrawerTrigger asChild>
         <Button variant="ghost" size="icon">
           <BsBell className="h-6 w-6" />
         </Button>

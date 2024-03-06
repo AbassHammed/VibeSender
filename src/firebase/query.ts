@@ -113,8 +113,7 @@ const searchFriendInRequest = async (senderId: string, receiverId: string) => {
 const acceptFriendRequest = async (requestId: string, senderId: string, receiverId: string) => {
   await runTransaction(firestore, async transaction => {
     const friendRequestRef = doc(firestore, 'friendRequests', requestId);
-    const newFriendRef = doc(firestore, 'friends');
-
+    const newFriendRef = doc(firestore, 'friends', requestId);
     transaction.delete(friendRequestRef);
     transaction.set(newFriendRef, {
       userId1: senderId,
@@ -131,7 +130,7 @@ const declineFriendRequest = async (requestId: string) => {
 
 const checkFriendshipStatus = async (userId1: string, userId2: string) => {
   const docId = [userId1, userId2].sort().join('_');
-  const docRef = doc(firestore, 'friendships', docId);
+  const docRef = doc(firestore, 'friends', docId);
   const docSnap = await getDoc(docRef);
   return docSnap.exists();
 };

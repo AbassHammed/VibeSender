@@ -17,12 +17,13 @@ const NewsPage: React.FC = () => {
     return <Loading />;
   }
 
-  function getFirstFiftyWords(text: string): string {
-    const words = text.split(/\s+/) || [];
-    const firstFiftyWords = words.slice(0, 50).join(' ');
-
-    // Append "..." only if the original text had more than 50 words.
-    return words.length > 50 ? `${firstFiftyWords}...` : firstFiftyWords;
+  function getFirstFiftyWords(text: string) {
+    if (text !== null) {
+      const words = text.split(/\s+/) || [];
+      const firstFiftyWords = words.slice(0, 50).join(' ');
+      // Append "..." only if the original text had more than 50 words.
+      return words.length > 50 ? `${firstFiftyWords}...` : firstFiftyWords;
+    }
   }
 
   return (
