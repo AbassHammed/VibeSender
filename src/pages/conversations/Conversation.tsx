@@ -65,10 +65,10 @@ const ConversationPage: React.FC = () => {
         {!sessionData.searchedUsers
           ? 'No recent users'
           : sessionData.searchedUsers.map(user => (
-            <div key={user.uid} className="m-2">
-              <UserAvatar key={user.uid} profileUser={user} />
-            </div>
-          ))}
+              <div key={user.uid} className="m-2">
+                <UserAvatar key={user.uid} profileUser={user} />
+              </div>
+            ))}
       </aside>
     </>
   );

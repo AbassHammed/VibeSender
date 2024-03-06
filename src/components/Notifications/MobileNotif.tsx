@@ -19,7 +19,7 @@ const MobileNotif: React.FC = () => {
     {
       id: 2,
       message:
-        'It\'s been 6 months since you changed your password, constantly changing password makes it more secure',
+        "It's been 6 months since you changed your password, constantly changing password makes it more secure",
       notif: 'warn',
     },
     {
