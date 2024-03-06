@@ -6,6 +6,7 @@ import { stringToNotif } from '@/utils/utils';
 import { BsBell } from 'react-icons/bs';
 
 import { NotificationMod } from '.';
+import Swipe from '../Swipe';
 
 const MobileNotif: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -53,22 +54,15 @@ const MobileNotif: React.FC = () => {
           </Button>
           <div className="overflow-auto">
             {notifs.map((item, idx) => (
-              <NotificationMod
-                key={idx}
-                notif={stringToNotif(item.notif)}
-                message={item.message}
-                url={item.url}
-                onClose={() => removeNotification(item.id)}
-              />
-            ))}
-            {notifs.map((item, idx) => (
-              <NotificationMod
-                key={idx}
-                notif={stringToNotif(item.notif)}
-                message={item.message}
-                url={item.url}
-                onClose={() => removeNotification(item.id)}
-              />
+              <Swipe key={idx} onSwipe={() => removeNotification(item.id)}>
+                <NotificationMod
+                  key={idx}
+                  notif={stringToNotif(item.notif)}
+                  message={item.message}
+                  url={item.url}
+                  onClose={() => removeNotification(item.id)}
+                />
+              </Swipe>
             ))}
           </div>
         </DrawerContent>

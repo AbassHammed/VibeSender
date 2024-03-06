@@ -62,7 +62,7 @@ const MediumLarge: React.FC = () => (
       <SheetHeader className="px-5">
         <SheetTitle>Notifications</SheetTitle>
         <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+          Make changes to your profile here. Click save when you&apos;re done.
         </SheetDescription>
         <Button type="submit">Clear your notifications</Button>
       </SheetHeader>

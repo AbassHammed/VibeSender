@@ -62,7 +62,7 @@ const Mobile: React.FC = () => (
       <DrawerHeader className="px-5">
         <DrawerTitle>Notifications</DrawerTitle>
         <DrawerDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
+          Make changes to your profile here. Click save when you&apos;re done.
         </DrawerDescription>
         <Button type="submit">Clear your notifications</Button>
       </DrawerHeader>
