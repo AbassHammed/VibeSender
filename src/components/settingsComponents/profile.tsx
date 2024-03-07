@@ -27,12 +27,13 @@ import { DeleteAccount } from '../Modal';
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 import UpdateImage from '../UpdateImage';
+import MobileImage from '../UpdateImage/Mobile';
 
 const status = [
-  { label: 'Online', value: 'success' },
-  { label: 'Offline', value: 'default' },
-  { label: 'Idle', value: 'warning' },
-  { label: 'DND', value: 'danger' },
+  { label: 'Online', value: 'success', statusColor: 'text-teal-600', statusBg: 'bg-teal-600' },
+  { label: 'Offline', value: 'default', statusColor: 'text-gray-600', statusBg: 'bg-gray-300' },
+  { label: 'Idle', value: 'warning', statusColor: 'text-yellow-600', statusBg: 'bg-yellow-600' },
+  { label: 'DND', value: 'danger', statusColor: 'text-red-600', statusBg: 'bg-red-600' },
 ] as const;
 
 const profileFormSchema = z.object({
@@ -103,8 +104,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
       <Separator />
 
       <UpdateImage profileUser={currentUser} />
-
-      {/* <ProfileForm /> */}
+      <MobileImage profileUser={currentUser} />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -175,6 +175,11 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
                           'w-[200px] justify-between',
                           !field.value && 'text-muted-foreground',
                         )}>
+                        <span
+                          className={cn(
+                            `w-2 h-2 rounded-full`,
+                            status.find(status => status.value === field.value)?.statusBg,
+                          )}></span>
                         {field.value
                           ? status.find(status => status.value === field.value)?.label
                           : 'Select status'}
@@ -200,6 +205,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
                                 status.value === field.value ? 'opacity-100' : 'opacity-0',
                               )}
                             />
+                            <span className={`w-2 h-2 mr-2 rounded-full ${status.statusBg}`}></span>
                             {status.label}
                           </CommandItem>
                         ))}
@@ -208,7 +214,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
                   </PopoverContent>
                 </Popover>
                 <FormDescription>
-                  This is the status that will be used for your messages.
+                  This is the status people using VibeSender will see.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -231,7 +237,12 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ currentUser }) => {
           <Button type="submit">{isLoading ? 'Updating ...' : 'Update profile'}</Button>
         </form>
       </Form>
-      <Separator />
+      <div className="relative">
+        <span className="block w-full h-px bg-red-600"></span>
+        <p className="inline-block w-fit text-sm dark:bg-black bg-white px-2 absolute -top-2 inset-x-0 mx-auto text-red-600">
+          Danger Zone
+        </p>
+      </div>
       <DeleteAccount />
     </div>
   );

@@ -8,17 +8,63 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
-type UpdateImageProps = {
+import { Drawer, DrawerContent, DrawerPortal, DrawerTitle, DrawerTrigger } from '../ui/drawer';
+
+interface DrawProps {
+  handleSelectedImage: (images: FileList | null) => Promise<void>;
+  handleListboxAction: (key: Key) => void;
+  fileInputRef: React.RefObject<HTMLInputElement>;
+  isError: string;
+}
+
+const Draw: React.FC<DrawProps> = ({
+  handleListboxAction,
+  handleSelectedImage,
+  isError,
+  fileInputRef,
+}) => (
+  <Drawer>
+    <DrawerTrigger asChild>
+      <Button size="sm" className="absolute right-4 items-center mt-3">
+        Change photo
+      </Button>
+    </DrawerTrigger>
+    <DrawerPortal>
+      <DrawerContent className="flex flex-col md:hidden fixed h-[20%] rounded-t-[10px] dark:bg-[#141414]">
+        <DrawerTitle className="flex justify-center items-center my-4">
+          Change Profile Picture
+        </DrawerTitle>
+        <Listbox aria-label="Example with disabled actions" onAction={handleListboxAction}>
+          <ListboxItem key="new" className="text-blue-600 ml-2">
+            Upload Photo
+          </ListboxItem>
+          <ListboxItem key="delete" className="text-danger hover:bg-muted hover:text-danger ml-2">
+            Remove current Photo
+          </ListboxItem>
+        </Listbox>
+        <h1 className="text-small">{isError}</h1>
+        <input
+          type="file"
+          ref={fileInputRef}
+          accept="image/png, image/jpeg, image/gif"
+          onChange={e => handleSelectedImage(e.target.files)}
+          style={{ display: 'none' }} // Hide the file input
+        />
+      </DrawerContent>
+    </DrawerPortal>
+  </Drawer>
+);
+
+type MobileImageProps = {
   profileUser: User;
 };
 
 const MAX_IMAGE_SIZE = 10000000;
 
-const UpdateImage: React.FC<UpdateImageProps> = ({ profileUser }) => {
+const MobileImage: React.FC<MobileImageProps> = ({ profileUser }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isError, setIsError] = useState('');
   const { setSessionData } = useSession();
-  const [isOpen, setIsopen] = useState(false);
 
   const handleSelectedImage = async (images: FileList | null) => {
     if (!images || images.length === 0) {
@@ -72,7 +118,7 @@ const UpdateImage: React.FC<UpdateImageProps> = ({ profileUser }) => {
   };
   return (
     <>
-      <Card className="border bg-transparent hidden md:flex">
+      <Card className="border bg-transparent md:hidden">
         <CardBody className="justify-between">
           <div className="flex gap-3">
             <Avatar radius="full" size="lg" src={profileUser.imageUrl} />
@@ -82,43 +128,16 @@ const UpdateImage: React.FC<UpdateImageProps> = ({ profileUser }) => {
               </h4>
               <h5 className="text-small tracking-tight text-default-500">{profileUser.fullName}</h5>
             </div>
-            <Button
-              size="sm"
-              className="absolute right-4 items-center mt-3"
-              onPress={() => setIsopen(prev => !prev)}>
-              Change photo
-            </Button>
+            <Draw
+              handleListboxAction={handleListboxAction}
+              handleSelectedImage={handleSelectedImage}
+              isError={isError}
+              fileInputRef={fileInputRef}
+            />
           </div>
         </CardBody>
       </Card>
-      <div className={isOpen ? 'flex' : 'hidden'}>
-        <div
-          className=" fixed inset-0 w-full h-full bg-black opacity-40 z-40"
-          onClick={() => setIsopen(prev => !prev)}
-        />
-        <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-lg sm:w-[60%] md:w-[320px] mx-auto px-4 m-4 light:bg-white z-50 dark:bg-[#141414]">
-          <header className="flex flex-col gap-1 mb-4 mt-2">Change Profile Photo</header>
-          <div>
-            <Listbox aria-label="Example with disabled actions" onAction={handleListboxAction}>
-              <ListboxItem key="new" className="text-blue-600 hover:text-blue-600">
-                Upload Photo
-              </ListboxItem>
-              <ListboxItem key="delete" className="text-danger hover:text-danger">
-                Remove current Photo
-              </ListboxItem>
-            </Listbox>
-            <h1 className="text-small">{isError}</h1>
-            <input
-              type="file"
-              ref={fileInputRef}
-              accept="image/png, image/jpeg, image/gif"
-              onChange={e => handleSelectedImage(e.target.files)}
-              style={{ display: 'none' }} // Hide the file input
-            />
-          </div>
-        </div>
-      </div>
     </>
   );
 };
-export default UpdateImage;
+export default MobileImage;

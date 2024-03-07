@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -58,15 +57,11 @@ const Mobile: React.FC = () => (
         <IoPersonAddOutline className="h-6 w-6" />
       </Button>
     </DrawerTrigger>
-    <DrawerContent className="overflow-y-auto h-screen px-1">
+    <DrawerContent className="flex flex-col md:hidden fixed max-h-[50%] rounded-t-[10px] dark:bg-[#141414]">
       <DrawerHeader className="px-5">
         <DrawerTitle>Notifications</DrawerTitle>
-        <DrawerDescription>
-          Make changes to your profile here. Click save when you&apos;re done.
-        </DrawerDescription>
-        <Button type="submit">Clear your notifications</Button>
       </DrawerHeader>
-      <ul className="mt-6 space-y-3">
+      <ul className="mt-6 space-y-3 overflow-auto">
         {friends.map(item => (
           <Module
             key={item.id}
