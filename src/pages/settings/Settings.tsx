@@ -20,7 +20,7 @@ const SettingsPage: React.FC = () => {
     return <Loading />;
   }
   return (
-    <div className=" space-y-6 pb-10 md:block rounded-lg  light:bg-white">
+    <div className=" space-y-6 pb-5 px-2 md:block rounded-lg  light:bg-white">
       <div className="space-y-0.5">
         <h2 className="text-2xl font-bold tracking-tight px-4 pt-4">Settings</h2>
       </div>

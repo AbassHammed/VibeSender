@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { useAuth, useSession } from '@/hooks';
+import { useAuth, useSearch, useSession } from '@/hooks';
 import { NavItemType } from '@/types';
-import { NavItem } from '@/utils/constants';
+import { NavItem1, NavItem2 } from '@/utils/constants';
 import { cn } from '@/utils/utils';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { CiSearch } from 'react-icons/ci';
+import { FiSearch } from 'react-icons/fi';
 
 import { SideBarAvatar } from '../Avatar';
 import Loading from '../Loading';
@@ -15,11 +17,15 @@ import Loading from '../Loading';
 function SideNavItem({ href, icon, label }: NavItemType) {
   const [animationParent] = useAutoAnimate();
   const pathname = usePathname();
+  const { setSearchEnabled } = useSearch();
   const isActivePage = pathname === href;
   return (
     <Link
       ref={animationParent}
       href={href}
+      onClick={() => {
+        setSearchEnabled(false);
+      }}
       className="flex gap-2 items-center p-2 transition-all rounded-lg cursor-pointer hover:bg-muted w-full">
       <div className="w-[35px] h-[35px] text-3xl">{isActivePage ? icon?.fillIcon : icon?.icon}</div>
 
@@ -31,8 +37,18 @@ function SideNavItem({ href, icon, label }: NavItemType) {
 }
 
 export default function SideBar() {
+  const [animationParent] = useAutoAnimate();
   const { sessionData } = useSession();
   const { user, loading } = useAuth();
+  const { setSearchEnabled, isSearchEnabled } = useSearch();
+
+  useEffect(() => {
+    if (!isSearchEnabled) {
+      const url = new URL(window.location.href);
+      url.hash = ''; // Clear the hash part
+      window.history.replaceState({}, '', url.href);
+    }
+  }, [isSearchEnabled]);
 
   if (!sessionData?.currentUser || !user || loading) {
     return <Loading />;
@@ -49,7 +65,25 @@ export default function SideBar() {
         </Link>
       </div>
 
-      {NavItem.map((d, idx) => (
+      {NavItem1.map((d, idx) => (
+        <SideNavItem key={idx} icon={d.icon} href={d.href} label={d.label} />
+      ))}
+      <button
+        ref={animationParent}
+        onClick={() => setSearchEnabled(prev => !prev)}
+        className="flex gap-2 items-center p-2 transition-all rounded-lg cursor-pointer hover:bg-muted w-full">
+        <div className="w-[35px] h-[35px] text-3xl">
+          {isSearchEnabled ? <FiSearch /> : <CiSearch />}
+        </div>
+        <p
+          className={cn(
+            'text-[16px] hidden md:block transition-all ',
+            isSearchEnabled && 'font-bold',
+          )}>
+          Search
+        </p>
+      </button>
+      {NavItem2.map((d, idx) => (
         <SideNavItem key={idx} icon={d.icon} href={d.href} label={d.label} />
       ))}
 

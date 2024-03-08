@@ -8,6 +8,8 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
+import { Separator } from '../ui/separator';
+
 type UpdateImageProps = {
   profileUser: User;
 };
@@ -91,20 +93,24 @@ const UpdateImage: React.FC<UpdateImageProps> = ({ profileUser }) => {
           </div>
         </CardBody>
       </Card>
-      <div className={isOpen ? 'flex' : 'hidden'}>
+      <div className={isOpen ? 'hidden md:flex' : 'hidden'}>
         <div
           className=" fixed inset-0 w-full h-full bg-black opacity-40 z-40"
           onClick={() => setIsopen(prev => !prev)}
         />
-        <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-lg sm:w-[60%] md:w-[320px] mx-auto px-4 m-4 light:bg-white z-50 dark:bg-[#141414]">
-          <header className="flex flex-col gap-1 mb-4 mt-2">Change Profile Photo</header>
-          <div>
+        <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] rounded-lg sm:w-[60%] md:w-[320px]  bg-white z-50 dark:bg-[#141414] justify-center items-center">
+          <header className="flex flex-col gap-1 text-center py-4">Change Profile Photo</header>
+          <Separator />
+          <div className="text-center">
             <Listbox aria-label="Example with disabled actions" onAction={handleListboxAction}>
-              <ListboxItem key="new" className="text-blue-600 hover:text-blue-600">
+              <ListboxItem showDivider key="new" className="text-blue-600 hover:text-blue-600 py-2">
                 Upload Photo
               </ListboxItem>
-              <ListboxItem key="delete" className="text-danger hover:text-danger">
+              <ListboxItem showDivider key="delete" className="text-danger hover:text-danger py-2">
                 Remove current Photo
+              </ListboxItem>
+              <ListboxItem key="cancel" onClick={() => setIsopen(prev => !prev)} className="py-2">
+                cancel
               </ListboxItem>
             </Listbox>
             <h1 className="text-small">{isError}</h1>

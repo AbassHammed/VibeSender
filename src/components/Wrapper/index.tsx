@@ -18,7 +18,7 @@ export function useShowNavbar() {
 export function PageWrapper({ children }: { children: ReactNode }) {
   const showNavbar = useShowNavbar();
   return showNavbar ? (
-    <div className="flex flex-col pt-2 px-4 space-y-2 light:bg-zinc-100 flex-grow">{children}</div>
+    <div className="flex flex-col space-y-2 light:bg-zinc-100 flex-grow">{children}</div>
   ) : null;
 }
 

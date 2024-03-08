@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { HeaderMobile } from '@/components/Header';
 import Header from '@/components/Header/Header';
 import { MediumSideBar, MobileDownBar, SideBar } from '@/components/NavBar';
-import Play from '@/components/News';
+import SearchPage from '@/components/SearchPagecompo';
 import {
   MarginWidthWrapper,
   PageWrapper,
@@ -14,7 +14,7 @@ import {
   useShowNavbar,
   Wrapper,
 } from '@/components/Wrapper';
-import { CacheProvider, SessionProvider } from '@/hooks';
+import { CacheProvider, SearchStateProvider, SessionProvider } from '@/hooks';
 import { NextUIProvider } from '@nextui-org/react';
 import { RecoilRoot } from 'recoil';
 import { Toaster } from 'sonner';
@@ -24,21 +24,23 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const renderContent = () => (
     <>
-      <Wrapper>
-        <MediumSideBar />
-        <SideBar />
-        <MobileDownBar />
-        <HeaderMobile />
-        <main className="flex-1">
-          <MarginWidthWrapper>
-            <Header />
-            <PageWrapper>
-              <Play />
-              <Component {...pageProps} />
-            </PageWrapper>
-          </MarginWidthWrapper>
-        </main>
-      </Wrapper>
+      <SearchStateProvider>
+        <Wrapper>
+          <MediumSideBar />
+          <SideBar />
+          <MobileDownBar />
+          <HeaderMobile />
+          <main className="flex-1">
+            <MarginWidthWrapper>
+              <Header />
+              <PageWrapper>
+                <SearchPage />
+                <Component {...pageProps} />
+              </PageWrapper>
+            </MarginWidthWrapper>
+          </main>
+        </Wrapper>
+      </SearchStateProvider>
     </>
   );
   return (

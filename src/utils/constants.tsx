@@ -103,3 +103,42 @@ export const MobileNavItem: MobileNavItemType[] = [
     href: '/settings',
   },
 ];
+
+export const NavItem1: NavItemType[] = [
+  {
+    icon: {
+      icon: <IoChatbubblesOutline />,
+      fillIcon: <IoChatbubblesSharp />,
+    },
+    label: 'Messages',
+    href: '/conversations',
+  },
+  {
+    icon: {
+      icon: <HiOutlineUsers />,
+      fillIcon: <HiUsers />,
+    },
+    label: 'Groups',
+    href: '#',
+  },
+];
+
+export const NavItem2: NavItemType[] = [
+  {
+    icon: {
+      icon: <PiNotepad />,
+      fillIcon: <PiNotepadFill />,
+    },
+    label: 'News',
+    href: '/news',
+  },
+
+  {
+    icon: {
+      icon: <IoSettingsOutline />,
+      fillIcon: <IoSettingsSharp />,
+    },
+    label: 'Settings ',
+    href: '/settings',
+  },
+];

@@ -28,7 +28,7 @@ const MobileDownBar: React.FC = () => {
   ));
 
   return (
-    <div className="fixed md:hidden bottom-0 flex flex-row justify-between p-2 w-full h-12 border-t bg-white dark:bg-black">
+    <div className="fixed md:hidden bottom-0 flex flex-row justify-between p-2 w-full h-12 border-t bg-white dark:bg-black z-40">
       {links}
     </div>
   );
