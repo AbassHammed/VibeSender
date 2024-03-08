@@ -36,7 +36,7 @@ const friendShipStatusStyles = {
   },
 };
 
-export type FriendshipStatus = 'follow' | 'unfollow' | 'pending' | 'accept';
+type FriendshipStatus = 'follow' | 'unfollow' | 'pending' | 'accept';
 
 type ProfileCardProps = {
   User: User;
@@ -48,6 +48,7 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
   const [friendshipStatus, setFriendshipStatus] = useState<FriendshipStatus>('accept');
   const [isMe, setIsMe] = useState(false);
   const [values, setValues] = useState({ background: '', text: '' });
+
   useEffect(() => {
     const { background, text } = friendShipStatusStyles[friendshipStatus];
     setValues(prev => ({ ...prev, background, text }));

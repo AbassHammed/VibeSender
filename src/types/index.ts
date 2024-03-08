@@ -37,7 +37,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 export type notif = 'info' | 'success' | 'warn' | 'error';
 
-export type color = 'default' | 'success' | 'danger' | 'warning';
+export type color = 'default' | 'success' | 'danger' | 'warning' | 'primary';
 
 export type User = {
   uid: string;

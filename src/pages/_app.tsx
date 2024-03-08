@@ -12,6 +12,7 @@ import {
   PageWrapper,
   ThemeProvider,
   useShowNavbar,
+  Wrapper,
 } from '@/components/Wrapper';
 import { CacheProvider, SessionProvider } from '@/hooks';
 import { NextUIProvider } from '@nextui-org/react';
@@ -23,19 +24,21 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const renderContent = () => (
     <>
-      <MediumSideBar />
-      <SideBar />
-      <MobileDownBar />
-      <HeaderMobile />
-      <main className="flex-1">
-        <MarginWidthWrapper>
-          <Header />
-          <PageWrapper>
-            <Play />
-            <Component {...pageProps} />
-          </PageWrapper>
-        </MarginWidthWrapper>
-      </main>
+      <Wrapper>
+        <MediumSideBar />
+        <SideBar />
+        <MobileDownBar />
+        <HeaderMobile />
+        <main className="flex-1">
+          <MarginWidthWrapper>
+            <Header />
+            <PageWrapper>
+              <Play />
+              <Component {...pageProps} />
+            </PageWrapper>
+          </MarginWidthWrapper>
+        </main>
+      </Wrapper>
     </>
   );
   return (

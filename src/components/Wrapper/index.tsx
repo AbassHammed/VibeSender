@@ -1,10 +1,13 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import * as React from 'react';
 
 import { useRouter } from 'next/router';
 
+import { auth, currentUserQuery } from '@/firebase';
+import { useSession } from '@/hooks';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { type ThemeProviderProps } from 'next-themes/dist/types';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 // Custom hook to determine if the navbar should be shown
 export function useShowNavbar() {
@@ -70,3 +73,26 @@ export function MarginWidthWrapper({ children }: { children: ReactNode }) {
     </div>
   );
 }
+
+export const Wrapper = ({ children }: { children: ReactNode }) => {
+  const showNavbar = useShowNavbar();
+  const { setSessionData } = useSession();
+  const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    const checkAuthStateAndFetchData = async () => {
+      const authState = sessionStorage.getItem('authState');
+
+      if (!authState && user) {
+        await currentUserQuery(user.uid, setSessionData).then(() => {
+          sessionStorage.setItem('authState', 'true');
+        });
+      }
+    };
+
+    if (showNavbar && user) {
+      checkAuthStateAndFetchData();
+    }
+  }, [showNavbar, user, setSessionData]);
+  return <div>{children}</div>;
+};

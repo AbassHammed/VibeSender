@@ -1,29 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import { useRouter } from 'next/navigation';
-
-import UserAvatar from '@/components/Avatar/UserAvatar';
+import UserAvatar from '@/components/Avatar/SearchAvatar';
 import SearchInput from '@/components/Button/SearchInput';
 import Loading from '@/components/Loading';
 import Placeholder from '@/components/ui/placeHolder';
 import { Separator } from '@/components/ui/separator';
 import { auth } from '@/firebase/firebase';
-import { currentUserQuery } from '@/firebase/query';
 import { useSession } from '@/hooks/useSession';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const SearchPage: React.FC = () => {
-  const { sessionData, setSessionData } = useSession();
+  const { sessionData } = useSession();
   const [user] = useAuthState(auth);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      return router.push('/');
-    }
-
-    currentUserQuery(user.uid, setSessionData);
-  }, [setSessionData, user, router]);
 
   if (!user || !sessionData?.currentUser) {
     return <Loading />;

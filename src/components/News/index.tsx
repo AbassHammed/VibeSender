@@ -8,21 +8,22 @@ const Play: React.FC = () => {
 
   useEffect(() => {
     const checkHash = () => {
-      setShowPage(/#News$/.test(window.location.hash));
+      setShowPage(/#Search$/.test(window.location.hash));
     };
-    /#News$/.test(asPath) ? setShowPage(true) : ''; // Run on mount and whenever the hash changes
+    /#Search$/.test(asPath) ? setShowPage(true) : '';
     window.addEventListener('hashchange', checkHash, false);
-
-    // Initial check in case the component mounts with the correct hash
     checkHash();
 
-    // Cleanup
     return () => {
       window.removeEventListener('hashchange', checkHash, false);
     };
-  }, [asPath]); // Empty dependency array means this effect runs once on mount
+  }, [asPath]);
 
-  return showPage ? <div className="z-50 text-black font-black">Hello, I am Hammed</div> : null;
+  return (
+    <div className={showPage ? 'flex' : 'hidden'}>
+      <div className="fixed inset-0 w-full h-full bg-black opacity-40 z-40" />
+    </div>
+  );
 };
 
 export default Play;

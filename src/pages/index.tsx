@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -30,14 +30,19 @@ const words = [
 export default function Home() {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
+  const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     if (user) {
       router.push('/conversations');
     }
-  }, [user, router]);
 
-  if (loading) {
+    if (!loading && !user) {
+      setPageLoading(false);
+    }
+  }, [user, router, loading]);
+
+  if (pageLoading) {
     return <Loading />;
   }
 

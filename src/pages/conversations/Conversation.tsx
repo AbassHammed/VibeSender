@@ -1,27 +1,17 @@
-import React, { useEffect } from 'react';
-
-import { useRouter } from 'next/navigation';
+import React from 'react';
 
 import { UserAvatar } from '@/components/Avatar';
 import { SearchInput } from '@/components/Button';
 import Loading from '@/components/Loading';
 import { Separator } from '@/components/ui/separator';
-import { auth, currentUserQuery } from '@/firebase';
+import { auth } from '@/firebase';
 import { useSession } from '@/hooks';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { MdOutlineGroupAdd } from 'react-icons/md';
 
 const ConversationPage: React.FC = () => {
-  const { sessionData, setSessionData } = useSession();
+  const { sessionData } = useSession();
   const [user] = useAuthState(auth);
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      return router.push('/');
-    }
-    currentUserQuery(user.uid, setSessionData);
-  }, [setSessionData, user, router]);
 
   if (!user || !sessionData?.currentUser) {
     return <Loading />;

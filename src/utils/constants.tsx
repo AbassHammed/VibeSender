@@ -34,7 +34,7 @@ export const NavItem: NavItemType[] = [
       fillIcon: <FiSearch />,
     },
     label: 'Search',
-    href: '/search',
+    href: '#Search',
   },
   {
     icon: {
@@ -86,7 +86,7 @@ export const MobileNavItem: MobileNavItemType[] = [
       icon: <CiSearch />,
       fillIcon: <FiSearch />,
     },
-    href: '/search',
+    href: '#Search',
   },
   {
     icon: {
