@@ -34,11 +34,12 @@ const SearchInput: React.FC<SearchInputProps> = ({ currentUserId, page }) => {
   return (
     <Input
       isClearable
-      className="max-w-[320px] px-3 mb-2"
+      className="w-full px-3 mb-2"
       variant="bordered"
       placeholder="Search by name..."
       value={filterValue}
       startContent={<SearchIcon />}
+      onClear={() => setFilterValue('')}
       onChange={handleSearchChange}
     />
   );

@@ -22,19 +22,8 @@ const SearchPage: React.FC = () => {
   return (
     isSearchEnabled && (
       <>
-        <div className="fixed z-50 hidden md:flex lg:h-[calc(100%-56px)]  p-4 min-w-[350px] bg-white dark:bg-black rounded-lg mb-4 border">
-          <aside
-            className="
-            flex flex-col
-          z-50
-          fixed
-          h-full 
-        w-80
-        bg-white
-        dark:bg-black
-        rounded-lg
-        border 
-      ">
+        <div className="fixed z-50 hidden md:flex lg:h-[calc(100%-56px)] h-screen  p-4 min-w-[350px] bg-white dark:bg-black rounded-lg mb-4 border">
+          <aside className=" flex flex-col z-50 fixed h-full w-80 bg-white dark:bg-black rounded-lg border">
             <div>
               <div className="px-5">
                 <div className="flex justify-between mb-4 pt-2">

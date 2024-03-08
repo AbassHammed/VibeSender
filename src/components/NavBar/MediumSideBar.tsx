@@ -4,11 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { useAuth, useSession } from '@/hooks';
+import { useAuth, useSearch, useSession } from '@/hooks';
 import { MobileNavItemType } from '@/types';
-import { NavItem } from '@/utils/constants';
+import { NavItem1, NavItem2 } from '@/utils/constants';
 import { cn } from '@/utils/utils';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { CiSearch } from 'react-icons/ci';
+import { FiSearch } from 'react-icons/fi';
 
 import { MediumSideBarAvatar } from '../Avatar';
 import { MediumLarge } from '../FriendRequest';
@@ -18,11 +20,13 @@ import { MediumLargeSheet } from '../Notifications';
 function MobileSideNavItem({ href, icon }: MobileNavItemType) {
   const [animationParent] = useAutoAnimate();
   const pathname = usePathname();
+  const { setSearchEnabled } = useSearch();
   const isActivePage = pathname === href;
   return (
     <Link
       ref={animationParent}
       href={href}
+      onClick={() => setSearchEnabled(false)}
       className="flex gap-2 items-center p-2 transition-all rounded-lg cursor-pointer hover:bg-muted w-[100%]">
       <div className="w-[35px] h-[35px] text-3xl">{isActivePage ? icon?.fillIcon : icon?.icon}</div>
     </Link>
@@ -30,8 +34,10 @@ function MobileSideNavItem({ href, icon }: MobileNavItemType) {
 }
 
 export default function MobileSideBar() {
+  const [animationParent] = useAutoAnimate();
   const { sessionData } = useSession();
   const { user, loading } = useAuth();
+  const { setSearchEnabled, isSearchEnabled } = useSearch();
 
   if (!sessionData?.currentUser || !user || loading) {
     return <Loading />;
@@ -54,7 +60,19 @@ export default function MobileSideBar() {
         </Link>
       </div>
 
-      {NavItem.map((d, idx) => (
+      {NavItem1.map((d, idx) => (
+        <MobileSideNavItem key={idx} icon={d.icon} href={d.href} />
+      ))}
+      <button
+        ref={animationParent}
+        onClick={() => setSearchEnabled(prev => !prev)}
+        className="flex gap-2 items-center p-2 transition-all rounded-lg cursor-pointer hover:bg-muted w-full">
+        <div className="w-[35px] h-[35px] text-3xl">
+          {' '}
+          {isSearchEnabled ? <FiSearch /> : <CiSearch />}
+        </div>
+      </button>
+      {NavItem2.map((d, idx) => (
         <MobileSideNavItem key={idx} icon={d.icon} href={d.href} />
       ))}
 

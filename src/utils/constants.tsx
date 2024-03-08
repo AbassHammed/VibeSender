@@ -86,7 +86,7 @@ export const MobileNavItem: MobileNavItemType[] = [
       icon: <CiSearch />,
       fillIcon: <FiSearch />,
     },
-    href: '#Search',
+    href: '/search',
   },
   {
     icon: {

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { useRouter } from 'next/router';
 
 import UserAvatar from '@/components/Avatar/SearchAvatar';
 import SearchInput from '@/components/Button/SearchInput';
@@ -6,39 +8,30 @@ import Loading from '@/components/Loading';
 import Placeholder from '@/components/ui/placeHolder';
 import { Separator } from '@/components/ui/separator';
 import { auth } from '@/firebase/firebase';
+import { useDimensions } from '@/hooks';
 import { useSession } from '@/hooks/useSession';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 const SearchPage: React.FC = () => {
   const { sessionData } = useSession();
   const [user] = useAuthState(auth);
+  const { width } = useDimensions();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (width >= 768) {router.push('/conversations');}
+  }, [width]);
 
   if (!user || !sessionData?.currentUser) {
     return <Loading />;
   }
 
   return (
-    <>
-      <aside
-        className="
-          h-fit
-        inset-y-0 
-        max-w-80
-        lg:pb-0
-        lg:max-w-80 
-        lg:block
-        rounded-lg
-        overflow-y-auto 
-        border 
-        border-gray-200
-      ">
-        <div className="px-5">
-          <div className="flex justify-between mb-4 pt-2">
-            <div className="text-2xl font-bold text-neutral-800">Search</div>
-          </div>
-        </div>
-        <SearchInput currentUserId={user.uid} page="find" />
-        <Separator className="my-4" />
+    <div className="fixed w-[calc(100%-16px)] h-[calc(100%-110px)] m-2 lg:block rounded-lg border">
+      <div className="font-bold py-4 text-2xl pl-4"> Search</div>
+      <SearchInput currentUserId={user.uid} page="find" />
+      <Separator className="mt-4 mb-2" />
+      <div className="overflow-auto">
         {!sessionData.searchedUsers || sessionData.searchedUsers.length === 0 ? (
           <Placeholder description="There is nothing to display" imagePath="/empty.svg" />
         ) : (
@@ -48,8 +41,8 @@ const SearchPage: React.FC = () => {
             </div>
           ))
         )}
-      </aside>
-    </>
+      </div>
+    </div>
   );
 };
 export default SearchPage;
