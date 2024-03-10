@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ChatBar from '@/components/Chat/ChatBar';
+import ChatTopBar from '@/components/Chat/ChatTopBar';
 import Loading from '@/components/Loading';
 import { auth } from '@/firebase';
 import { useSession } from '@/hooks';
@@ -16,11 +17,17 @@ const ConversationPage: React.FC = () => {
   }
 
   return (
-    <div className="hidden md:flex flex-col lg:h-[calc(100%-56px)] h-screen p-2 w-[350px]">
-      <aside className="flex flex-co fixed lg:h-[calc(100%-70px)] md:h-[calc(100%-16px)] w-80 bg-white dark:bg-black rounded-lg border">
-        <ChatBar chats={mockConversations} />
-      </aside>
-    </div>
+    <>
+      <div className="flex p-2">
+        <aside className="fixed hidden md:flex flex-col w-80 bg-white dark:bg-black rounded-lg border lg:h-[calc(100%-70px)] md:h-[calc(100%-16px)]">
+          <ChatBar chats={mockConversations} />
+        </aside>
+        <div className="fixed hidden rounded-lg ml-[330px] md:flex lg:w-[950px] lg:h-[calc(100%-70px)] md:h-[calc(100%-16px)] border">
+          {' '}
+          <ChatTopBar selectedConvo={mockConversations[0]} />
+        </div>
+      </div>
+    </>
   );
 };
 export default ConversationPage;

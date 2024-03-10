@@ -6,8 +6,8 @@ import { UserQuery } from '@/firebase';
 import { useAuth } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { conversation } from '@/types';
-import { FaSquarePen } from 'react-icons/fa6';
 import { FiMoreHorizontal } from 'react-icons/fi';
+import { LuPenSquare } from 'react-icons/lu';
 
 interface ChatItemProps {
   chat: conversation;
@@ -49,9 +49,7 @@ export const ChatItem: React.FC<ChatItemProps> = ({ chat }) => {
               'text-zinc-300 text-xs truncate',
               chat.lastMessage.read ? 'font-bold dark:text-white text-black' : '',
             )}>
-            {chat.lastMessage.userId === user?.uid
-              ? `${userData.name.split(' ')[0]}: `
-              : `${userData.name.split(' ')[0]}: `}
+            {chat.lastMessage.userId === user?.uid ? `You: ` : `${userData.name.split(' ')[0]}: `}
             {chat.lastMessage.message}
           </span>
         )}
@@ -77,7 +75,7 @@ const ChatBar: React.FC<ChatBarProps> = ({ chats }) => (
         </button>
 
         <button className={cn(buttonVariants({ variant: 'ghost', size: 'icon' }), 'h-9 w-9')}>
-          <FaSquarePen size={20} />
+          <LuPenSquare size={20} />
         </button>
       </div>
     </div>
