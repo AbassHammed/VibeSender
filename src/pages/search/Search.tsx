@@ -19,7 +19,9 @@ const SearchPage: React.FC = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (width >= 768) {router.push('/conversations');}
+    if (width >= 768) {
+      router.push('/conversations');
+    }
   }, [width]);
 
   if (!user || !sessionData?.currentUser) {

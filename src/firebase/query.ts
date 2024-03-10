@@ -51,6 +51,17 @@ const currentUserQuery = async (
   });
 };
 
+const UserQuery = async (userId: string) => {
+  const userQuery = query(collection(firestore, 'users'), where('uid', '==', userId));
+  const querySnapshot = await getDocs(userQuery);
+
+  if (querySnapshot.empty) {
+    return;
+  }
+
+  return querySnapshot.docs[0].data() as User;
+};
+
 // Function to search users based on userName
 const searchRequest = async (
   filterValue: string,
@@ -136,6 +147,7 @@ const checkFriendshipStatus = async (userId1: string, userId2: string) => {
 };
 
 export {
+  UserQuery,
   searchFriendInRequest,
   checkFriendshipStatus,
   declineFriendRequest,

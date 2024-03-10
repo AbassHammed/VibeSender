@@ -1,26 +1,20 @@
 import { SVGProps } from 'react';
 
 import { settingPage } from '@/pages/settings/Settings';
-import * as Dialog from '@radix-ui/react-dialog';
 
-const DialogRoot = Dialog.Root;
-const DialogTrigger = Dialog.Trigger;
-const DialogPortal = Dialog.Portal;
-const DialogOverlay = Dialog.Overlay;
-const DialogContent = Dialog.Content;
-const DialogTitle = Dialog.Title;
-const DialogDescription = Dialog.Description;
-const DialogClose = Dialog.Close;
+export type Message = {
+  userId: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+  type: string;
+};
 
-export {
-  DialogRoot,
-  DialogTrigger,
-  DialogPortal,
-  DialogOverlay,
-  DialogContent,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
+export type conversation = {
+  conversationId: string;
+  participants: string[];
+  lastMessage: Message;
+  lastUpdate: string;
 };
 
 export type friendRequestData = {
