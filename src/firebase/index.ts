@@ -1,5 +1,6 @@
 export { auth, firestore, app, storage } from './firebase';
 export {
+  getMessages,
   UserQuery,
   searchFriendInRequest,
   searchRequest,

@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { Chat } from '@/components/Chat';
 import ChatBar from '@/components/Chat/ChatBar';
-import ChatTopBar from '@/components/Chat/ChatTopBar';
 import Loading from '@/components/Loading';
 import { auth } from '@/firebase';
 import { useSession } from '@/hooks';
@@ -24,7 +24,7 @@ const ConversationPage: React.FC = () => {
         </aside>
         <div className="fixed hidden rounded-lg ml-[330px] md:flex lg:w-[950px] lg:h-[calc(100%-70px)] md:h-[calc(100%-16px)] border">
           {' '}
-          <ChatTopBar selectedConvo={mockConversations[0]} />
+          <Chat />
         </div>
       </div>
     </>

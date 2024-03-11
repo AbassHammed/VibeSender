@@ -1,13 +1,14 @@
 import { Dispatch, SetStateAction } from 'react';
 
 import { SessionData } from '@/hooks';
-import { friendRequestData, User } from '@/types';
+import { friendRequestData, Message, User } from '@/types';
 import {
   collection,
   deleteDoc,
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   runTransaction,
   serverTimestamp,
@@ -146,7 +147,28 @@ const checkFriendshipStatus = async (userId1: string, userId2: string) => {
   return docSnap.exists();
 };
 
+const getMessages = async (conversationId: string) => {
+  const messagesCollection = collection(firestore, `conversations/${conversationId}/messages`);
+  const q = query(messagesCollection, orderBy('timestamp', 'asc')); // assuming you want to order by timestamp
+
+  const querySnapshot = await getDocs(q);
+
+  const messages = querySnapshot.docs.map(doc => {
+    const data = doc.data();
+    return {
+      userId: data.userId,
+      message: data.message,
+      timestamp: data.timestamp.toDate(), // Convert Firestore Timestamp to JavaScript Date object
+      read: data.read,
+      type: data.type,
+    } as Message; // Cast the data to the Message type
+  });
+
+  return messages;
+};
+
 export {
+  getMessages,
   UserQuery,
   searchFriendInRequest,
   checkFriendshipStatus,

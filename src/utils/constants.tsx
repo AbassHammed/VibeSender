@@ -1,4 +1,10 @@
-import { conversation, MobileNavItemType, NavItemType, SettingsNavItemType } from '@/types';
+import {
+  conversation,
+  Message,
+  MobileNavItemType,
+  NavItemType,
+  SettingsNavItemType,
+} from '@/types';
 import { CiSearch } from 'react-icons/ci';
 import { FiSearch } from 'react-icons/fi';
 import { HiUsers } from 'react-icons/hi';
@@ -102,7 +108,7 @@ export const NavItem2: NavItemType[] = [
 export const mockConversations: conversation[] = [
   {
     conversationId: 'conv1',
-    participants: ['qUOBTPeDzATjJSw0yUjgccihtgE2', 'qUOBTPeDzATjJSw0yUjgccihtgE2'],
+    participants: ['qUOBTPeDzATjJSw0yUjgccihtgE2', 'UXhZLccNMGePKBygptto8fqlFV63'],
     lastMessage: {
       userId: 'qUOBTPeDzATjJSw0yUjgccihtgE2',
       message: 'Hey, are we still on for tomorrow?',
@@ -114,9 +120,9 @@ export const mockConversations: conversation[] = [
   },
   {
     conversationId: 'conv2',
-    participants: ['qUOBTPeDzATjJSw0yUjgccihtgE2', 'qUOBTPeDzATjJSw0yUjgccihtgE2'],
+    participants: ['qUOBTPeDzATjJSw0yUjgccihtgE2', 'UXhZLccNMGePKBygptto8fqlFV63'],
     lastMessage: {
-      userId: 'qUOBTPeDzATjJSw0yUjgccihtgE2',
+      userId: 'UXhZLccNMGePKBygptto8fqlFV63',
       message: 'Just sent the documents. Let me know if you need any changes.',
       timestamp: '2024-03-09T12:30:00Z',
       read: true,
@@ -126,7 +132,7 @@ export const mockConversations: conversation[] = [
   },
   {
     conversationId: 'conv3',
-    participants: ['qUOBTPeDzATjJSw0yUjgccihtgE2', 'qUOBTPeDzATjJSw0yUjgccihtgE2'],
+    participants: ['qUOBTPeDzATjJSw0yUjgccihtgE2', 'UXhZLccNMGePKBygptto8fqlFV63'],
     lastMessage: {
       userId: 'qUOBTPeDzATjJSw0yUjgccihtgE2',
       message: 'Loved the photos from the trip!',
@@ -137,3 +143,51 @@ export const mockConversations: conversation[] = [
     lastUpdate: '2024-03-08T09:20:00Z',
   },
 ];
+
+const mockMessages: Message[] = [
+  {
+    userId: 'qUOBTPeDzATjJSw0yUjgccihtgE2',
+    message: 'Hey, how are you?',
+    timestamp: '2024-03-10T08:00:00Z',
+    read: true,
+    type: 'text',
+  },
+  {
+    userId: 'UXhZLccNMGePKBygptto8fqlFV63',
+    message: "I'm good, thanks! Working on the project we talked about. How about you?",
+    timestamp: '2024-03-10T08:02:00Z',
+    read: true,
+    type: 'text',
+  },
+  {
+    userId: 'qUOBTPeDzATjJSw0yUjgccihtgE2',
+    message: 'Pretty much the same here. Just trying to catch up with my tasks.',
+    timestamp: '2024-03-10T08:05:00Z',
+    read: false,
+    type: 'text',
+  },
+  {
+    userId: 'UXhZLccNMGePKBygptto8fqlFV63',
+    message: 'Do you want to meet later and go through the project together?',
+    timestamp: '2024-03-10T08:10:00Z',
+    read: false,
+    type: 'text',
+  },
+  {
+    userId: 'qUOBTPeDzATjJSw0yUjgccihtgE2',
+    message: "Sure, that sounds like a plan. Let's say around 3 PM?",
+    timestamp: '2024-03-10T08:15:00Z',
+    read: false,
+    type: 'text',
+  },
+  {
+    userId: 'UXhZLccNMGePKBygptto8fqlFV63',
+    message: 'Perfect, see you then!',
+    timestamp: '2024-03-10T08:16:00Z',
+    read: false,
+    type: 'text',
+  },
+];
+
+// Export the mock data if needed elsewhere
+export default mockMessages;
