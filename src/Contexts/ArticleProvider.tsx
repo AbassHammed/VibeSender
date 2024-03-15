@@ -1,5 +1,6 @@
 import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
+import { decryptData, encryptData } from '@/lib/utils';
 import { Articles } from '@/types';
 
 interface ArticleProviderProps {
@@ -18,7 +19,7 @@ export const ArticleProvider: React.FC<ArticleProviderProps> = ({ children }) =>
     if (typeof window !== 'undefined') {
       const storedArticles = sessionStorage.getItem('articles');
       try {
-        return storedArticles ? JSON.parse(storedArticles) : null;
+        return storedArticles ? JSON.parse(decryptData(storedArticles)) : null;
       } catch (error) {
         console.error('Failed to parse articles from sessionStorage', error);
         return null;
@@ -30,7 +31,7 @@ export const ArticleProvider: React.FC<ArticleProviderProps> = ({ children }) =>
   useEffect(() => {
     if (typeof window !== 'undefined') {
       if (articles) {
-        sessionStorage.setItem('articles', JSON.stringify(articles));
+        sessionStorage.setItem('articles', encryptData(JSON.stringify(articles)));
       } else {
         sessionStorage.removeItem('articles');
       }

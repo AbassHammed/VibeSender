@@ -29,7 +29,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ currentUserId }) => {
       isClearable
       className="w-full px-3 mb-2"
       variant="bordered"
-      placeholder="Search by name..."
+      placeholder="Search by Username..."
       value={filterValue}
       startContent={<SearchIcon />}
       onClear={() => setFilterValue('')}

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Dialog, DialogContent } from '@/Components/UserInterface';
+import { Dialog, DialogContent } from '@/Components/UserInterface/dialog';
 import { cn } from '@/lib/utils';
 import { type DialogProps } from '@radix-ui/react-dialog';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';

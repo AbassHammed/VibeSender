@@ -6,7 +6,6 @@ import { useLocalStorage } from '@/hooks';
 import { User as SessionUser } from '@/types';
 import {
   Button,
-  cn,
   Dropdown,
   DropdownItem,
   DropdownMenu,
@@ -14,6 +13,7 @@ import {
   DropdownTrigger,
   User,
 } from '@nextui-org/react';
+import { LogOutIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useSignOut } from 'react-firebase-hooks/auth';
 
@@ -26,7 +26,7 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
   const { setTheme } = useTheme();
   const [themeVariant, setThemeVariant] = useLocalStorage('theme', 'system');
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([themeVariant]));
-  const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0';
+  const iconClasses = 'text-xl pointer-events-none flex-shrink-0 h-6 w-6';
 
   useEffect(() => {
     setTheme(themeVariant);
@@ -111,6 +111,7 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
             key="logout"
             className="text-warning"
             color="warning"
+            startContent={<LogOutIcon className={iconClasses} />}
             onPress={signOut}
             description="Logout of your account">
             Log out

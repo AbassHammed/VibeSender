@@ -16,3 +16,4 @@ export { default as WarnIcon } from './WarnIcon';
 export { default as XIcon } from './XIcon';
 export { default as AddUserIcon } from './AddUserIcon';
 export { default as BellIcon } from './BellIcon';
+export { default as LogOutIcon } from './LogOutIcon';

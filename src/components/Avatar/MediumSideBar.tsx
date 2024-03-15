@@ -1,6 +1,6 @@
 import React, { SetStateAction, useEffect } from 'react';
 
-import { MoonIcon, SunIcon, SystemIcon } from '@/Components/Icons';
+import { EditDocumentIcon, MoonIcon, SunIcon, SystemIcon } from '@/Components/Icons';
 import { auth } from '@/firebase';
 import { useLocalStorage } from '@/hooks';
 import { stringToColor } from '@/lib/utils';
@@ -14,6 +14,7 @@ import {
   DropdownSection,
   DropdownTrigger,
 } from '@nextui-org/react';
+import { LogOutIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useSignOut } from 'react-firebase-hooks/auth';
 
@@ -26,7 +27,7 @@ const MediumSideBarAvatar: React.FC<MediumSideBarAvatarProps> = ({ profileUser }
   const { setTheme } = useTheme();
   const [themeVariant, setThemeVariant] = useLocalStorage('theme', 'system');
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([themeVariant]));
-  const iconClasses = 'text-xl text-default-500 pointer-events-none flex-shrink-0 w-6 h-6';
+  const iconClasses = 'text-xl pointer-events-none flex-shrink-0 w-6 h-6';
 
   useEffect(() => {
     setTheme(themeVariant);
@@ -95,15 +96,20 @@ const MediumSideBarAvatar: React.FC<MediumSideBarAvatarProps> = ({ profileUser }
             }>
             Theme
           </DropdownItem>
-          <DropdownItem href="/report" key="report" description="Report a bug or an issue">
+          <DropdownItem
+            href="/report"
+            key="report"
+            description="Report a bug or an issue"
+            startContent={<EditDocumentIcon className={iconClasses} />}>
             Help & Feedback
           </DropdownItem>
         </DropdownSection>
-        <DropdownSection showDivider>
+        <DropdownSection>
           <DropdownItem
             key="logout"
             className="text-warning"
             color="warning"
+            startContent={<LogOutIcon className={iconClasses} />}
             onPress={signOut}
             description="Logout of your account">
             Log Out

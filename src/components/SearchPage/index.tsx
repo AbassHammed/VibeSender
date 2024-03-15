@@ -26,7 +26,7 @@ const SearchPage: React.FC = () => {
             <div>
               <div className="px-5">
                 <div className="flex justify-between mb-4 pt-2">
-                  <div className="text-2xl font-bold text-neutral-800">Search</div>
+                  <div className="text-2xl font-bold">Search</div>
                 </div>
               </div>
               <SearchInput currentUserId={user.uid} />
