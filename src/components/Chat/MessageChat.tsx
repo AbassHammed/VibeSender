@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '@/Components/UserInterface';
+import mockMessages from '@/data';
 import { getMessages, UserQuery } from '@/firebase';
 import { useAuth } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { conversation, Message, User } from '@/types';
-import mockMessages from '@/utils/constants';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { ChatBottomBar } from '.';

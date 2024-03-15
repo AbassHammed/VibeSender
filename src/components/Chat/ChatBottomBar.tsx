@@ -1,8 +1,12 @@
 import React, { useRef, useState } from 'react';
 
-import { buttonVariants } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Textarea } from '@/components/ui/textarea';
+import {
+  buttonVariants,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Textarea,
+} from '@/Components/UserInterface';
 import { useAuth } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { Message } from '@/types';

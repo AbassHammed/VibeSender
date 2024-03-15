@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { SessionData } from '@/hooks';
-import { friendRequestData, Message, User } from '@/types';
+import { friendRequestData, Message, SessionData, User } from '@/types';
 import {
   collection,
   deleteDoc,

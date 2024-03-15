@@ -1,4 +1,4 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/Components/UserInterface';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { SmileIcon } from 'lucide-react';

@@ -1,5 +1,6 @@
 import React, { Key, useRef, useState } from 'react';
 
+import { Separator } from '@/Components/UserInterface';
 import { currentUserQuery, firestore, storage } from '@/firebase';
 import { useSession } from '@/hooks';
 import { User } from '@/types';
@@ -8,11 +9,9 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Separator } from '../ui/separator';
-
-type UpdateImageProps = {
+interface UpdateImageProps {
   profileUser: User;
-};
+}
 
 const MAX_IMAGE_SIZE = 10000000;
 

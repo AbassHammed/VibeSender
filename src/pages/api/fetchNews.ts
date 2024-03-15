@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from 'react';
 
-import { useCache, useSession } from '@/hooks';
+import { useArticle, useSession } from '@/hooks';
 import { Articles } from '@/types';
 
 const useFetchAndUpdateArticles = () => {
-  const { setArticles, articles } = useCache();
+  const { setArticles, articles } = useArticle();
   const { sessionData } = useSession();
 
   const fetchData = useCallback(async () => {

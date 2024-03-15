@@ -4,12 +4,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 
+import { MobileAvatar } from '@/Components/Avatar';
+import { Mobile } from '@/Components/FriendRequest';
+import { MobileNotif } from '@/Components/Notifications';
+import Spinner from '@/Components/Spinner';
 import { useAuth, useSession } from '@/hooks';
-
-import { MobileAvatar } from '../Avatar';
-import { Mobile } from '../FriendRequest';
-import Loading from '../Loading';
-import { MobileNotif } from '../Notifications';
 
 const HeaderMobile: React.FC = () => {
   const { sessionData } = useSession();
@@ -27,7 +26,7 @@ const HeaderMobile: React.FC = () => {
   }, [sessionData, router]);
 
   if (!user || authLoading || !sessionData?.currentUser) {
-    return <Loading />;
+    return <Spinner />;
   }
 
   return (

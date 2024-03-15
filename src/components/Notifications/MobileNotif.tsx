@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
-import { Drawer, DrawerContent, DrawerPortal, DrawerTrigger } from '@/components/ui/drawer';
-import { stringToNotif } from '@/utils/utils';
-import { BsBell } from 'react-icons/bs';
-
-import { NotificationMod } from '.';
-import Swipe from '../Swipe';
+import { BellIcon } from '@/Components/Icons';
+import { NotificationMod } from '@/Components/Notifications';
+import Swipe from '@/Components/Swipe';
+import {
+  Button,
+  Drawer,
+  DrawerContent,
+  DrawerPortal,
+  DrawerTrigger,
+} from '@/Components/UserInterface';
+import { stringToNotif } from '@/lib/utils';
 
 const MobileNotif: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -44,7 +48,7 @@ const MobileNotif: React.FC = () => {
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
         <Button variant="ghost" size="icon">
-          <BsBell className="h-6 w-6" />
+          <BellIcon className="h-6 w-6" />
         </Button>
       </DrawerTrigger>
       <DrawerPortal>

@@ -1,13 +1,13 @@
-export { auth, firestore, app, storage } from './firebase';
+export { app, firestore, auth, storage } from './firebase';
 export {
   getMessages,
   UserQuery,
   searchFriendInRequest,
-  searchRequest,
-  currentUserQuery,
-  sendFriendRequest,
-  searchFriendRequest,
-  acceptFriendRequest,
-  declineFriendRequest,
   checkFriendshipStatus,
+  declineFriendRequest,
+  acceptFriendRequest,
+  searchFriendRequest,
+  sendFriendRequest,
+  currentUserQuery,
+  searchRequest,
 } from './query';

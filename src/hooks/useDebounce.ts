@@ -8,4 +8,5 @@ function useDebounce(effect: EffectCallback, deps: DependencyList, delay: number
     return () => clearTimeout(timeout);
   }, [callback, delay]);
 }
+
 export default useDebounce;

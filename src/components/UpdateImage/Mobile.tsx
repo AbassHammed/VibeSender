@@ -1,5 +1,12 @@
 import React, { Key, useRef, useState } from 'react';
 
+import {
+  Drawer,
+  DrawerContent,
+  DrawerPortal,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/Components/UserInterface';
 import { currentUserQuery, firestore, storage } from '@/firebase';
 import { useSession } from '@/hooks';
 import { User } from '@/types';
@@ -7,8 +14,6 @@ import { Avatar, Button, Card, CardBody, Listbox, ListboxItem } from '@nextui-or
 import { doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
-
-import { Drawer, DrawerContent, DrawerPortal, DrawerTitle, DrawerTrigger } from '../ui/drawer';
 
 interface DrawProps {
   handleSelectedImage: (images: FileList | null) => Promise<void>;

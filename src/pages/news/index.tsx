@@ -1,20 +1,19 @@
 import React from 'react';
 
-import Loading from '@/components/Loading';
+import Spinner from '@/Components/Spinner';
 import { auth } from '@/firebase';
-import { useCache } from '@/hooks';
+import { useArticle } from '@/hooks';
+import useFetchAndUpdateArticles from '@/pages/api/fetchNews';
 import { useAuthState } from 'react-firebase-hooks/auth';
-
-import useFetchAndUpdateArticles from '../api/fetchNews';
 
 const NewsPage: React.FC = () => {
   const [user] = useAuthState(auth);
-  const { articles } = useCache();
+  const { articles } = useArticle();
 
   useFetchAndUpdateArticles();
 
   if (!user || !articles) {
-    return <Loading />;
+    return <Spinner />;
   }
 
   function getFirstFiftyWords(text: string) {

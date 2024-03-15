@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { ErrorIcon, InfoIcon, SuccessIcon, WarnIcon, XIcon } from '@/Components/Icons';
+import { notificationStyles } from '@/data';
 import { cn } from '@/lib/utils';
 import { notif } from '@/types';
-
-import { ErrorIcon, InfoIcon, SuccessIcon, WarnIcon, XIcon } from '../Icons';
 
 interface NotificationModProps {
   notif: notif;
@@ -11,29 +11,6 @@ interface NotificationModProps {
   url?: string;
   onClose: () => void;
 }
-
-const notificationStyles = {
-  error: {
-    background: 'bg-red-50 border border-red-300',
-    text: 'text-red-600',
-    hover: 'hover:text-red-700',
-  },
-  info: {
-    background: 'bg-blue-50 border border-blue-300',
-    text: 'text-blue-600',
-    hover: 'hover:text-blue-700',
-  },
-  warn: {
-    background: 'bg-yellow-50 border border-yellow-300',
-    text: 'text-yellow-600',
-    hover: 'hover:text-yellow-700',
-  },
-  success: {
-    background: 'bg-green-50 border border-green-300',
-    text: 'text-green-600',
-    hover: 'hover:text-green-700',
-  },
-};
 
 const icons = { error: ErrorIcon, info: InfoIcon, success: SuccessIcon, warn: WarnIcon };
 

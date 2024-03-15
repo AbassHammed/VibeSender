@@ -1,50 +1,39 @@
+import { Header, HeaderMobile } from '@/Components/Header';
+import { MediumSideBar, MobileDownBar, SideBar } from '@/Components/Nav';
+import { MarginWidthWrapper, PageWrapper } from '@/Components/Wrapper';
+import { Provider } from '@/Contexts';
+import { useShowNavbar } from '@/lib/utils';
+
 import '@/styles/globals.css';
 
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import { HeaderMobile } from '@/components/Header';
-import Header from '@/components/Header/Header';
-import { MediumSideBar, MobileDownBar, SideBar } from '@/components/NavBar';
-import SearchPage from '@/components/SearchPagecompo';
-import {
-  MarginWidthWrapper,
-  PageWrapper,
-  ThemeProvider,
-  useShowNavbar,
-  Wrapper,
-} from '@/components/Wrapper';
-import { CacheProvider, SearchStateProvider, SessionProvider } from '@/hooks';
-import { NextUIProvider } from '@nextui-org/react';
-import { RecoilRoot } from 'recoil';
-import { Toaster } from 'sonner';
+import SearchPage from '@/Components/SearchPage';
 
 export default function App({ Component, pageProps }: AppProps) {
   const showNavbar = useShowNavbar();
 
   const renderContent = () => (
     <>
-      <SearchStateProvider>
-        <Wrapper>
-          <MediumSideBar />
-          <SideBar />
-          <MobileDownBar />
-          <HeaderMobile />
-          <main className="flex-1">
-            <MarginWidthWrapper>
-              <Header />
-              <PageWrapper>
-                <SearchPage />
-                <Component {...pageProps} />
-              </PageWrapper>
-            </MarginWidthWrapper>
-          </main>
-        </Wrapper>
-      </SearchStateProvider>
+      <MediumSideBar />
+      <SideBar />
+      <MobileDownBar />
+      <HeaderMobile />
+      <main className="flex-1">
+        <MarginWidthWrapper>
+          <Header />
+          <PageWrapper>
+            <SearchPage />
+            <Component {...pageProps} />
+          </PageWrapper>
+        </MarginWidthWrapper>
+      </main>
     </>
   );
+
   return (
-    <RecoilRoot>
+    <>
       <Head>
         <title>VibeSender</title>
         <meta
@@ -54,20 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo.ico" />
       </Head>
-      <SessionProvider>
-        <CacheProvider>
-          <ThemeProvider
-            attribute="class"
-            enableSystem
-            defaultTheme="system"
-            disableTransitionOnChange>
-            <Toaster richColors position="top-center" closeButton />
-            <NextUIProvider>
-              {showNavbar ? renderContent() : <Component {...pageProps} />}
-            </NextUIProvider>
-          </ThemeProvider>
-        </CacheProvider>
-      </SessionProvider>
-    </RecoilRoot>
+      <Provider>{showNavbar ? renderContent() : <Component {...pageProps} />}</Provider>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+import { friendShipStatusStyles } from '@/data';
 import {
   acceptFriendRequest,
   checkFriendshipStatus,
@@ -9,38 +10,14 @@ import {
 } from '@/firebase';
 import { useAuth, useSession } from '@/hooks';
 import { cn } from '@/lib/utils';
-import { User } from '@/types';
+import { FriendshipStatus, User } from '@/types';
 import { Avatar, Button, Card, CardBody, CardFooter, CardHeader } from '@nextui-org/react';
 import { deleteDoc, doc } from 'firebase/firestore';
 
-const friendShipStatusStyles = {
-  unfollow: {
-    background: 'bg-red-50 border border-red-300',
-    text: 'text-red-600',
-    hover: 'hover:text-red-700',
-  },
-  follow: {
-    background: 'bg-blue-50 border border-blue-300',
-    text: 'text-blue-600',
-    hover: 'hover:text-blue-700',
-  },
-  pending: {
-    background: 'bg-yellow-50 border border-yellow-300',
-    text: 'text-yellow-600',
-    hover: 'hover:text-yellow-700',
-  },
-  accept: {
-    background: 'bg-green-50 border border-green-300',
-    text: 'text-green-600',
-    hover: 'hover:text-green-700',
-  },
-};
-
-type FriendshipStatus = 'follow' | 'unfollow' | 'pending' | 'accept';
-
-type ProfileCardProps = {
+interface ProfileCardProps {
   User: User;
-};
+}
+
 const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
   const { user: currentUser } = useAuth();
   const { sessionData } = useSession();

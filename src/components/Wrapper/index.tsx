@@ -1,21 +1,13 @@
-import { ReactNode, useEffect } from 'react';
-import * as React from 'react';
-
-import { useRouter } from 'next/router';
+import React, { useEffect } from 'react';
 
 import { auth, currentUserQuery } from '@/firebase';
 import { useSession } from '@/hooks';
+import { useShowNavbar } from '@/lib/utils';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { type ThemeProviderProps } from 'next-themes/dist/types';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-// Custom hook to determine if the navbar should be shown
-export function useShowNavbar() {
-  const { pathname } = useRouter();
-  return !['/', '/404', '/auth'].includes(pathname);
-}
-
-export function PageWrapper({ children }: { children: ReactNode }) {
+export function PageWrapper({ children }: { children: React.ReactNode }) {
   const showNavbar = useShowNavbar();
   return showNavbar ? (
     <div className="flex flex-col space-y-2 light:bg-zinc-100 flex-grow">{children}</div>
@@ -51,7 +43,7 @@ export function useNavbarType() {
   return navbarType;
 }
 
-export function MarginWidthWrapper({ children }: { children: ReactNode }) {
+export function MarginWidthWrapper({ children }: { children: React.ReactNode }) {
   const navbarType = useNavbarType();
 
   let marginLeftClass = '';
@@ -74,7 +66,7 @@ export function MarginWidthWrapper({ children }: { children: ReactNode }) {
   );
 }
 
-export const Wrapper = ({ children }: { children: ReactNode }) => {
+export const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const showNavbar = useShowNavbar();
   const { setSessionData } = useSession();
   const [user] = useAuthState(auth);

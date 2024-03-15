@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { mockConversations } from '@/utils/constants';
+import { ChatTopBar } from '@/Components/Chat';
+import { mockConversations } from '@/data';
 
 import { MessageChat } from '.';
-import ChatTopBar from './ChatTopBar';
 
 const Chat: React.FC = () => {
   return (

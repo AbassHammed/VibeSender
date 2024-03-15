@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { StatusAvatar } from '@/Components/Avatar';
+import { MediumLarge } from '@/Components/FriendRequest';
+import { MediumLargeSheet } from '@/Components/Notifications';
+import Spinner from '@/Components/Spinner';
 import { useAuth, useScroll, useSession } from '@/hooks';
-import { cn } from '@/utils/utils';
-
-import { StatusAvatar } from '../Avatar';
-import { MediumLarge } from '../FriendRequest';
-import Loading from '../Loading';
-import { MediumLargeSheet } from '../Notifications';
+import { cn } from '@/lib/utils';
 
 const Header = () => {
   const scrolled = useScroll(5);
@@ -24,7 +23,7 @@ const Header = () => {
   }, [sessionData, router]);
 
   if (!user || authLoading || !sessionData?.currentUser) {
-    return <Loading />;
+    return <Spinner />;
   }
 
   return (

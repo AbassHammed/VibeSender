@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { buttonVariants } from '@/components/ui/button';
+import { Avatar, AvatarImage, buttonVariants } from '@/Components/UserInterface';
 import { UserQuery } from '@/firebase';
 import { useAuth } from '@/hooks';
 import { cn } from '@/lib/utils';

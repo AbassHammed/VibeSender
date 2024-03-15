@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 
-import { Button } from '@/components/ui/button';
+import DeleteAccount from '@/Components/Modals';
+import UpdateImage from '@/Components/UpdateImage';
+import MobileImage from '@/Components/UpdateImage/Mobile';
 import {
+  Button,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
   Form,
   FormControl,
   FormDescription,
@@ -9,10 +17,13 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
-import { Textarea } from '@/components/ui/textarea';
+  Input,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Separator,
+  Textarea,
+} from '@/Components/UserInterface';
 import { currentUserQuery, firestore } from '@/firebase';
 import { useSession } from '@/hooks';
 import { cn } from '@/lib/utils';
@@ -22,12 +33,6 @@ import { CaretSortIcon, CheckIcon } from '@radix-ui/react-icons';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-import { DeleteAccount } from '../Modal';
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../ui/command';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
-import UpdateImage from '../UpdateImage';
-import MobileImage from '../UpdateImage/Mobile';
 
 const status = [
   { label: 'Online', value: 'success', statusColor: 'text-teal-600', statusBg: 'bg-teal-600' },

@@ -1,6 +1,31 @@
 import { SVGProps } from 'react';
 
-import { settingPage } from '@/pages/settings/Settings';
+export type User = {
+  uid: string;
+  email: string;
+  fullName: string;
+  userName: string;
+  jobDescription: string;
+  bio: string;
+  status: string;
+  lang: string;
+  following: number;
+  lastSeen: string;
+  dateBirth: string;
+  streetName: string;
+  postalCode: string;
+  stateprovince: string;
+  country: string;
+  imageUrl: string;
+  createdAt: string;
+  deletedAt: string;
+};
+
+export interface SessionData {
+  currentUser?: User;
+  friends?: User[];
+  searchedUsers?: User[];
+}
 
 export type Message = {
   userId: string;
@@ -27,31 +52,6 @@ export type friendRequestData = {
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
-};
-
-export type notif = 'info' | 'success' | 'warn' | 'error';
-
-export type color = 'default' | 'success' | 'danger' | 'warning' | 'primary';
-
-export type User = {
-  uid: string;
-  email: string;
-  fullName: string;
-  userName: string;
-  jobDescription: string;
-  bio: string;
-  status: string;
-  lang: string;
-  following: number;
-  lastSeen: string;
-  dateBirth: string;
-  streetName: string;
-  postalCode: string;
-  stateprovince: string;
-  country: string;
-  imageUrl: string;
-  createdAt: string;
-  deletedAt: string;
 };
 
 export type SideNavItem = {
@@ -87,6 +87,22 @@ export type notification = {
   url?: string;
   createdAt: string;
   dismissed: boolean;
+};
+
+export type settingPage = 'profile' | 'account';
+
+export type FriendshipStatus = 'follow' | 'unfollow' | 'pending' | 'accept';
+
+export type color = 'success' | 'primary' | 'warning' | 'danger' | 'default' | undefined;
+
+export type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export type notif = 'info' | 'success' | 'warn' | 'error';
+
+export type friendship = {
+  background: color;
+  message: string;
+  text: string;
 };
 
 export type SettingsNavItemType = {
