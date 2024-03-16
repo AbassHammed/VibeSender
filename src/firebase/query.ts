@@ -5,6 +5,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  DocumentData,
   getDoc,
   getDocs,
   orderBy,
@@ -12,6 +13,7 @@ import {
   runTransaction,
   serverTimestamp,
   setDoc,
+  updateDoc,
   where,
 } from 'firebase/firestore';
 
@@ -28,7 +30,7 @@ const currentUserQuery = async (
     return;
   }
 
-  const userData = querySnapshot.docs[0].data() as User;
+  const userData = querySnapshot.docs[0].data() as DocumentData;
 
   setSessionData((prevSessionData): SessionData | null => {
     // If there's no previous session data, we opt to return a default structure or null
@@ -36,6 +38,10 @@ const currentUserQuery = async (
       return {
         currentUser: {
           ...userData,
+          lastSeen: {
+            date: userData.lastSeen.date.toDate().toDateString(),
+            time: userData.lastSeen.time.toDate().toLocaleTimeString(),
+          },
         },
       };
     }
@@ -166,7 +172,46 @@ const getMessages = async (conversationId: string) => {
   return messages;
 };
 
+async function updateUserOnlineStatus(userId: string, isOnline: boolean) {
+  const userDocRef = doc(firestore, 'users', userId);
+  await updateDoc(userDocRef, {
+    isOnline,
+    lastSeen: isOnline ? null : serverTimestamp(),
+  });
+}
+
+async function setupUserActivityMonitoring(userId: string) {
+  let inactivityTimer: NodeJS.Timeout;
+
+  const markUserAsOffline = async () => await updateUserOnlineStatus(userId, false);
+  const resetInactivityTimer = () => {
+    clearTimeout(inactivityTimer);
+    inactivityTimer = setTimeout(markUserAsOffline, 60000);
+  };
+
+  document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'hidden') {
+      await markUserAsOffline();
+    } else {
+      await updateUserOnlineStatus(userId, true);
+      resetInactivityTimer();
+    }
+  });
+
+  window.addEventListener('focus', async () => {
+    await updateUserOnlineStatus(userId, true);
+    resetInactivityTimer();
+  });
+
+  document.addEventListener('mousemove', resetInactivityTimer);
+  document.addEventListener('keypress', resetInactivityTimer);
+
+  resetInactivityTimer();
+}
+
 export {
+  updateUserOnlineStatus,
+  setupUserActivityMonitoring,
   getMessages,
   UserQuery,
   searchFriendInRequest,

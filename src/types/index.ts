@@ -1,5 +1,7 @@
 import { SVGProps } from 'react';
 
+import { FieldValue } from 'firebase/firestore';
+
 export type User = {
   uid: string;
   email: string;
@@ -9,8 +11,9 @@ export type User = {
   bio: string;
   status: string;
   lang: string;
+  isOnline: boolean;
   following: number;
-  lastSeen: string;
+  lastSeen: { date: string; time: FieldValue };
   dateBirth: string;
   streetName: string;
   postalCode: string;

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { auth, currentUserQuery } from '@/firebase';
+import { auth, currentUserQuery, setupUserActivityMonitoring } from '@/firebase';
 import { useSession } from '@/hooks';
 import { useShowNavbar } from '@/lib/utils';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
@@ -79,6 +79,7 @@ export const Wrapper = ({ children }: { children: React.ReactNode }) => {
         await currentUserQuery(user.uid, setSessionData).then(() => {
           sessionStorage.setItem('authState', 'true');
         });
+        setupUserActivityMonitoring(user.uid);
       }
     };
 

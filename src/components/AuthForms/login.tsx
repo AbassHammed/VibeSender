@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import { EyeIcon, EyeSlashIcon, Icons } from '@/Components/Icons';
 import { Button } from '@/Components/UserInterface';
-import { auth, currentUserQuery } from '@/firebase';
+import { auth, currentUserQuery, updateUserOnlineStatus } from '@/firebase';
 import { useSession } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -36,6 +36,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
     try {
       const newUser = await signInWithEmailAndPassword(inputs.email, inputs.password);
       if (newUser) {
+        await updateUserOnlineStatus(newUser.user.uid, true);
         await currentUserQuery(newUser.user.uid, setSessionData);
         router.push('/messages');
       }
@@ -97,7 +98,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
           <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button type="button" disabled={isLoading}>
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
@@ -105,7 +106,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ className, ...props }) => {
         )}{' '}
         Google
       </Button>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button type="button" disabled={isLoading}>
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (

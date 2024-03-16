@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { EyeIcon, EyeSlashIcon, Icons } from '@/Components/Icons';
 import { Button } from '@/Components/UserInterface';
 import { placeholderUrl } from '@/data';
-import { auth, currentUserQuery, firestore } from '@/firebase';
+import { auth, currentUserQuery, firestore, updateUserOnlineStatus } from '@/firebase';
 import { useSession } from '@/hooks';
 import { cn } from '@/lib/utils';
 import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
@@ -72,7 +72,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ className, ...props }) => {
           lang: null,
           following: 0,
           status: null,
-          lastSeen: null,
+          isOnline: true,
+          lastSeen: { date: null, time: null },
           dateBirth: null,
           streetName: null,
           postalCode: null,
@@ -82,6 +83,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ className, ...props }) => {
           createdAt: serverTimestamp(),
           deletedAt: null,
         });
+        await updateUserOnlineStatus(newUser.user.uid, true);
         await currentUserQuery(newUser.user.uid, setSessionData);
         router.push('/user');
       }
@@ -187,7 +189,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ className, ...props }) => {
           <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button type="button" disabled={isLoading}>
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
@@ -195,7 +197,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ className, ...props }) => {
         )}{' '}
         Google
       </Button>
-      <Button variant="outline" type="button" disabled={isLoading}>
+      <Button type="button" disabled={isLoading}>
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
         ) : (
