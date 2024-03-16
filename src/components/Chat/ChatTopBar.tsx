@@ -45,7 +45,7 @@ const ChatTopBar: React.FC<ChatTopBarProps> = ({ selectedConvo }) => {
         </Avatar>
         <div className="flex flex-col">
           <span className="font-medium">{selecteduser?.fullName}</span>
-          <span className="text-xs">{selecteduser?.lastSeen}</span>
+          <span className="text-xs">{selecteduser?.lastSeen.time}</span>
         </div>
       </div>
 

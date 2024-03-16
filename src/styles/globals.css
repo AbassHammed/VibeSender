@@ -66,6 +66,37 @@
   }
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Dark mode track color */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #4b5563; /* Dark mode handle color */
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #374151; /* Dark mode handle color on hover */
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

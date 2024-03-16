@@ -59,28 +59,20 @@ const ChatBottomBar: React.FC = () => {
   return (
     <div className="p-2 flex justify-between w-full items-center gap-2">
       <div className="flex">
-        <Popover>
-          <PopoverTrigger asChild>
-            <button
-              className={cn(
-                buttonVariants({ variant: 'ghost', size: 'icon' }),
-                'h-9 w-9',
-                'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white',
-              )}>
-              <PlusCircle size={20} className="text-muted-foreground" />
-            </button>
-          </PopoverTrigger>
-          <PopoverContent side="top" className="w-full p-2">
-            {chat.trim() ? (
+        {chat.trim() && (
+          <Popover>
+            <PopoverTrigger asChild>
+              <button
+                className={cn(
+                  buttonVariants({ variant: 'ghost', size: 'icon' }),
+                  'h-9 w-9',
+                  'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white',
+                )}>
+                <PlusCircle size={20} className="text-muted-foreground" />
+              </button>
+            </PopoverTrigger>
+            <PopoverContent side="top" className="w-full p-2">
               <div className="flex gap-2">
-                <button
-                  className={cn(
-                    buttonVariants({ variant: 'ghost', size: 'icon' }),
-                    'h-9 w-9',
-                    "'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
-                  )}>
-                  <Mic size={20} className="text-muted-foreground" />
-                </button>
                 {BottombarIcons.map((icon, idx) => (
                   <button
                     key={idx}
@@ -93,19 +85,9 @@ const ChatBottomBar: React.FC = () => {
                   </button>
                 ))}
               </div>
-            ) : (
-              <button
-                className={cn(
-                  buttonVariants({ variant: 'ghost', size: 'icon' }),
-                  'h-9 w-9',
-                  "'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white",
-                )}>
-                {' '}
-                <Mic size={20} className="text-muted-foreground" />
-              </button>
-            )}
-          </PopoverContent>
-        </Popover>
+            </PopoverContent>
+          </Popover>
+        )}
 
         {!chat.trim() && (
           <div className="flex">
@@ -147,11 +129,11 @@ const ChatBottomBar: React.FC = () => {
             onChange={handleInputChange}
             name="message"
             placeholder="Aa"
-            className=" w-full border rounded-full flex items-center h-9 resize-none overflow-hidden bg-background"></Textarea>
-          <div className="absolute right-2 bottom-0.5  ">
+            className=" w-full border rounded-lg flex items-center min-h-9 max-h-16 resize-none overflow-auto bg-background"></Textarea>
+          <div className="absolute right-2 bottom-1  ">
             <Emoji
               onChange={value => {
-                setChat(message + value);
+                setChat(chat ? chat + value : value);
                 if (inputRef.current) {
                   inputRef.current.focus();
                 }
@@ -176,9 +158,8 @@ const ChatBottomBar: React.FC = () => {
               buttonVariants({ variant: 'ghost', size: 'icon' }),
               'h-9 w-9',
               'dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white shrink-0',
-            )}
-            onClick={handleThumbsUp}>
-            <ThumbsUp size={20} className="text-muted-foreground" />
+            )}>
+            <Mic size={20} className="text-muted-foreground" />
           </button>
         )}
       </AnimatePresence>

@@ -1,6 +1,6 @@
-import { Popover, PopoverContent, PopoverTrigger } from '@/Components/UserInterface';
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { Popover, PopoverContent, PopoverTrigger } from '@nextui-org/react';
 import { SmileIcon } from 'lucide-react';
 
 interface EmojiProps {

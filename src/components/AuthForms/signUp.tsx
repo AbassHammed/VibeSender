@@ -85,7 +85,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ className, ...props }) => {
         });
         await updateUserOnlineStatus(newUser.user.uid, true);
         await currentUserQuery(newUser.user.uid, setSessionData);
-        router.push('/user');
+        router.push('/messages');
       }
     } catch (error: any) {
     } finally {

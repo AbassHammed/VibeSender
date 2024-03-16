@@ -21,7 +21,7 @@ const ConversationPage: React.FC = () => {
         <aside className="fixed hidden md:flex flex-col w-80 bg-white dark:bg-black rounded-lg border lg:h-[calc(100%-70px)] md:h-[calc(100%-16px)]">
           <ChatBar chats={mockConversations} />
         </aside>
-        <div className="fixed hidden rounded-lg ml-[330px] md:flex lg:w-[950px] lg:h-[calc(100%-70px)] md:h-[calc(100%-16px)] border">
+        <div className="fixed hidden rounded-lg ml-[330px] md:flex lg:w-[950px] lg:h-[calc(100%-70px)] md:h-[calc(100%-16px)] md:w-[525px] border">
           {' '}
           <Chat />
         </div>

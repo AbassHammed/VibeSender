@@ -100,10 +100,10 @@ const ProfileCard = ({ User: profileUser }: ProfileCardProps) => {
           </div>
         </div>
         <Button
-          className={cn(values.background, values.text, { 'hidden ': isMe })}
+          className={cn(values.background, values.text, isMe ? 'hidden' : 'ml-4')}
           color="primary"
           radius="full"
-          size="sm"
+          size="md"
           variant={isFollowed ? 'bordered' : 'solid'}
           onPress={toggleFriendshipStatus}>
           {friendshipStatus}

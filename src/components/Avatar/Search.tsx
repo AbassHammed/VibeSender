@@ -53,8 +53,7 @@ const SearchAvatar: React.FC<SearchAvatarProps> = ({ profileUser }) => {
 
       setFriendshipStatus('follow');
     };
-    const isUser = profileUser.uid === currentUser?.uid;
-    setIsMe(isUser);
+    setIsMe(profileUser.uid === currentUser?.uid);
     checkStatus();
   }, [currentUser, profileUser, friendshipStatus]);
 
@@ -102,7 +101,6 @@ const SearchAvatar: React.FC<SearchAvatarProps> = ({ profileUser }) => {
         <Button
           className={isMe ? 'hidden' : 'absolute right-2 items-center'}
           onPress={toggleFriendshipStatus}
-          isIconOnly
           color={values?.background}>
           {values?.message}
         </Button>

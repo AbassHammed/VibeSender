@@ -37,10 +37,27 @@ const currentUserQuery = async (
     if (!prevSessionData) {
       return {
         currentUser: {
-          ...userData,
+          uid: userData.uid,
+          email: userData.email,
+          fullName: userData.fullName,
+          userName: userData.userName,
+          jobDescription: userData.jobDescription,
+          bio: userData.bio,
+          lang: userData.lang,
+          isOnline: userData.isOnline,
+          status: userData.color,
+          following: userData.following,
+          dateBirth: userData.dateBirth,
+          streetName: userData.streetName,
+          postalCode: userData.postalCode,
+          stateprovince: userData.stateprovince,
+          country: userData.country,
+          imageUrl: userData.imageUrl,
+          createdAt: userData.createdAt,
+          deletedAt: userData.deletedAt,
           lastSeen: {
-            date: userData.lastSeen.date.toDate().toDateString(),
-            time: userData.lastSeen.time.toDate().toLocaleTimeString(),
+            date: userData.lastSeen.date,
+            time: userData.lastSeen.time,
           },
         },
       };
@@ -51,7 +68,28 @@ const currentUserQuery = async (
       ...prevSessionData,
       currentUser: {
         ...prevSessionData.currentUser,
-        ...userData,
+        uid: userData.uid,
+        email: userData.email,
+        fullName: userData.fullName,
+        userName: userData.userName,
+        jobDescription: userData.jobDescription,
+        bio: userData.bio,
+        lang: userData.lang,
+        isOnline: userData.isOnline,
+        status: userData.color,
+        following: userData.following,
+        dateBirth: userData.dateBirth,
+        streetName: userData.streetName,
+        postalCode: userData.postalCode,
+        stateprovince: userData.stateprovince,
+        country: userData.country,
+        imageUrl: userData.imageUrl,
+        createdAt: userData.createdAt,
+        deletedAt: userData.deletedAt,
+        lastSeen: {
+          date: userData.lastSeen.date,
+          time: userData.lastSeen.time,
+        },
       },
     };
   });
@@ -174,9 +212,15 @@ const getMessages = async (conversationId: string) => {
 
 async function updateUserOnlineStatus(userId: string, isOnline: boolean) {
   const userDocRef = doc(firestore, 'users', userId);
+  const currentTime = new Date();
+  const hours = currentTime.getHours();
+  const minutes = currentTime.getMinutes();
   await updateDoc(userDocRef, {
     isOnline,
-    lastSeen: isOnline ? null : serverTimestamp(),
+    lastSeen: {
+      date: currentTime.toISOString().split('T')[0],
+      time: `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`,
+    },
   });
 }
 
