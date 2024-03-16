@@ -29,9 +29,8 @@ const SideBarAvatar: React.FC<SideBarAvatarProps> = ({ profileUser }) => {
   const iconClasses = 'text-xl pointer-events-none flex-shrink-0 h-6 w-6';
 
   useEffect(() => {
-    setThemeVariant(window.localStorage.getItem('theme'));
     setTheme(themeVariant);
-  }, [setTheme, themeVariant, setThemeVariant]);
+  }, [setTheme, themeVariant]);
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(', ').replaceAll('_', ' '),

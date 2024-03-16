@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, AvatarImage, buttonVariants } from '@/Components/UserInterface';
 import { UserQuery } from '@/firebase';
 import { useAuth } from '@/hooks';
-import { cn } from '@/lib/utils';
-import { conversation, User } from '@/types';
+import { cn, compareTimeAndDate } from '@/lib/utils';
+import { conversation, TimeComparisonResult, User } from '@/types';
 import { Info, Phone, Video } from 'lucide-react';
 
 type ChatTopBarProps = {
@@ -15,12 +15,18 @@ export const TopBarIcons = [{ icon: Phone }, { icon: Video }, { icon: Info }];
 const ChatTopBar: React.FC<ChatTopBarProps> = ({ selectedConvo }) => {
   const { user } = useAuth();
   const [selecteduser, setSelectedUser] = useState<User>();
+  const [lastSaw, setLastSaw] = useState<TimeComparisonResult>({
+    success: false,
+    difference: undefined,
+    units: 'mins',
+  });
 
   useEffect(() => {
     const fetchFriendData = async (participantId: string) => {
       const userDoc = await UserQuery(participantId);
       if (userDoc) {
         setSelectedUser(userDoc);
+        setLastSaw(compareTimeAndDate(userDoc.lastSeen.time, userDoc.lastSeen.date));
       }
     };
 
@@ -45,7 +51,11 @@ const ChatTopBar: React.FC<ChatTopBarProps> = ({ selectedConvo }) => {
         </Avatar>
         <div className="flex flex-col">
           <span className="font-medium">{selecteduser?.fullName}</span>
-          <span className="text-xs">{selecteduser?.lastSeen.time}</span>
+          <span className="text-xs">
+            {lastSaw.success
+              ? `last seen ${lastSaw.difference} ${lastSaw.units} ago`
+              : `last seen ${selecteduser?.lastSeen.date}`}
+          </span>
         </div>
       </div>
 

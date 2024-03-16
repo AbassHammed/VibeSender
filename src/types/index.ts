@@ -145,3 +145,9 @@ export type Articles = {
   results: Article[];
   nextPage: string;
 };
+
+export type TimeComparisonResult = {
+  success: boolean;
+  difference?: number;
+  units?: 'mins' | 'hours';
+};

@@ -28,12 +28,9 @@ const Header = () => {
 
   return (
     <div
-      className={cn(
-        `sticky inset-x-0 top-0 z-30 w-full hidden lg:block transition-all border-b border-gray-200`,
-        {
-          'border-b border-gray-200 light:bg-white/75 backdrop-blur-lg': scrolled,
-        },
-      )}>
+      className={cn(`sticky inset-x-0 top-0 z-30 w-full hidden lg:block transition-all border-b`, {
+        'border-b  light:bg-white/75 backdrop-blur-lg': scrolled,
+      })}>
       <div className="flex h-[56px] items-center justify-end px-4">
         <div className=" flex flex-row">
           <MediumLarge />

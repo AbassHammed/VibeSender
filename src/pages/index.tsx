@@ -112,8 +112,13 @@ export default function Home() {
         </div>
         <div className="-ml-12 -mt-12 p-12 hidden md:block lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
           <img
-            className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
-            src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
+            className="w-[48rem] max-w-none rounded-xl hidden lg:block bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
+            src="/settings.png"
+            alt="App ScreenShot"
+          />
+          <img
+            className="w-[48rem] max-w-none rounded-xl hidden md:block lg:hidden bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
+            src="/screenshot.png"
             alt="App ScreenShot"
           />
         </div>
